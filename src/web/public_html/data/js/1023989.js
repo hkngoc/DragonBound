@@ -30365,7 +30365,8 @@
         document.addEventListener(
           "visibilitychange",
           function () {
-            document.hidden ? a.PauseMusic() : a.UnPauseMusic();
+            // disablee pause/un-pause music when visibilitychange, always play music :P
+            // document.hidden ? a.PauseMusic() : a.UnPauseMusic();
           },
           !1
         );
@@ -33040,7 +33041,8 @@
                   $("#playerInfoDialog").hide();
                   $("#itemsSelection").addClass("InRoom");
                   $("#roomScreen").show();
-                  AudioPlayMusic(AUDIO_MUSIC_ROOM);
+                  // AudioPlayMusic(AUDIO_MUSIC_ROOM);
+                  AudioPlayMusic(dragonTheme.Get("room_music") || AUDIO_MUSIC_CHANNEL);
 
                   g_tabsMenu.curTab == TAB_ALL
                     ? g_tabsMenu.TabChangeTo(TAB_ITEMS)
@@ -34582,6 +34584,13 @@
         bg_tour: "/static/images/themes/val2016/bg_tour.jpg",
         shop_bg: ".",
       };
+
+    var ThemeGunny = {
+      channel_music: "ddtank_square.ogg",
+      room_music: "roombgm.ogg",
+    };
+    CopyMissingProps(ThemeThorsHammer, ThemeGunny);
+
     CopyMissingProps(ThemeClassic, ThemeVal2016);
     var ThemeVal2017 = {
       lobby_bg: "/static/images/themes/val2017/lobby_bg.png",
@@ -34964,6 +34973,7 @@
         classic: ThemeClassic,
         classicHD: ThemeClassicHD,
         thorshammer: ThemeThorsHammer,
+        gunny: ThemeGunny,
         dragonbound: ThemeDB,
         halloween2015: ThemeHalloween2015,
         halloween2016: ThemeHalloween2016,
