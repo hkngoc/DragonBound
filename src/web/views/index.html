@@ -29,26 +29,26 @@
         <meta itemprop="name" content="ThorBound">
         <meta itemprop="description" content="Play with or against your friends from your browser anywhere for free. Shop for items to make you stronger. Unlock hidden characters, new game modes, and challenges. Meet new friends. Single player option too.">
         <meta itemprop="image" content="/static/images/icon2_200x200.png">
-		<script src="socket.io/socket.io.js"></script>
+        <script src="socket.io/socket.io.js"></script>
 
-<script>    
+        <script>    
+            
+        var socket = io();
+        
+        socket.on('connect', function(){
+        
+        console.log('Conectado al Servidor');
+        
+        });
+        
+            socket.on('disconnect', function(){
+        
+        console.log('Se Perdio la Conexion al Servidor');
+        
+        });
 
- var socket = io();
- 
- socket.on('connect', function(){
- 
-   console.log('Conectado al Servidor');
-   
-   });
-   
-    socket.on('disconnect', function(){
- 
-   console.log('Se Perdio la Conexion al Servidor');
-   
-   });
-
-</script>
-		
+        </script>
+        
         <script>
             function CheckPinUser(e) {
                 var keynum = window.event ? window.event.keyCode : e.which;

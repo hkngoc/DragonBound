@@ -10622,11 +10622,35 @@ a:active {
     transform: scale(1.2)
 }
 
+table.MobileTable {
+    width: 100%;
+    max-width: 100%;
+}
+
+.MobileGroup {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+table.MobileTable th, table.MobileTable td {
+    align-content: center;
+}
+
+table.MobileTable, table.MobileTable th, table.MobileTable td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+
 #roomMobileSelect {
     position: absolute;
-    left: 25px;
+    /* left: 25px; */
+    /* left: 16px; */
     top: 55px;
-    width: 515px;
+    /* width: 515px; */
+    /* width: 552px; */
+    width: 100%;
     height: 515px;
     background: rgba(0,30,50,0.75);
     z-index: 99;
@@ -10642,13 +10666,16 @@ a:active {
 
 .mobileSelectBtn {
     position: relative;
-    width: 70px;
-    height: 70px;
+    /* width: 70px;
+    height: 70px; */
+    width: 54px;
+    height: 54px;
     background: rgba(0,70,30,0.75);
     border: 3px solid #0f9;
     border-radius: 15px;
     float: left;
-    margin: 12px
+    /* margin: 12px; */
+    margin: 8px 8px;
 }
 
 .mobileSelectBtn:hover {
