@@ -20,6 +20,11 @@ services:
       context: .
       dockerfile: game.Dockerfile
     container_name: game_dragonbound
+    environment:
+      DB_HOST: mysql
+      DB_DATABASE: dragonbound
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
     volumes:
       - ./src/game:/app/src/game
     ports:
@@ -33,6 +38,11 @@ services:
       context: .
       dockerfile: web.Dockerfile
     container_name: web_dragonbound
+    environment:
+      DB_HOST: mysql
+      DB_DATABASE: dragonbound
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
     volumes:
       - ./src/web:/app/src/web
     ports:

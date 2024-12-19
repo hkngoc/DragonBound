@@ -6,7 +6,6 @@ var Shoot = require("./lib/shoot");
 var events = require("events");
 var thorControl = require("./lib/thorControl");
 var weatherControl = require("./lib/weatherControl");
-const { forEach } = require("underscore");
 
 // Game
 module.exports = class Game {
@@ -62,28 +61,44 @@ module.exports = class Game {
       angle: 90,
       time: 0,
     };
-    if (this.weather.current.id == 0) this.thor.active = true;
-    else this.thor.active = false;
+
+    if (this.weather.current.id == 0) {
+      this.thor.active = true;
+    } else {
+      this.thor.active = false;
+    }
+
     this.gamePrixEnd_callback = null;
     this.world = new World(self, self.gameserver);
     this.setWindVars(this.room.max_wind);
+
     this.world.onShootComplete(function (acc, shoot, chat) {
       try {
         self.thorControl.onShootComplete(shoot);
         self.weather.update();
-        if (self.weather.current.id == 0) self.thor.active = true;
-        else self.thor.active = false;
+
+        if (self.weather.current.id == 0) {
+          self.thor.active = true;
+        } else {
+          self.thor.active = false;
+        }
+
         self.updateWind();
 
         var actual_turn = self.getActualTurn();
         let shootTime = self.sumShootTime(shoot);
+
         acc.player.lastturn = actual_turn;
         self.UpdateUserLastTurn(acc.user_id, actual_turn);
         //	console.log({is:"final Shoot data",acc:acc,shoot:shoot,shootTime:shootTime});
         self.getNextTurn(actual_turn, function (player) {
           if (typeof player != "undefined") {
-            if (self.turn_player == player.position) self.sumDelay = true;
-            else self.sumDelay = false;
+            if (self.turn_player == player.position) {
+              self.sumDelay = true;
+            } else {
+              self.sumDelay = false;
+            }
+
             self.turn_player = player.position;
             var shoot_message = new Message.gamePlay(
               acc,
@@ -92,14 +107,17 @@ module.exports = class Game {
               self.lastturn,
               chat
             );
+
             self.gameserver.pushToRoom(self.room.id, shoot_message);
             self.historical.push(shoot_message);
+
             if (shoot[0].tele.length > 0) {
               //console.log(acc.player.user_id);
               acc.player.x = shoot[0].tele[1];
               acc.player.y = shoot[0].tele[2];
               acc.player.move();
             }
+
             if (self.room.game_mode === Types.GAME_MODE.BOSS) {
               self.room.forBots(function (bot) {
                 if (bot.player.position === self.turn_player) {
@@ -107,6 +125,7 @@ module.exports = class Game {
                 }
               });
             }
+
             self.setPassTimeOut(player.user_id, shootTime);
             setTimeout(() => {
               self.checkDead();
@@ -114,6 +133,7 @@ module.exports = class Game {
           } else {
             self.getNextTurn(actual_turn, function (player2) {
               self.turn_player = player2.position;
+
               if (typeof player2.position !== "undefined") {
                 var shoot_message = new Message.gamePlay(
                   acc,
@@ -122,8 +142,10 @@ module.exports = class Game {
                   self.lastturn,
                   chat
                 );
+
                 self.gameserver.pushToRoom(self.room.id, shoot_message);
                 self.historical.push(shoot_message);
+
                 if (self.room.game_mode === Types.GAME_MODE.BOSS) {
                   self.room.forBots(function (bot) {
                     if (bot.player.position === self.turn_player) {
@@ -131,6 +153,7 @@ module.exports = class Game {
                     }
                   });
                 }
+
                 self.setPassTimeOut(player2.user_id, shootTime);
                 setTimeout(() => {
                   self.checkDead();
@@ -142,15 +165,15 @@ module.exports = class Game {
       } catch (e) {
         //console.log(e);
         /*self.getNextTurn(actual_turn,function (player) {
-					self.turn_player = player.position;
-					self.gameserver.pushToRoom(self.room.id, new Message.gamePlay(acc, shoot, player, chat));
-					if (self.room.game_mode === Types.GAME_MODE.BOSS) {
-						self.room.forBots(function (bot) {
-							if (bot.player.position === self.turn_player) {
-								self.gameEnd_callback;
-							}
-						});
-					}*/
+          self.turn_player = player.position;
+          self.gameserver.pushToRoom(self.room.id, new Message.gamePlay(acc, shoot, player, chat));
+          if (self.room.game_mode === Types.GAME_MODE.BOSS) {
+            self.room.forBots(function (bot) {
+              if (bot.player.position === self.turn_player) {
+                self.gameEnd_callback;
+              }
+            });
+          }*/
         self.checkDead();
         /*});*/
       }
@@ -159,21 +182,26 @@ module.exports = class Game {
 
   start(callback) {
     var self = this;
+
     self.room.status = Types.ROOM_STATUS.PLAYING;
     self.room.forPlayers(function (account) {
       if (account !== null) {
         let player = account.player;
         var point = self.map.GetPoint();
+
         if (typeof point !== "undefined" && typeof point.x !== "undefined") {
           player.x = point.x;
           player.y = point.y;
         }
+
         player.reloadHp();
+
         if (player.is_bot === 1) {
           account.init();
         }
       }
     });
+
     self.checkRoom();
     callback();
   }
@@ -186,10 +214,12 @@ module.exports = class Game {
       this.gamePass(player);
     }, this.turnTime + shootTime);
   }
+
   checkRoom() {
     var self = this;
     var team_a_alive = 0;
     var team_b_alive = 0;
+
     self.room.forPlayers(function (account) {
       let player = account.player;
       //Logger.info("Player: "+player.game_id+" - Team: "+player.team+" - Is_alive: "+player.is_alive);
@@ -201,25 +231,31 @@ module.exports = class Game {
         }
       }
     });
-    if (team_a_alive === 0 || team_b_alive === 0) self.checkDead();
-    else
+
+    if (team_a_alive === 0 || team_b_alive === 0) {
+      self.checkDead();
+    } else {
       this.roomClock = setTimeout(() => {
         //	console.log({is:"Pass Time Out",TimeOutAt:this.turnTime, player:player,PlayerID:PlayerID,turn:turn});
         self.checkRoom();
       }, 100);
+    }
   }
-
+  
   sumShootTime(shoot) {
-    let time = 0;
+    let time = 0;    
     for (const bulet of shoot) {
       time += bulet.time;
     }
     return time;
   }
+
   setWindVars() {
     var self = this;
+
     self.turns_change_wind_angle_mod = self.turns_wind_angle_mod[0];
     self.turns_change_wind_power_mod = self.turns_wind_power_mod[0];
+
     switch (self.room.max_wind) {
       case 50:
         self.turns_change_wind_angle_mod = self.turns_wind_angle_mod[2];
@@ -239,10 +275,15 @@ module.exports = class Game {
 
   checkDead() {
     var self = this;
-    if (self.game_endx) return null;
+
+    if (self.game_endx) {
+      return null;
+    }
+
     var team_a_alive = 0;
     var team_b_alive = 0;
     var end = false;
+
     self.room.forPlayers(function (account) {
       let player = account.player;
       //Logger.info("Player: "+player.game_id+" - Team: "+player.team+" - Is_alive: "+player.is_alive);
@@ -254,16 +295,23 @@ module.exports = class Game {
         }
       }
     });
+
     var win_gp = this.room.team;
+
     if (team_a_alive === 0) {
       //enviar win team a
       if (self.room.event_game_room === 1) {
         self.room.forPlayerB(function (account) {
-          if (self.room.free_kill) self.room.win_team_gp = 0;
+          if (self.room.free_kill) {
+            self.room.win_team_gp = 0;
+          }
+
           account.player.addWinGoldWinGp(0, self.room.win_team_gp);
           account.player.addWinGoldWinGp(0, self.room.win_team_gpb);
+
           /* ================================================= */
           var increase = 1;
+
           self.room.forPlayerA(function (account_win) {
             if (typeof account_win !== "undefined") {
               if (
@@ -285,6 +333,7 @@ module.exports = class Game {
               }
             }
           });
+
           self.room.no_win_bonus_players_room[account.player.user_id] = {
             user_id: account.player.user_id,
             loss: increase,
@@ -292,6 +341,7 @@ module.exports = class Game {
           };
           /* ================================================= */
         });
+
         self.room.forPlayerA(function (account) {
           account.player.addWinGoldWinGp(0, self.world.gp_lose);
         });
@@ -301,9 +351,12 @@ module.exports = class Game {
           account.player.addWinGoldWinGp(0, self.room.win_team_gp);
           account.player.addWinGoldWinGp(0, self.room.win_team_gpb);
         });
+
         self.room.forPlayerB(function (account) {
           account.player.addWinGoldWinGp(0, self.world.gp_lose);
+
           var increase = 1;
+
           self.room.forPlayerA(function (account_win) {
             if (typeof account_win !== "undefined") {
               if (
@@ -325,6 +378,7 @@ module.exports = class Game {
               }
             }
           });
+
           self.room.no_win_bonus_players_room[account.player.user_id] = {
             user_id: account.player.user_id,
             loss: increase,
@@ -332,10 +386,12 @@ module.exports = class Game {
           };
         });
       }
+
       self.gameserver.pushToRoom(
         self.room.id,
         new Message.gameOver(self.room, 0, self.room.player_left_room)
       );
+
       //Logger.log("win: team a");
       end = true;
       self.gameEnd_callback(0);
@@ -344,11 +400,16 @@ module.exports = class Game {
       //enviar win team b
       if (self.room.event_game_room === 1) {
         self.room.forPlayerA(function (account) {
-          if (self.room.free_kill) self.room.win_team_gp = 0;
+          if (self.room.free_kill) {
+            self.room.win_team_gp = 0;
+          }
+
           account.player.addWinGoldWinGp(0, self.room.win_team_gp);
           account.player.addWinGoldWinGp(0, self.room.win_team_gpb);
+
           /* ================================================= */
           var increase = 1;
+
           self.room.forPlayerB(function (account_win) {
             if (typeof account_win !== "undefined") {
               if (
@@ -370,6 +431,7 @@ module.exports = class Game {
               }
             }
           });
+
           self.room.no_win_bonus_players_room[account.player.user_id] = {
             user_id: account.player.user_id,
             loss: increase,
@@ -377,6 +439,7 @@ module.exports = class Game {
           };
           /* ================================================= */
         });
+
         self.room.forPlayerB(function (account) {
           account.player.addWinGoldWinGp(0, self.world.gp_lose);
         });
@@ -386,9 +449,12 @@ module.exports = class Game {
           account.player.addWinGoldWinGp(0, self.room.win_team_gp);
           account.player.addWinGoldWinGp(0, self.room.win_team_gpb);
         });
+
         self.room.forPlayerA(function (account) {
           account.player.addWinGoldWinGp(0, self.world.gp_lose);
+
           var increase = 1;
+
           self.room.forPlayerB(function (account_win) {
             if (typeof account_win !== "undefined") {
               if (
@@ -410,6 +476,7 @@ module.exports = class Game {
               }
             }
           });
+
           self.room.no_win_bonus_players_room[account.player.user_id] = {
             user_id: account.player.user_id,
             loss: increase,
@@ -417,15 +484,18 @@ module.exports = class Game {
           };
         });
       }
+
       self.gameserver.pushToRoom(
         self.room.id,
         new Message.gameOver(self.room, 1, self.room.player_left_room)
       );
+
       //Logger.log("win: team b");
       end = true;
       self.gameEnd_callback(1);
       self.game_endx = true;
     }
+
     if (end) {
       clearTimeout(self.turnPassClock);
       self.world = null;
@@ -436,22 +506,24 @@ module.exports = class Game {
   gameShoot(x, y, body, look, ang, power, time, type, account) {
     let self = this;
     let mobile_data;
+
     clearTimeout(self.turnPassClock);
+
     power = parseInt((power * 234) / 100);
-    if (account.player.mobile == Types.MOBILE.RANDOMIZER) {
-      mobile_data =
-        Types.MOBILES[
-          Types.RANDOMIZER[this.getRandomInt(0, Types.RANDOMIZER.length)]
-        ];
+
+    if (account.player.mobile == Types.MOBILES.RANDOMIZER) {
+      mobile_data = Types.MOBILES[Types.RANDOMIZER[this.getRandomInt(0, Types.RANDOMIZER.length)]];
     } else {
       mobile_data = Types.MOBILES[account.player.mobile];
     }
+
     let dis = 0;
+    
     if (look === 0) {
       ang = 180 - ang;
       if (
-        account.player.mobile == Types.MOBILE.ADUKA ||
-        account.player.mobile == Types.MOBILE.NAK
+        account.player.mobile == Types.MOBILES.ADUKA ||
+        account.player.mobile == Types.MOBILES.NAK
       ) {
         dis = 26;
       } else {
@@ -459,23 +531,26 @@ module.exports = class Game {
       }
     } else {
       if (
-        account.player.mobile == Types.MOBILE.ADUKA ||
-        account.player.mobile == Types.MOBILE.NAK
+        account.player.mobile == Types.MOBILES.ADUKA ||
+        account.player.mobile == Types.MOBILES.NAK
       ) {
         dis = -26;
       } else {
         dis = 11;
       }
     }
+
     ang -= body;
+
     let point = {
       x: x + dis,
       y:
-        account.player.mobile == Types.MOBILE.ADUKA ||
-        account.player.mobile == Types.MOBILE.NAK
+        account.player.mobile == Types.MOBILES.ADUKA ||
+        account.player.mobile == Types.MOBILES.NAK
           ? y - 31
           : y - 28,
     };
+
     let pfinal = self.rotatePoint(
       point,
       {
@@ -489,7 +564,9 @@ module.exports = class Game {
       (Math.atan2(this.thor.y - pfinal.y, this.thor.x - pfinal.x) * 180) /
         Math.PI
     );
-    if (calc_thor_angle < 0) calc_thor_angle = 360 - calc_thor_angle;
+    if (calc_thor_angle < 0) {
+      calc_thor_angle = 360 - calc_thor_angle;
+    }
     this.thor.angle = Math.round(calc_thor_angle);
 
     if (account.player.DUAL == 1 && type === 2) {
@@ -498,8 +575,10 @@ module.exports = class Game {
 
     this.world.shoots_count = 0;
     this.mobileDelay = mobile_data.delay + time * 10;
+
     if (account.player.TELEPORT == 1) {
       this.thor.active = false;
+
       let data = {
         x0: pfinal.x,
         y0: pfinal.y,
@@ -517,6 +596,7 @@ module.exports = class Game {
         shootId: 0,
         bonos: false,
       };
+
       self.setTurnDelay({ delay: 0 }, account);
       self.world.shoots[self.world.shoots_count] = new Shoot(data);
       this.world.shoots_count = 1;
@@ -538,6 +618,7 @@ module.exports = class Game {
     } else {
       this.setShoots(pfinal, mobile_data, 0, ang, power, 0, type, account);
     }
+
     this.world.shoot(account.player.TELEPORT == 1 ? true : false); // temporal modificar quitar el nohole de lugar
 
     this.world.run();
@@ -551,7 +632,10 @@ module.exports = class Game {
     let shootId = 0;
     const shootData = mobile_data.shoots[type];
 
-    if (shootCount == 0) self.setTurnDelay(shootData[0], account);
+    if (shootCount == 0) {
+      self.setTurnDelay(shootData[0], account);
+    }
+
     shootData.forEach((shootConfig) => {
       let data = {
         x0: pfinal.x,
@@ -565,7 +649,9 @@ module.exports = class Game {
         account: account,
         shootId: shootId,
       };
+
       data = { ...data, ...shootConfig };
+
       if (Array.isArray(data.addOrbit) && Array.isArray(data.addOrbit[1])) {
         data.orbit = [
           data.addOrbit[0],
@@ -574,6 +660,7 @@ module.exports = class Game {
           data.addOrbit[3],
         ];
       }
+
       self.world.shoots[self.world.shoots_count] = new Shoot(data);
       self.world.shoots_count++;
       shootId++;
@@ -585,12 +672,14 @@ module.exports = class Game {
       account.player.check_my_ava && !isNaN(account.player.avaDelayOne)
         ? account.player.avaDelayOne
         : 0;
+
     let avaDelayTwo =
       account.player.itemUsed[0] == 0
         ? 0
         : account.player.check_my_ava && !isNaN(account.player.avaDelayTwo)
         ? account.player.avaDelayTwo
         : 0;
+
     let correcionOne = Types.ITEM.NONE[1];
     let delay = Math.round(
       shoot.delay +
@@ -598,25 +687,26 @@ module.exports = class Game {
         avaDelayOne * correcionOne +
         (account.player.itemUsed[0] - avaDelayTwo * account.player.itemUsed[1])
     );
+
     account.player.addDelay(delay);
     account.player.itemUsed = Types.ITEM.NONE;
     /*	
-		console.log({
-			is			: "add delay",
-			shootDelay	: shoot.delay,
-			mobileDelay	: this.mobileDelay,
-			itemUsed	: account.player.itemUsed,
-			part1		: shoot.delay + this.mobileDelay,
-			avaDelayOne	: avaDelayOne,
-			finalADO	: avaDelayOne * correcionOne,
-			avaDelayTwo	: avaDelayTwo,
-			finalADT	: avaDelayTwo * account.player.itemUsed[1],
-			usuarioID	: account.player.user_id,
-			delayA		: (shoot.delay + this.mobileDelay - avaDelayOne * correcionOne),
-			delayB		: (account.player.itemUsed[0] - avaDelayTwo * account.player.itemUsed[1]),
-			delayadded	: delay,
-			totaldelay	: account.player.delay
-		});*/
+    console.log({
+      is			: "add delay",
+      shootDelay	: shoot.delay,
+      mobileDelay	: this.mobileDelay,
+      itemUsed	: account.player.itemUsed,
+      part1		: shoot.delay + this.mobileDelay,
+      avaDelayOne	: avaDelayOne,
+      finalADO	: avaDelayOne * correcionOne,
+      avaDelayTwo	: avaDelayTwo,
+      finalADT	: avaDelayTwo * account.player.itemUsed[1],
+      usuarioID	: account.player.user_id,
+      delayA		: (shoot.delay + this.mobileDelay - avaDelayOne * correcionOne),
+      delayB		: (account.player.itemUsed[0] - avaDelayTwo * account.player.itemUsed[1]),
+      delayadded	: delay,
+      totaldelay	: account.player.delay
+    });*/
   }
 
   getActualTurn() {
@@ -625,8 +715,13 @@ module.exports = class Game {
 
   getNextTurn(actual_turn, callback) {
     var self = this;
-    if (self.game_endx) return null;
+
+    if (self.game_endx) {
+      return null;
+    }
+
     var xf = 0;
+
     if (!self.room.turn_list.length > 0) {
       self.room.forPlayers(function (account) {
         if (typeof account !== "undefined") {
@@ -637,49 +732,65 @@ module.exports = class Game {
             lastturn: account.player.lastturn,
             position: account.player.position,
           });
+
           account.player.game_position = account.player.position;
         }
       });
+
       self.room.turn_list.sort(function (a, b) {
         return a.position - b.position;
       });
     }
+
     this.room.forPlayers(function (account) {
       if (typeof account !== "undefined") {
         var player = account.player;
         //console.log({id:player.user_id,alive:player.is_alive});
+
         if (account !== null && player.is_alive === 1) {
           for (var i in self.room.turn_list) {
             var turn_data = self.room.turn_list[i];
-            if (turn_data.user_id == account.user_id)
+
+            if (turn_data.user_id == account.user_id) {
               self.room.turn_list[i].delay = player.delay;
+            }
           }
+
           xf++;
         } else {
           //console.log("eliminando del array");
           for (var i in self.room.turn_list) {
             var turn_data = self.room.turn_list[i];
-            if (turn_data.user_id == account.user_id)
+
+            if (turn_data.user_id == account.user_id) {
               self.room.turn_list.splice(i, 1);
+            }
           }
         }
       }
     });
 
-    if (xf <= 0) self.checkDead();
+    if (xf <= 0) {
+      self.checkDead();
+    }
+
     //console.log(this.room.turn_list);
     this.room.turn_list.sort(function (a, b) {
       //         return a.delay == b.delay ? a.lastturn == b.lastturn ? a.position-b.position : a.lastturn - b.lastturn : a.delay - b.delay;
       return a.delay == b.delay ? a.lastturn - b.lastturn : a.delay - b.delay;
     });
+
     self.turns_pass++;
     self.turns_pass_sudden++;
+
     let players = [];
+
     if (self.turns_pass_sudden == self.sudden - 1) {
       self.gameserver.pushBroadcastChat(
         new Message.chatResponse(self, "Dual activado", Types.CHAT_TYPE.SYSTEM),
         self
       );
+
       this.room.forPlayers(function (account) {
         if (typeof account !== "undefined") {
           var player = account.player;
@@ -690,17 +801,21 @@ module.exports = class Game {
       self.room.forPlayers(function (account) {
         if (typeof account !== "undefined") {
           var player = account.player;
+
           self.suddenShoot = true;
+
           if (player.hp > 0) {
             player.disHpShield(
               (self.turns_pass_sudden - (self.sudden - 1)) * 5,
               0
             );
+
             if (player.hp <= 0) {
               player.setAlive(0);
               self.checkDead();
             }
           }
+
           players.push({
             id: player.user_id,
             damage: (self.turns_pass_sudden - (self.sudden - 1)) * 5,
@@ -709,6 +824,7 @@ module.exports = class Game {
         }
       });
     }
+
     //	console.log({is: "sudden",suddenAtTurn: self.sudden,turnCount: self.turns_pass_sudden,players: players});
     //console.log({is:"game turn list",data:self.room.turn_list});
     callback(
@@ -721,54 +837,71 @@ module.exports = class Game {
   UpdateUserLastTurn(user_id, lastturn) {
     for (var i in this.room.turn_list) {
       var turn_data = this.room.turn_list[i];
-      if (turn_data.user_id == user_id)
+
+      if (turn_data.user_id == user_id) {
         this.room.turn_list[i].lastturn = lastturn;
+      }
     }
   }
 
   updateWind() {
     let self = this;
+
     if (this.weather.current.id == 1) {
       self.turns_change_wind_angle_temp = self.room.RandomInt(
         self.turns_change_wind_angle - self.turns_change_wind_angle_mod,
         self.turns_change_wind_angle
       );
+
       self.change_wind_angle_turn_count = 0;
       self.wind_angle = self.getRandomInt(0, 360);
-    } else if (
-      self.change_wind_power_turn_count > self.turns_change_wind_power_temp
-    ) {
+    } else if (self.change_wind_power_turn_count > self.turns_change_wind_power_temp) {
       self.turns_change_wind_power_temp = self.room.RandomInt(
         self.turns_change_wind_power - self.turns_change_wind_power_mod,
         self.turns_change_wind_power
       );
+
       self.change_wind_power_turn_count = 0;
+
       if (self.room.max_wind > 0) {
         self.wind_power = self.getRandomInt(0, self.room.max_wind);
       }
-    } else self.change_wind_angle_turn_count++;
+    } else {
+      self.change_wind_angle_turn_count++;
+    }
+
     self.change_wind_power_turn_count++;
   }
 
   gamePass(account) {
     let self = this;
     let actual_turn = self.getActualTurn();
+
     self.weather.update();
-    if (self.weather.current.id == 0) self.thor.active = true;
-    else self.thor.active = false;
+
+    if (self.weather.current.id == 0) {
+      self.thor.active = true;
+    } else {
+      self.thor.active = false;
+    }
+
     clearTimeout(self.turnPassClock);
+
     if (typeof account !== "undefined") {
       if (account.player !== null) {
         account.player.addDelay(self.mobileDelay);
         account.player.lastturn = actual_turn;
         self.UpdateUserLastTurn(account.user_id, actual_turn);
       }
+
       self.turns_pass++;
     }
+
     self.getNextTurn(actual_turn, function (player) {
       if (typeof player !== "undefined") {
         self.turn_player = player.position;
         self.turns_pass++;
+
         if (self.room.game_mode === Types.GAME_MODE.BOSS) {
           self.room.forBots(function (bot) {
             if (bot.player.position === self.turn_player) {
@@ -776,15 +909,18 @@ module.exports = class Game {
             }
           });
         }
+
         var pass_message = new Message.gamePass(
           self.lastturn,
           account,
           player,
           self.room
         );
+
         self.gameserver.pushToRoom(self.room.id, pass_message);
         self.historical.push(pass_message);
         self.turns_pass++;
+
         self.setPassTimeOut(player.user_id);
       } else {
       }
@@ -809,29 +945,36 @@ module.exports = class Game {
 
   vector(a, b) {
     var data = {};
+
     data.x = Math.cos(this.RadToAngle(a)) * b;
     data.y = -Math.sin(this.RadToAngle(a)) * b;
+
     return data;
   }
 
   rotatePoint(point, center, angle) {
     var px = {};
     angle = angle * (Math.PI / 180); // Convert to radians
+
     px.x =
       Math.cos(angle) * (point.x - center.x) -
       Math.sin(angle) * (point.y - center.y) +
       center.x;
+
     px.y =
       Math.sin(angle) * (point.x - center.x) +
       Math.cos(angle) * (point.y - center.y) +
       center.y;
+
     px.x = Math.floor(px.x);
     px.y = Math.floor(px.y);
+
     return px;
   }
 
   GetNextWeatherPos() {
     var self = this;
+
     return self.weather.client.next;
   }
 };

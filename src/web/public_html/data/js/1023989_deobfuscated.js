@@ -16980,6 +16980,7 @@
     delete window.setInterval;
     var setInterval = setInterval1;
     var setInterval1 = undefined;
+
     var EPA = {
       raonmine: {
         file: "raonmine",
@@ -19063,6 +19064,7 @@
         }
       }
     };
+
     var STATIC_DIR = "/static/";
     var STATIC_DIR2 = STATIC_DIR;
     var LOCATION_TYPE_UNKNOWN = 0;
@@ -19104,6 +19106,7 @@
       ITEM: 3,
       PASS: 4
     };
+
     var AVATAR_TYPE_HEAD = "h";
     var AVATAR_TYPE_BODY = "b";
     var AVATAR_TYPE_EYES = "g";
@@ -19130,10 +19133,12 @@
       2: "Foreground",
       x: "ExItem"
     };
+
     var AVATAR_NAKED_HEAD_MALE = 1;
     var AVATAR_NAKED_BODY_MALE = 2;
     var AVATAR_NAKED_HEAD_FEMALE = 3;
     var AVATAR_NAKED_BODY_FEMALE = 4;
+
     var AVATAR_INDEX_N = 0;
     var AVATAR_INDEX_TYPE = 1;
     var AVATAR_INDEX_GENDER = 2;
@@ -19157,6 +19162,7 @@
     var AVATAR_INDEX_GRAPHICS = 20;
     var AVATAR_INDEX_GLOW = 21;
     var AVATAR_INDEX_URL = 22;
+
     var GAME_MODE_NORMAL = 0;
     var GAME_MODE_BOSS = 1;
     var GAME_MODE_SAME = 2;
@@ -19164,6 +19170,7 @@
     var GAME_MODE_NAMES = ["NORMAL", "BOSS", "SAME"];
     var GAME_MODE_NAMES_LOWER = ["Normal", "Boss", "Same"];
     var GAME_MODES = GAME_MODE_NAMES.length;
+
     var CHAT_TYPE_NORMAL = 0;
     var CHAT_TYPE_DEAD = 2;
     var CHAT_TYPE_GOLD = 3;
@@ -19182,6 +19189,7 @@
     var CHAT_TYPE_AUDIO_GM = 16;
     var CHAT_TYPE_BOT = 17;
     var CHAT_LENGTH_LIMIT = 150;
+
     var GENDER_MALE = "m";
     var GENDER_FEMALE = "f";
     var GENDER_ALL = "a";
@@ -19191,17 +19199,20 @@
       f: "Female",
       a: "All"
     };
+
     var TEAM_A = 0;
     var TEAM_B = 1;
     var TIE = 2;
     var MS_IN_1_HOUR = 3600000;
     var MS_IN_1_DAY = MS_IN_1_HOUR * 24;
+
     var RANK_GM = 26;
     var RANK_MOD = 27;
     var RANK_BRONE_CUP = 28;
     var RANK_SILVER_CUP = 29;
     var RANK_GOLD_CUP = 30;
     var RANK_VIP = 31;
+
     var MAX_RANK = RANK_VIP;
     var WEATHER_THOR = 0;
     var WEATHER_WIND_CHANGE = 1;
@@ -19216,15 +19227,18 @@
     var WEATHER_MOON = 10;
     var WEATHER_LAND = 11;
     var WEATHER_NAME = [];
+
     WEATHER_NAME[WEATHER_LIGHTNING] = "Lightning";
     WEATHER_NAME[WEATHER_SUN] = "Force";
     WEATHER_NAME[WEATHER_BLACK] = "Black";
     WEATHER_NAME[WEATHER_TORNADO] = "Tornado";
     WEATHER_NAME[WEATHER_RANDOM] = "Random";
     WEATHER_NAME[WEATHER_MIRROR] = "Mirror";
+
     var SUDDEN_DEATH_DOUBLE = 1;
     var SUDDEN_DEATH_BIGBOMB = 2;
     var SUDDEN_DEATH_SS = 3;
+
     var MOBILE = {
       ARMOR: 0,
       ICE: 1,
@@ -19284,6 +19298,7 @@
     function GetMobileAfter(a) {
       return SELECTABLE_MOBILES[(SELECTABLE_MOBILES.indexOf(a) + 1) % SELECTABLE_MOBILES.length];
     }
+
     var BULLETS = {
       ARMOR1: 0,
       ARMOR2: 1,
@@ -19377,6 +19392,7 @@
       BEE2: 89,
       BEESS: 90
     };
+
     var EXPLODE = {
       ARMOR1: 0,
       ARMOR2: 1,
@@ -19442,11 +19458,13 @@
       BEE2: 61,
       BEESS: 62
     };
+
     var g_is_easter = is_between(new Date(), new Date("2020-03-30"), new Date("2020-04-20"));
     var g_is_halloween = false;
     var MOBILES = [];
     var EXPLODES = [];
     var BULLET = [];
+
     function InitGlobals() {
       MOBILES[MOBILE.ARMOR] = {
         name: "Armor",
@@ -20613,10 +20631,12 @@
         sound: "92blast"
       });
     }
+
     InitGlobals();
     var THOR_GRAPHICS = [[159, 99, 98, 59], 19];
     var THOR_LEVEL = [0, 300, 900, 1800, 3200, 6000];
     var RAON_MINE_WALK_DIST = 90;
+
     function Graphics2(a) {
       var b = 0;
       var c = [];
@@ -20883,10 +20903,13 @@
       NEVADASNOW: 56,
       NUMBER_OF_MAPS: 57
     };
+
     var MAPS_PACK = [MAP.NIRVANA2, MAP.METRO2, MAP.SEA2, MAP.AUDIM2, MAP.DRAGON2, MAP.COZY2, MAP.DUMMY2, MAP.STAR2, MAP.METAMINE2, MAP.LOVEYOU, MAP.LOVEYOU2, MAP.LOND, MAP.LOND2, MAP.DESERT, MAP.DESERT2, MAP.GRAY, MAP.GRAY2, MAP.JUNGLE, MAP.JUNGLE2, MAP.MYROOM, MAP.MYROOM2, MAP.DUMMY3];
     var SELECTABLE_MAPS_NEW = [MAP.RANDOM, MAP.MIRAMO, MAP.NIRVANA, MAP.METRO, MAP.SEA, MAP.ADIUM, MAP.DRAGON, MAP.COZY, MAP.DUMMY, MAP.STAR, MAP.METAMINE, MAP.TREEOFLIFE, MAP.CANDY, MAP.ICEFISH, MAP.MONSTER, MAP.SOCCER].concat(MAPS_PACK).concat([MAP.CLOCKTOWER, MAP.CLOCKTOWER2]);
     var SELECTABLE_MAPS = SELECTABLE_MAPS_NEW;
+
     var MAPS = [];
+
     MAPS[MAP.MIRAMO] = {
       name: "Dragon Lava",
       fg: "dragonlava.jpg",
@@ -21630,6 +21653,7 @@
       bg_size: 1000,
       data: "6c2u8L5P697K4y943qa12AaM1Wbm1sbL19c20Yca0Rcf0Ncj0Ico0Ecr0Bcu0ycx0vcA0tcC0qcF0ocG0mcJ0kcL0icM0gcP0ecQ0dcR0ccT0bcT0acU09cW07cX07cX06cY05cZ05cZ04d103d103d102d202d202d202d201d301d202d202d202d202d202d202d203d004d004d004d004cZ06cY06cY06cX08cW08cW09cU0acU0bcS0ccS0dcQ0ecQ0fcO0hcM0icM0jcK0lcI0mcH0ocG0pcF0qcE0rcD0scD0rcD0scC0tcB0vcA0vcz0wcy0xcx0ycw0zcv0zcv0Acu0Bct0Bct0Ccs0Dcr0Dcr0Ecp0G8F043F0H8E083B0H8D0c3y0I8C0f3v0J8A0j3r0K8z0n3o0L8x0r3l0M8v0v3i0M8v0y3f0N4e0b440C3b0P490h410G380Q470k3Y0J360Q470l3W0N330R450o3T0R2Z0T1G012d03070q3P0W2W0U1E042806070s3M0Z2U0U1E072308070t3K131N0c0R0W1C0a1Y0c060v3H161I0i0O0X1A0e1T0e060x3E1a1D0n0K0Z1y0i1O0g050z3C1d1z0r0I101x0k1J0k040B3y1i1u0v0F111w0o1E0m040D3v1l1q0z0D121u0r1A0o040F3s1p1l0D0A141s0v1v0r020H3p1t1i0G0y151q0y1q1f3m1w1e0K0v171o0C1l1j3i1B190O0s181n0F1h1n3f1E160R0q191m0I1c1q3d1H130U0n1b1k0L181u391L0Z0Y0j1e1i0P131y2n010I1O0W120f1g1g0S0Z1B2k040F1S0S170a1j1e0W0U1F2h060D1V0P2C1c100P1J2e090z1Z0L2E1b130L1N2b0b0x210J2G19170G1Q290e0t250F2J171a0C1U260g0q280D2L151e0x1Y230j0n2b0z2O131h0t21210l0k2e0x2Q101m0o251Y0n0i2h0t2T0Y1p0k291V0q0e2k0q2W0W1t0f2d1S0s0b2n0n2Z0U1w0b2g1Q0v072r0j320S1A062k1M0y052u0f350Q1E022n1J0A022z083a0N471G6v0L491E6y0H4d1B6A0F4g1y6C0D4j1v6E0A4m1t6H0w4q1p6K0t4u1m6N0p4y1j6Q0l4C1g6T0h4F1e6W0c4K1b71054P17bZ14c112c40Zc70Wca0Sce0Pch0Mcj0Kcm0Gcq0Dct0Acw0wcA0tcD0qcG0mcK0jcN0fcS0acW06+clf1e7J1e2E2l5Z2m2l2r5T2s2f2x5O2w2b2B5K2A272E5H2E242H5E2H202K5C2J1Y2M5A2L1W2O5y2N1U2Q5w2P1S2S5u2R1R2S5t2T1P2U5r2V1N2W5q2V1N2W5p2X1L2Y5o2X1L2Y5n2Z1K2Z5m2Z1J305m2Z1J305l301J305l311I315k311I315k311I315k311I315j321I315j321I315j321I315j321I315j321I315j311J315j311K305k301K305k301K2Z5l301K2Z5m2Y1M2X5o2X1M2U5u2U1N04022M5w2L02051P02042K5x2K05021X2I5z2J252G5B2H272F5C2F282D5F2D2a2B5H2B2c2z5J2z2e2x5M2x2f2v5O2v2h23060j5R0k06232i22090g5U0g09212k1Z0d0c5X0d0d1Y2m1X0g0960090g1W2o0a020p050Z030c0k0564050k0b040Z050p020a2p08040m080X06080o016w08070X080m04082r06060i0c0V08066Y05090V0c0i06062t03090e0g0T0b0271030b0S0g0f09032H0a0k0R7t0R0k0b2U070o0P7v0P0o082U040t0M7x0N0s042W030u0K7z0L0u032W030v0z05047B04060z0v032W030w0v7Z0v0x022Y010y0s830s0y023z0o880o4b0l8c0l4d0h8i0g4h0c8n0d4k078t08+h9v202N206b2p2b2p622v252v5X2z212z5T2D1X2D5Q2F1V2F5N2I1T2I5K2L1P2L5I2N1N2N5G2P1L2P5E2Q1L2Q5C2S1J2S5A2U1H2U5z2V1G2U5y2W1F2W5x2X1D2X5w2Y1D2Y5v2Y1D2Y5v2Z1B2Z5u301B305t301B305t311z315t311z315t311z315t311z315t311z315t311z315t311z315t311z315t311z315t311z315u301z305v301z305v301z305v2Z1B2Z5w2Y1B2Y5x2U1J2U5x06012M1L2M01065y04032L1L2L03045H2J1N2J5Q2H1P2I5Q2G1R2G5S2E1T2E5U2C1V2C5W2A1X2A5Y2y1Z2y5Z2w232w6025040l250l04256222080i270i082264200b0e2b0e0b20661X0f0b2d0b0f1X680a020q031g0i072h070i1g030q020a6a08030o070X06090m032l030m0a050Y060o03096a08040l0a0W07073b07080V0b0k05076c06060h0e0U09043f04090U0e0h07056q0d0i0S3H0S0i0d6E090m0Q3J0Q0m096F060q0O3L0O0q066F040t0M3N0M0t046G030u0B03063P06030B0u036H030w0x07033R03070x0w036I020x0t4h0t0y017j0q4l0q7U0n4p0n7X0i4v0i800f4z0f830a4F0a87044N04+jSy2e7Q2e0H2q7C2q0A2v7w2v0v2A7s2A0r2C7q2C0o2G7m2G0l2I7k2I0i2L7i2L0f2N7g2N0d2P7e2P0b2R7c2R0a2S7a2S092U782U072V782V062W762W052X762X042Y742Y032Z742Z022Z742Z023072300230723002307230013172637064706470647032013170320131703102317031023170310231703102307230032Z722Z042Z722Z042Y742Y052T7c2T0605022M7c2M02050703042K7e2K04030f2J7g2J0n2H7i2H0p2F7k2F0r2D7m2D0t2B7o2B0v2z7q2A0v2y7s2y0x2w7u2w0z24050k7y0k05240B22080h7A0h08220D1Z0c0e7D0d0c1Z0F1X0f0a7G0b0e1Y0F0b010q0410020d0j067K070i0d0210040q010b0H09030n070Y050a0m027O020m0a050Y070n03090J07050k0a0W08068E06080W0a0k05070L05070g0e0U0a048G040a0U0e0g07050Z0c0j0R9a0R0j0c1d080n0P9c0P0n081e050r0N9e0N0r051e040t0L9g0L0t041e040u0A04059i05040A0u041f020w0x08029k02080x0w021g020y0t9I0t0y021R0p9O0p2t0m9S0m2w0i9W0i2z0ea20e2C09a809eo"
     };
+
     var CLASSIC_MAPS = [];
     CLASSIC_MAPS[MAP.MIRAMO] = {
       name: "Miramo Town",
@@ -21704,6 +21728,7 @@
       bg: "secret_bg.jpg",
       bg_size: 1300
     };
+
     var MAP_BACKGROUND_W = 1000;
     var MAP_BACKGROUND_H = 1000;
     var RENDERER_DOM = 0;
@@ -24353,6 +24378,7 @@
         $("#LoginLang").html("ES");
       }
     };
+
     var STRINGS = {
       "Top Players": "Jugadores Top",
       ME: "YO",
@@ -32027,37 +32053,49 @@
       this.ConnectToGameServer(b, c, this.server + 1);
       CheckDragonBook();
     };
+
     DragonNetwork.prototype.BrokerResponse2 = function (a) {
       var b = a[0];
       if (b != VERSION && b != VERSION2) {
         return NewVersionAvailableMsg();
       }
-      var c = 0;
-      var d = 0;
-      var e = 0;
+
+      var c = 0; // count valid broker server config
+      // var d = 0;
+      var e = 0; // count server full
       var b = this.user_rank;
+
       $("#BrokerTitle").html(l.t("Select Server"));
+
       this.channels = [];
       var f = this;
-      var h = a.pop();
+      var h = a.pop(); // now
+
       for (var k = 3; k < 18; k++) {
-        var m = k - 3;
-        var n = k - 2;
+        var m = k - 3; // server id
+        var n = k - 2; // server number
+
         var p = $("#BrokerChannel" + m);
         p.removeClass("FastLobbyServer PrixServer LoveLobbyServer HalloweenServer XmasServer EasterServer BirthdayServer").unbind();
+
         if (Array.isArray(a[k])) {
-          var d = n;
-          var q = a[k][0][0] || "";
-          var svsubtitle = a[k][0][1];
+          // var d = n;
+
+          var q = a[k][0][0] || "";    // title
+          var svsubtitle = a[k][0][1]; // sub-title
+
           var isavaon = a[k][0][2] ? "rankava-on" : "rankava-off";
           var tipotxt = a[k][0][3];
+
           var r = a[k][1];
           var t = a[k][3];
-          var u = a[k][4];
+          var u = a[k][4]; // rank
           var x = a[k][5];
           var w = a[k][6];
           var v = a[k][7];
+
           var y = false;
+
           /*Onfroy*/
           p.data("tipo", tipotxt);
           //console.log("TIPO",p.data('tipo'));
@@ -32073,9 +32111,24 @@
           if (r == 4) {
             p.addClass("LoveLobbyServerOff");
           }
+
           this.channels[m] = a[k];
-          if (u > 0 && (b == RANK_MOD || b == RANK_GM || b == RANK_BRONE_CUP || b == RANK_SILVER_CUP || b == RANK_GOLD_CUP || b == RANK_VIP || t < u && (x == undefined || x == -1 || x <= b) && (w == undefined || w == -1 || b <= w))) {
+
+          // b: current user rank
+          function isSpecialRank(rank) {
+            return [
+              RANK_MOD,
+              RANK_GM,
+              RANK_BRONE_CUP,
+              RANK_SILVER_CUP,
+              RANK_GOLD_CUP,
+              RANK_VIP,
+            ].includes(rank);
+          }
+
+          if (u > 0 && (isSpecialRank(b) || t < u && (x == undefined || x == -1 || x <= b) && (w == undefined || w == -1 || b <= w))) {
             p.addClass("BrokerChannelOnline opacity_button");
+
             y = true;
             p.click(function (a) {
               return function () {
@@ -32083,7 +32136,8 @@
                 f.EnterServer(a);
               };
             }(m));
-            if (t >= u && u > 0 && (b == RANK_MOD || b == RANK_GM || b == RANK_BRONE_CUP || b == RANK_SILVER_CUP || b == RANK_GOLD_CUP || b == RANK_VIP)) {
+
+            if (t >= u && u > 0 && isSpecialRank(b)) {
               p.addClass("BrokerChannelFull");
               e++;
             }
@@ -32093,15 +32147,21 @@
             }
             e++;
           }
+
           c++;
           m = "";
+
+          const commingSoon = v && v > h;
+
           if (x != undefined && w != undefined) {
-            m = "<div class=\"BrokerRanks" + (v && v > h ? " BrokerRanksSize" : "") + "\"><span class=\"InlineRank rank rank" + x + "\"><span class=\"rank-min\"></span></span><span class=\"InlineRank rank rank" + w + "\"><span class=\"rank-max\"></span></span><span class=\"InlineRank " + isavaon + "\"></span></div>";
+            m = "<div class=\"BrokerRanks" + (commingSoon ? " BrokerRanksSize" : "") + "\"><span class=\"InlineRank rank rank" + x + "\"><span class=\"rank-min\"></span></span><span class=\"InlineRank rank rank" + w + "\"><span class=\"rank-max\"></span></span><span class=\"InlineRank " + isavaon + "\"></span></div>";
           }
+
           t = t * 74 / u;
           if (t > 74) {
             t = 74;
           }
+
           if (y) {
             if (r == 4) {
               p.addClass("LoveLobbyServer");
@@ -32124,17 +32184,20 @@
               p.addClass("PrixServer");
             }
           }
+
           if (r == 2) {
             this.prix_server_number = n;
           }
           if (q.slice(-1) == ".") {
             q = q.slice(0, -1);
           }
-          r = v && v > h ? "<div class=\"PrixTimer blackShadow\"></div>" : "";
+
+          r = commingSoon ? "<div class=\"PrixTimer blackShadow\"></div>" : "";
+
           //console.log("QQQQ",q);//TEST Onfroy
           p.html("<div class=\"BrokerChannelName blackShadow\">" + l.t("Server") + " " + n + " - " + l.t(q) + "</div> " + r + "<div class=\"BrokerMaxPlayers2\"></div> <div class=\"BrokerNumPlayers2\" style=\"width:" + t + "px\"></div><div class=\"BrokerChannelFullIcon\"></div>" + m + "<div class=\"Alt\">" + n.toString(16).toUpperCase() + "</div>");
           //p.html('<div class="BrokerChannelName blackShadow"><font class="numserver">' + n + ".</font> " + l.t(q) + "</div> " + r + '<div class="BrokerMaxPlayers2"></div> <div class="BrokerNumPlayers2" style="width:' + t + 'px"></div><div class="BrokerChannelFullIcon"></div>' + m + '<div class="Alt">' + n.toString(16).toUpperCase() + "</div> <div class=\"svsubtitle blackShadow\">"+svsubtitle+"</div>");
-          if (r) {
+          if (commingSoon) {
             new DragonTimer(".PrixTimer", v - h);
           }
         } else {
@@ -32142,13 +32205,17 @@
           p.html("<div class=\"BrokerChannelName blackShadow\"><font class=\"numserver\">" + n + ".</font> Offline</div>");
         }
       }
+
       if ($(".Alt").is(":visible")) {
         $(".Alt").show();
       }
+
       if (e >= c) {
         $("#BrokerTitle").html(l.t("All worlds are currently full. Press this button to refresh") + " ->");
       }
+
       a = $("#BrokerWindow");
+
       if (d <= 12) {
         $("#BrokerChannel0,#BrokerChannel1,#BrokerChannel2,#BrokerChannel3,#BrokerChannel4,#BrokerChannel5,#BrokerChannel6,#BrokerChannel7,#BrokerChannel8,#BrokerChannel9,#BrokerChannel10,#BrokerChannel11").css("left", "").show();
         $("#BrokerChannel12,#BrokerChannel13,#BrokerChannel14").hide();
@@ -32224,6 +32291,7 @@
         }
       }
     };
+
     function SetRoomURL(a, b, c) {
       if (history && history.replaceState) {
         if (a == undefined) {

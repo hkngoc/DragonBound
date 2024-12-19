@@ -1,6 +1,6 @@
 var _ = require("underscore");
 
-Types = {
+var Types = {
   SERVER_OPCODE: {
     chat: 0,
     my_player_info: 1,

@@ -176,7 +176,7 @@ module.exports = class GameServer {
           } /* else if (self.name === 'Guilds Prix' && account.player.guild !== '' && self.player.server_tournament_state === 0) {//Revisar
                         account.player.guild_score -= 1;
                         self.db.updateGuildPrixById(account.player.guild_score, account.player.guild_id);
-                    }*/ else if (self.id === 4) {
+                    }*/else if (self.id === 4) {
             account.player.cash -= 1500;
             self.db.sendDeleteCash(0, 1500, account.player.user_id);
           }
@@ -189,6 +189,7 @@ module.exports = class GameServer {
             });*/
     });
   }
+
   guildMessage(account, message) {
     //[0,"Junior35","holiwis",10,"GmPlay","PE"]
     var chatmessage = [
@@ -211,17 +212,13 @@ module.exports = class GameServer {
       }
     }
   }
+
   sendAccountsOnline() {
     var self = this;
     var data = [];
     self.forEachAccount(function (account) {
       if (account !== null) {
-        if (account.player.rank < 25) {
-          data.push(account.user_id);
-          data.push(account.player.game_id);
-          data.push(account.player.rank);
-          data.push(account.player.guild);
-        } else if (account.player.rank > 31) {
+        if (account.player.rank < 25 || account.player.rank > 31) {
           data.push(account.user_id);
           data.push(account.player.game_id);
           data.push(account.player.rank);
@@ -231,24 +228,25 @@ module.exports = class GameServer {
     });
     self.pushBroadcastChannel([Types.SERVER_OPCODE.channel_players, data]);
   }
-
   sendRooms(account) {
     var self = this;
     var data = [];
     self.getRoomsArray(false, function (arr) {
       data = arr;
       var snd = [Types.SERVER_OPCODE.rooms_list, data];
-      if (typeof account !== "undefined") account.send(snd);
-      else self.pushBroadcastChannel(snd);
+      if (typeof account !== "undefined") {
+        account.send(snd);
+      } else {
+        self.pushBroadcastChannel(snd);
+      }
     });
   }
-
   sendRoomUpdate(room, account) {
     var self = this;
     var data_fin = [];
     var data = [];
     self.getRoomById(room, function (rom) {
-      if (room === rom.id)
+      if (room === rom.id) {
         data.push(
           rom.id,
           rom.title,
@@ -260,6 +258,7 @@ module.exports = class GameServer {
           rom.map,
           rom.power
         );
+      }
     });
     data.sort(function (a, b) {
       return a[0] - b[0];
@@ -385,9 +384,7 @@ module.exports = class GameServer {
         updateCount = 0;
       }
     }, 1000 / this.ups);
-    Logger.normal(
-      "" + this.id + " created (capacity: " + this.maxPlayers + " players)."
-    );
+    Logger.normal("" + this.id + " created (capacity: " + this.maxPlayers + " players).");
     this.global.multiworld[this.id] = this;
   }
 
@@ -400,22 +397,20 @@ module.exports = class GameServer {
   }
 
   pushToRoom(roomId, message, ignoredAccount) {
-    var self = this,
-      room = this.rooms[roomId];
+    var self = this;
+    var room = this.rooms[roomId];
     if (room) {
       room.forPlayers(function (account) {
         if (account !== null && typeof account !== "undefined") {
-          if (
-            account.user_id != ignoredAccount &&
-            account.player.is_bot === 0
-          ) {
+          if (account.user_id != ignoredAccount && account.player.is_bot === 0) {
             self.pushToAccount(account, message);
           }
         }
       });
       for (var user_id in room.watchers) {
-        if (user_id != ignoredAccount)
+        if (user_id != ignoredAccount) {
           room.watchers[user_id].sendMessage(message);
+        }
       }
     }
   }
@@ -448,14 +443,12 @@ module.exports = class GameServer {
     var self = this;
     for (var id in this.outgoingQueues) {
       var account = self.getAccountById(id);
-      if (
-        account !== null &&
-        account.location_type === Types.LOCATION.CHANNEL &&
-        !account.room
-      ) {
-        if (Array.isArray(message) === true)
+      if (account !== null && account.location_type === Types.LOCATION.CHANNEL && !account.room) {
+        if (Array.isArray(message) === true) {
           this.outgoingQueues[id].push(message);
-        else this.outgoingQueues[id].push(message.serialize());
+        } else {
+          this.outgoingQueues[id].push(message.serialize());
+        }
       }
     }
   }
@@ -469,8 +462,8 @@ module.exports = class GameServer {
   }
 
   processQueues() {
-    var self = this,
-      connection;
+    var self = this;
+    var connection;
     for (var id in this.outgoingQueues) {
       if (this.outgoingQueues[id].length > 0) {
         var account = this.getAccountById(id);
@@ -481,8 +474,9 @@ module.exports = class GameServer {
           // if(connection._connection.readyState==WebSocket.OPEN)
           for (var i = 0; i < this.outgoingQueues[id].length; i++) {
             try {
-              if (connection._connection.readyState == WebSocket.OPEN)
+              if (connection._connection.readyState == WebSocket.OPEN) {
                 connection.send(this.outgoingQueues[id][i]);
+              }
             } catch (e) {
               Logger.debug(e);
             }
@@ -523,32 +517,10 @@ module.exports = class GameServer {
     self.forEachRooms(function (rom) {
       if (free === true) {
         if (rom.status === Types.ROOM_STATUS.WAITING) {
-          data.push([
-            rom.id,
-            rom.title,
-            rom.player_count,
-            rom.max_players,
-            rom.status,
-            rom.game_mode,
-            rom.look,
-            rom.map,
-            rom.power,
-            rom.allow_watch,
-          ]);
+          data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power, rom.allow_watch]);
         }
       } else {
-        data.push([
-          rom.id,
-          rom.title,
-          rom.player_count,
-          rom.max_players,
-          rom.status,
-          rom.game_mode,
-          rom.look,
-          rom.map,
-          rom.power,
-          rom.allow_watch,
-        ]);
+        data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power, rom.allow_watch]);
       }
     });
     data.sort(function (a, b) {
@@ -566,30 +538,10 @@ module.exports = class GameServer {
     self.forEachRooms(function (rom) {
       if (free === true) {
         if (rom.game_mode === Types.GAME_MODE.NORMAL) {
-          data.push([
-            rom.id,
-            rom.title,
-            rom.player_count,
-            rom.max_players,
-            rom.status,
-            rom.game_mode,
-            rom.look,
-            rom.map,
-            rom.power,
-          ]);
+          data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power]);
         }
       } else {
-        data.push([
-          rom.id,
-          rom.title,
-          rom.player_count,
-          rom.max_players,
-          rom.status,
-          rom.game_mode,
-          rom.look,
-          rom.map,
-          rom.power,
-        ]);
+        data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power]);
       }
     });
     data.sort(function (a, b) {
@@ -607,30 +559,10 @@ module.exports = class GameServer {
     self.forEachRooms(function (rom) {
       if (free === true) {
         if (rom.game_mode === Types.GAME_MODE.BOSS) {
-          data.push([
-            rom.id,
-            rom.title,
-            rom.player_count,
-            rom.max_players,
-            rom.status,
-            rom.game_mode,
-            rom.look,
-            rom.map,
-            rom.power,
-          ]);
+          data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power]);
         }
       } else {
-        data.push([
-          rom.id,
-          rom.title,
-          rom.player_count,
-          rom.max_players,
-          rom.status,
-          rom.game_mode,
-          rom.look,
-          rom.map,
-          rom.power,
-        ]);
+        data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power]);
       }
     });
     data.sort(function (a, b) {
@@ -648,30 +580,10 @@ module.exports = class GameServer {
     self.forEachRooms(function (rom) {
       if (free === true) {
         if (rom.game_mode === Types.GAME_MODE.SAME) {
-          data.push([
-            rom.id,
-            rom.title,
-            rom.player_count,
-            rom.max_players,
-            rom.status,
-            rom.game_mode,
-            rom.look,
-            rom.map,
-            rom.power,
-          ]);
+          data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power]);
         }
       } else {
-        data.push([
-          rom.id,
-          rom.title,
-          rom.player_count,
-          rom.max_players,
-          rom.status,
-          rom.game_mode,
-          rom.look,
-          rom.map,
-          rom.power,
-        ]);
+        data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power]);
       }
     });
     data.sort(function (a, b) {
@@ -689,30 +601,10 @@ module.exports = class GameServer {
     self.forEachRooms(function (rom) {
       if (free === true) {
         if (rom.game_mode === Types.GAME_MODE.SCORE) {
-          data.push([
-            rom.id,
-            rom.title,
-            rom.player_count,
-            rom.max_players,
-            rom.status,
-            rom.game_mode,
-            rom.look,
-            rom.map,
-            rom.power,
-          ]);
+          data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power]);
         }
       } else {
-        data.push([
-          rom.id,
-          rom.title,
-          rom.player_count,
-          rom.max_players,
-          rom.status,
-          rom.game_mode,
-          rom.look,
-          rom.map,
-          rom.power,
-        ]);
+        data.push([rom.id, rom.title, rom.player_count, rom.max_players, rom.status, rom.game_mode, rom.look, rom.map, rom.power]);
       }
     });
     data.sort(function (a, b) {
@@ -730,7 +622,7 @@ module.exports = class GameServer {
     self.forEachRooms(function (rom) {
       data.push({
         id: rom.id,
-        power: rom.power,
+        power: rom.power
       });
     });
     data.sort(function (a, b) {
@@ -740,9 +632,10 @@ module.exports = class GameServer {
       return b.power - a.power;
     });
     for (var i = 0; i < data.length; i++) {
-      if (data[i].id == room_id) return i;
+      if (data[i].id == room_id) {
+        return i;
+      }
     }
-
     return null;
   }
 
@@ -756,7 +649,9 @@ module.exports = class GameServer {
 
   forEachAccount(callback) {
     for (var user_id in this.accounts) {
-      if (this.accounts[user_id] !== null) callback(this.accounts[user_id]);
+      if (this.accounts[user_id] !== null) {
+        callback(this.accounts[user_id]);
+      }
     }
   }
 
@@ -767,7 +662,9 @@ module.exports = class GameServer {
   }
 
   getAccountById(user_id) {
-    if (this.accounts[user_id] === null) return null;
+    if (this.accounts[user_id] === null) {
+      return null;
+    }
     return this.accounts[user_id];
   }
 
@@ -779,32 +676,32 @@ module.exports = class GameServer {
       }
     });
   }
+
   searchAccountById(user_id) {
     //console.log(Object.keys(this.multiworld));
     for (var server_id in this.global.multiworld) {
       //console.log(Object.keys(this.global.multiworld[server_id].accounts));
       //console.log(Object.keys(this.multiworld[server_id].accounts),Object.keys(this.accounts));
       //this.global.multiworld[server_id].logUsers();
-      var account = this.global.multiworld[server_id].getAccountById(
-        user_id.toString()
-      );
+      var account = this.global.multiworld[server_id].getAccountById(user_id.toString());
       //console.log("find_account",account);
-      if (account != null) return account;
+      if (account != null) {
+        return account;
+      }
     }
     return null;
   }
 
   getBotById(user_id) {
-    if (this.bots[user_id] === null) return null;
+    if (this.bots[user_id] === null) {
+      return null;
+    }
     return this.bots[user_id];
   }
 
   getIdforRoom() {
     for (var i = 1; i < 4000; i++) {
-      if (
-        this.room_ids[i] === null ||
-        typeof this.room_ids[i] === "undefined"
-      ) {
+      if (this.room_ids[i] === null || typeof this.room_ids[i] === "undefined") {
         this.room_ids[i] = true;
         return i;
       }
@@ -814,12 +711,13 @@ module.exports = class GameServer {
   removeRoom(id) {
     if (this.rooms[id] !== null) {
       var room = this.rooms[id];
-      if (room && room.watchers)
+      if (room && room.watchers) {
         for (var user_id in room.watchers) {
           var account = room.watchers[user_id];
           room.removeWatcher(account);
           account.sendMessage(new Message.loginResponse(account));
         }
+      }
       this.rooms[id] = null;
       this.removeIdforRoom(id);
       delete this.rooms[id];
@@ -835,11 +733,7 @@ module.exports = class GameServer {
 
   getIdforBot() {
     for (var i = 60000; i < 60500; i++) {
-      if (
-        this.bot_ids[i] === null ||
-        this.bot_ids[i] === false ||
-        typeof this.bot_ids[i] === "undefined"
-      ) {
+      if (this.bot_ids[i] === null || this.bot_ids[i] === false || typeof this.bot_ids[i] === "undefined") {
         this.bot_ids[i] = true;
         return i;
       }
@@ -907,14 +801,18 @@ module.exports = class GameServer {
 
   SecondsToString(data_time) {
     var p = Math.abs(parseInt(Date.now() - parseInt(data_time)) / 1000);
-    var MS_IN_1_HOUR = 36e5,
-      MS_IN_1_DAY = 24 * MS_IN_1_HOUR,
-      TIME_MINUTE = 60 * 1e3;
-    var w = void 0;
-    if (((p *= 1e3), p >= MS_IN_1_DAY))
-      w = Math.ceil(p / MS_IN_1_DAY) + " días";
-    else if (3540000 < p) w = Math.ceil(p / MS_IN_1_HOUR) + " horas";
-    else w = Math.ceil(p / TIME_MINUTE) + " minutos";
+    var MS_IN_1_HOUR = 3600000;
+    var MS_IN_1_DAY = MS_IN_1_HOUR * 24;
+    var TIME_MINUTE = 60000;
+    var w = undefined;
+    p *= 1000;
+    if (p >= MS_IN_1_DAY) {
+      w = Math.ceil(p / MS_IN_1_DAY) + " days";
+    } else if (p > 3540000) {
+      w = Math.ceil(p / MS_IN_1_HOUR) + " hours";
+    } else {
+      w = Math.ceil(p / TIME_MINUTE) + " minutes";
+    }
     return w;
   }
 };

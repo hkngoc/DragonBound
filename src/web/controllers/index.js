@@ -1054,8 +1054,8 @@ router.post("/ajaxRegister", function (req, res) {
                               req.db.sendGift(uid, 8143);
                               req.db.sendGift(uid, 748554);
                             } else if (gender === "f") {
-                              req.db.sendGift(uid, 0849);
-                              req.db.sendGift(uid, 0872);
+                              req.db.sendGift(uid, 849);
+                              req.db.sendGift(uid, 872);
                             }
                             req.db
                               .putAvatarUseFB(nxdi)
@@ -1116,24 +1116,29 @@ router.post("/ajaxRegister", function (req, res) {
 
 router.get("/w2", function (req, res) {
   res.setHeader("Content-Type", "application/json");
+
+  // TODO: read from db - hardcode
   var data = [
-    86,
+    86, // version
     0,
     0,
-    [["All", "", false, "normal"], 0, "", 2, 35, 0, 27, ""] /*200%gps*/,
-    ,
-    /*[["Battle Off","Avatar Off",true,"Holliday"],1,9003,20,100,26,27,""],
-	[["Betting","Special Server",true,"gm"],4,9003,20,100,26,27,26,27,""],
-	[["Prix BigFoot","Avatar On",false,"bunge"],2,9003,20,100, 26, 27,""],0,
-	[["ZONA BUNGE","",true,"prix"],6,9003,20,100, 26, 27,1621573680000]*/ 0,
+    //  Title           Sub-title         avatar typing                     rank
+    [ [ "All",          "",               false, "normal"   ], 0,   "",  2,   35,  0, 27, "" ],
+    [ [ "Battle Off",   "Avatar Off",     true,  "Holliday" ], 1, 9003, 20,  100, 26, 27, "" ],
+    [ [ "Betting",      "Special Server", true,  "gm"       ], 4, 9003, 20,  100, 26, 27, "" ],
+    [ [ "Prix BigFoot", "Avatar On",      false, "bunge"    ], 2, 9003, 20,  100, 26, 27, "" ],
+    [ [ "ZONA BUNGE",   "",               true,  "prix"     ], 6, 9003, 20,  100, 26, 27, 1734886800000 ],
     0,
     0,
     0,
     0,
     0,
+    0,
+
     1623339720117,
     parseInt(Date.now()),
   ];
+
   req.session.touch();
   res.send(JSON.stringify(data));
 });
