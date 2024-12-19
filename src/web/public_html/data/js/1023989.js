@@ -25584,19 +25584,48 @@
         BEE: 27,
       },
       SELECTABLE_MOBILES = [
+        // MOBILE.ARMOR,
+        // MOBILE.ICE,
+        // MOBILE.ADUKA,
+        // MOBILE.LIGHTNING,
+        // MOBILE.BIGFOOT,
+        // MOBILE.JD,
+        // MOBILE.ASATE,
+        // MOBILE.NAK,
+        // MOBILE.TRICO,
+        // MOBILE.MAGE,
+        // MOBILE.TURTLE,
+        // MOBILE.BOOMER,
+        // MOBILE.RANDOM,
+
         MOBILE.ARMOR,
-        MOBILE.ICE,
-        MOBILE.ADUKA,
-        MOBILE.LIGHTNING,
-        MOBILE.BIGFOOT,
-        MOBILE.JD,
-        MOBILE.ASATE,
+        MOBILE.MAGE,
         MOBILE.NAK,
         MOBILE.TRICO,
-        MOBILE.MAGE,
-        MOBILE.TURTLE,
+        MOBILE.BIGFOOT,
         MOBILE.BOOMER,
+        MOBILE.RAON,
+        MOBILE.LIGHTNING,
+        MOBILE.JD,
+        MOBILE.ASATE,
+        MOBILE.ICE,
+        MOBILE.TURTLE,
+        MOBILE.GRUB,
+        MOBILE.ADUKA,
+        MOBILE.KALSIDDON,
+        MOBILE.FROG,
+        MOBILE.KNIGHT,
+        // MOBILE.DRAGON,
+        MOBILE.DRAGON2,
         MOBILE.RANDOM,
+
+        // MOBILE.FOX,
+        // MOBILE.ELECTRICO,
+        // MOBILE.RANDOMIZER,
+        // MOBILE.MAYA,
+        // MOBILE.TIBURON,
+        // MOBILE.PHOENIX,
+        // MOBILE.BEE,
       ];
 
     function GetMobileAfter(a) {
@@ -38320,39 +38349,39 @@
             this.StartNextTurn();
             this.AddEventLetter(this.addEventLetter);
             break;
-            case "pass":
-              b = ArrayToObject(
-                b,
-                "next_turn_number player_number x y look add_delay next_turn_of_player chat thor_x thor_y thor_angle thor_damage new_weather wind_power wind_angle active_weathers next_weather_pos".split(
-                  " "
-                )
-              );
-              a = this.GetPlayerByPlayerNumber(b.player_number);
-              a.MoveTo(b.x, b.y, b.look);
-              a.ChangeDelay(a.delay + b.add_delay, b.next_turn_number - 1);
-              this.UpdateTurnList();
-              this.turn_number = b.next_turn_number;
-              this.UpdateGhostsTurn();
-              this.EndTurn();
-              this.next_turn = b.next_turn_of_player;
-              
-              // Weather and Thor updates (added from the play case)
-              this.ReceivedChatArray(b.chat, a.name);
-              
-              // Update Thor lightning effect
-              this.UpdateThor([b.thor_x, b.thor_y, b.thor_angle, b.thor_damage]);
-            
-              // Push new weather and update active weathers
-              this.PushWeather(b.new_weather);
-              
-              // Update wind
-              this.next_wind = [b.wind_power, b.wind_angle];
-              this.DrawWind(this.next_wind[0], this.next_wind[1]);
-            
-              // Draw active weathers and update weather position
-              this.DrawWeathers(b.active_weathers, b.next_weather_pos);
-            
-              this.StartNextTurn();
+          case "pass":
+            b = ArrayToObject(
+              b,
+              "next_turn_number player_number x y look add_delay next_turn_of_player chat thor_x thor_y thor_angle thor_damage new_weather wind_power wind_angle active_weathers next_weather_pos".split(
+                " "
+              )
+            );
+            a = this.GetPlayerByPlayerNumber(b.player_number);
+            a.MoveTo(b.x, b.y, b.look);
+            a.ChangeDelay(a.delay + b.add_delay, b.next_turn_number - 1);
+            this.UpdateTurnList();
+            this.turn_number = b.next_turn_number;
+            this.UpdateGhostsTurn();
+            this.EndTurn();
+            this.next_turn = b.next_turn_of_player;
+
+            // Weather and Thor updates (added from the play case)
+            this.ReceivedChatArray(b.chat, a.name);
+
+            // Update Thor lightning effect
+            this.UpdateThor([b.thor_x, b.thor_y, b.thor_angle, b.thor_damage]);
+
+            // Push new weather and update active weathers
+            this.PushWeather(b.new_weather);
+
+            // Update wind
+            this.next_wind = [b.wind_power, b.wind_angle];
+            this.DrawWind(this.next_wind[0], this.next_wind[1]);
+
+            // Draw active weathers and update weather position
+            this.DrawWeathers(b.active_weathers, b.next_weather_pos);
+
+            this.StartNextTurn();
             break;
           case "update":
             this.UpdatePlayer(b);
@@ -44771,20 +44800,16 @@
       $("#roomButtonMobile").click(function () {
         AudioPlay(AUDIO_BUTTON_SELECT2);
         b();
-        for (
-          var d = $("#roomMobileSelect"), e = SELECTABLE_MOBILES, f = {}, h = 0;
-          h < e.length;
-          f = {
-            nameDiv: f.nameDiv,
-            m: f.m,
-            j: f.j,
-            anim: f.anim,
-          },
-            h++
-        ) {
-          f.j = e[h];
-          f.m = MOBILES[f.j];
+        var d = $("#roomMobileSelect");
+        var e = SELECTABLE_MOBILES;
+
+        function addMobile(m, h) {
+          var f = {
+            j: m,
+            m: MOBILES[m]
+          };
           f.nameDiv = void 0;
+
           var k = $(
             '<div class="mobileSelectBtn glow_button" style="cursor: pointer;"><div class="mobileName blackShadow">' +
               f.m.name +
@@ -44803,6 +44828,7 @@
               })(f)
             )
             .appendTo(d);
+
           f.nameDiv = k.children().eq(0);
           var m = f.m.epa && f.m.epa.file ? f.m.epa.file : f.m.file;
           m.includes("/") || (m = "mobiles/" + m + ".png");
@@ -44830,6 +44856,67 @@
             function () {}
           );
         }
+
+        addMobile(MOBILE.ADUKA, 0);
+        // for (
+        //   var f = {}, h = 0;
+        //   h < e.length;
+        //   f = {
+        //     nameDiv: f.nameDiv,
+        //     m: f.m,
+        //     j: f.j,
+        //     anim: f.anim,
+        //   },
+        //     h++
+        // ) {
+        //   f.j = e[h];
+        //   f.m = MOBILES[f.j];
+        //   f.nameDiv = void 0;
+        //   var k = $(
+        //     '<div class="mobileSelectBtn glow_button" style="cursor: pointer;"><div class="mobileName blackShadow">' +
+        //       f.m.name +
+        //       '</div><div class="Alt">' +
+        //       h.toString(16).toUpperCase() +
+        //       "</div>"
+        //   )
+        //     .click(
+        //       (function (c) {
+        //         return function () {
+        //           c.nameDiv.text() == c.m.name &&
+        //             (a.SendRoomChangeMobile(c.j),
+        //             b(),
+        //             AudioPlay(AUDIO_BUTTON_SELECT2));
+        //         };
+        //       })(f)
+        //     )
+        //     .appendTo(d);
+        //   f.nameDiv = k.children().eq(0);
+        //   var m = f.m.epa && f.m.epa.file ? f.m.epa.file : f.m.file;
+        //   m.includes("/") || (m = "mobiles/" + m + ".png");
+        //   f.anim = new CAnimatedObject2(
+        //     m,
+        //     f.m.epa || f.m.graphics,
+        //     f.j == MOBILE.RANDOM ? 29 : 35,
+        //     f.j == MOBILE.RANDOM ? 63 : 55,
+        //     k,
+        //     1,
+        //     MOBILE_FPS,
+        //     !0,
+        //     LOOP_NORMAL,
+        //     0,
+        //     1,
+        //     !0
+        //   );
+        //   c.push(f.anim);
+        //   k.hover(
+        //     (function (a) {
+        //       return function () {
+        //         return a.anim.ChangeEpaAnim("emotion1", "normal");
+        //       };
+        //     })(f),
+        //     function () {}
+        //   );
+        // }
         $(".Alt").is(":visible") && $(".Alt").show();
         15 == e.length &&
           d.css({

@@ -141,9 +141,9 @@ module.exports = class GameServer {
             9,
           ]);
         }
-        data.push(["Bienvenido: " + account.player.game_id + " :)  ", "", 9]);
+        data.push(["Welcome: " + account.player.game_id + " :)  ", "", 9]);
         data.push([
-          "Hola " +
+          "Hello " +
             account.player.game_id +
             " enteraté de nuestro nuevo (gift) Evento (gift) en => https://thorbound.com/event :)",
           "",
