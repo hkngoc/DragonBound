@@ -129,9 +129,13 @@ module.exports = class Account {
       }, 2000);
     }
   }
+
   Handler(opcode, message) {
     var self = this;
     const ip = this.connection._connection._socket.remoteAddress;
+
+    console.log("Handler", opcode, message);
+
     switch (opcode) {
       case Types.CLIENT_OPCODE.login: {
         let _ver = parseInt(message[1]);
@@ -653,13 +657,13 @@ module.exports = class Account {
                   //self.gameserver.account_check[self.gameserver.id].accounts_server += 1;
                   self.check_messages();
                   /*if (self.player.win === 0 && self.player.loss === 0) {
-										self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.RECEIVED_AVATAR, ["ThorBound", 8142, 0, "Welcome Gift", "forever", "Chicken [Head]"]));
-										self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.RECEIVED_AVATAR, ["ThorBound", 8143, 0, "Welcome Gift", "forever", "Chicken [Body]"]));
-										self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.RECEIVED_AVATAR, ["ThorBound", 748554, 0, "Welcome Gift", "forever", "Chastifall (RARE) [Flag]"]));
-									}*/
+                    self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.RECEIVED_AVATAR, ["ThorBound", 8142, 0, "Welcome Gift", "forever", "Chicken [Head]"]));
+                    self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.RECEIVED_AVATAR, ["ThorBound", 8143, 0, "Welcome Gift", "forever", "Chicken [Body]"]));
+                    self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.RECEIVED_AVATAR, ["ThorBound", 748554, 0, "Welcome Gift", "forever", "Chastifall (RARE) [Flag]"]));
+                  }*/
                   /*if (1559602800000 >= Date.now()) {
-										self.send([17,"¡PROMOCIÓN!",'Promoción de cash por tiempo limitado, aprovecha esta gran oferta y recibe 2 RANGOS ESPECIALES + 170,000 de cash. <a style="color:#fbf9f9;text-shadow: 0px 0px 2px #ff980099, 0px 0px 3px #ff830057, 0px 0px 7px #ff98005e, 0px 0px 5px #ff9b0066, 0px 0px 8px #ff980059, 0px 0px 8px #ff8f0070;" href="/cash" target="_blank">¡RECARGA YA! - ¡Click Aqui!</a>']);
-									}*/
+                    self.send([17,"¡PROMOCIÓN!",'Promoción de cash por tiempo limitado, aprovecha esta gran oferta y recibe 2 RANGOS ESPECIALES + 170,000 de cash. <a style="color:#fbf9f9;text-shadow: 0px 0px 2px #ff980099, 0px 0px 3px #ff830057, 0px 0px 7px #ff98005e, 0px 0px 5px #ff9b0066, 0px 0px 8px #ff980059, 0px 0px 8px #ff8f0070;" href="/cash" target="_blank">¡RECARGA YA! - ¡Click Aqui!</a>']);
+                  }*/
                   //self.send([17,"¡ALERTA!",'El servidor se encuentra en mantenimiento durante unas horas, le recomendamos no jugar por el momento, gracias por su comprension']);
                 }
               );
@@ -671,6 +675,7 @@ module.exports = class Account {
           });
         break;
       }
+
       case Types.CLIENT_OPCODE.get_avatar: {
         let _id = message[1];
         var data = self.gameserver.avatars.getAvatar(_id);
@@ -678,6 +683,7 @@ module.exports = class Account {
           self.send([Types.SERVER_OPCODE.avatar_info, _id, data]);
         break;
       }
+
       case Types.CLIENT_OPCODE.get_my_avatars: {
         // seguridad
         if (!self.login_complete) {
@@ -694,6 +700,7 @@ module.exports = class Account {
         });
         break;
       }
+
       case Types.CLIENT_OPCODE.chat: {
         // seguridad
         if (!self.login_complete) {
@@ -734,6 +741,7 @@ module.exports = class Account {
                     }*/
         break;
       }
+
       case Types.CLIENT_OPCODE.send_bcm: {
         // seguridad
         if (!self.login_complete) {
@@ -772,9 +780,9 @@ module.exports = class Account {
           );
           return null;
         } /*else if (self.gameserver.name === 'Prix' && this.player.gm === 0 && self.player.server_tournament_state === 0) {
-						self.sendMessage(new Message.alertResponse("Hola "+this.player.game_id, "El Chat en el Lobby esta prohibido para los usuarios."));
-						return null;
-					}*/ else if (_msj.length > 150) {
+            self.sendMessage(new Message.alertResponse("Hola "+this.player.game_id, "El Chat en el Lobby esta prohibido para los usuarios."));
+            return null;
+          }*/ else if (_msj.length > 150) {
         } else if (self.player.megaphones > 0) {
           _msj = _msj.replace("<", "");
           _msj = _msj.replace(">", "");
@@ -808,9 +816,9 @@ module.exports = class Account {
             Logger.error(e.stack);
           }
           /*self.gameserver.db.updateMegaphone(-1, self.player.user_id).then(() => {
-						self.player.megaphones -= 1;
+            self.player.megaphones -= 1;
 
-					}); */
+          }); */
           self.sendMessage(new Message.loginResponse(self));
           /*self.gameserver.db.UpdateAvatarAmountBuggle(self.player.user_id).then(() => {}); */
         } else {
@@ -857,6 +865,7 @@ module.exports = class Account {
 
         break;
       }
+
       case Types.CLIENT_OPCODE.pchat: {
         // seguridad
         if (!self.login_complete) {
@@ -1059,18 +1068,18 @@ module.exports = class Account {
               )
                 return null;
               /*if (self.player.rank === 26 && is_cash === true || self.player.rank === 27 && is_cash === true || self.player.rank === 31 && is_cash === true) {
-									self.send([17,"PROHIBITED","This option is prohibited for your rank"]);
-									return null;
-								} */
+                  self.send([17,"PROHIBITED","This option is prohibited for your rank"]);
+                  return null;
+                } */
               /*if (id === 2319 && self.player.rank !== 26) {
                                     self.sendMessage(new Message.alertResponse("Lo sentimos", "Este Item no se puede Regalar.."));
                                     return null;
                                 }
-								if (self.player.user_id === 4) {
+                if (self.player.user_id === 4) {
                                     self.sendMessage(new Message.alertResponse("Lo sentimos Jorge", "Esta opción esta Prohibida. De insistir todo tiene un registro ATTE: Berny."));
                                     return null;
                                 }
-								if (self.player.user_id === 6) {
+                if (self.player.user_id === 6) {
                                     self.sendMessage(new Message.alertResponse("Lo sentimos Johnatan", "Esta opción esta Prohibida. De insistir todo tiene un registro ATTE: Berny."));
                                     return null;
                                 }*/
@@ -1472,6 +1481,7 @@ module.exports = class Account {
 
         break;
       }
+
       case Types.CLIENT_OPCODE.quick_join: {
         // seguridad
         if (!self.login_complete) {
@@ -1518,6 +1528,7 @@ module.exports = class Account {
 
         break;
       }
+
       case Types.CLIENT_OPCODE.use_exitem: {
         if (!self.login_complete) {
           console.log("login incomplete", opcode);
@@ -1571,6 +1582,7 @@ module.exports = class Account {
         }
         break;
       }
+
       case Types.CLIENT_OPCODE.equip: {
         // seguridad
         if (!self.login_complete) {
@@ -1869,7 +1881,7 @@ module.exports = class Account {
         // seguridad
         if (!self.login_complete) {
           /*self.connection.close();
-						return null;*/
+            return null;*/
           var trys = 0;
           var check_ready = function () {
             if (trys < 400)
@@ -2008,6 +2020,7 @@ module.exports = class Account {
         }
         break;
       }
+
       case Types.CLIENT_OPCODE.guild_create: {
         // seguridad
         if (!self.login_complete) {
@@ -2137,6 +2150,7 @@ module.exports = class Account {
         }
         break;
       }
+
       case Types.CLIENT_OPCODE.guildinvite: {
         // seguridad
         if (!self.login_complete) {
@@ -2178,6 +2192,7 @@ module.exports = class Account {
         }
         break;
       }
+
       case Types.CLIENT_OPCODE.guild_approved: {
         // seguridad
         if (!self.login_complete) {
@@ -2214,6 +2229,7 @@ module.exports = class Account {
         }
         break;
       }
+
       case Types.CLIENT_OPCODE.guild_leave: {
         // seguridad
         if (!self.login_complete) {
@@ -2310,6 +2326,7 @@ module.exports = class Account {
         }
         break;
       }
+
       case Types.CLIENT_OPCODE.guild_kick: {
         // seguridad
         if (!self.login_complete) {
@@ -2378,15 +2395,16 @@ module.exports = class Account {
         if (_strtype === "all") {
           self.gameserver.sendRoomsType(self, 0, null);
         } else if (_strtype === "waiting") {
-          self.gameserver.sendRoomsWait(self, 0, null);
+          self.gameserver.sendRoomsType(self, 0, { free: true, status: Types.ROOM_STATUS.WAITING });
         } else if (_strtype === "normal") {
-          self.gameserver.sendRoomsnormal(self, 0, null);
+          self.gameserver.sendRoomsType(self, 0, { free: true, mode: Types.GAME_MODE.NORMAL });
         } else if (_strtype === "boss") {
-          self.gameserver.sendRoomsboss(self, 0, null);
+          console.log("get list boss room");
+          self.gameserver.sendRoomsType(self, 0, { free: true, mode: Types.GAME_MODE.BOSS });
         } else if (_strtype === "same") {
-          self.gameserver.sendRoomssame(self, 0, null);
+          self.gameserver.sendRoomsType(self, 0, { free: true, mode: Types.GAME_MODE.SAME });
         } else if (_strtype === "score") {
-          self.gameserver.sendRoomsscore(self, 0, null);
+          self.gameserver.sendRoomsType(self, 0, { free: true, mode: Types.GAME_MODE.SCORE });
         } else if (_strtype === "next") {
           self.player.channel_rango = self.player.channel_rango + 6;
           if (self.player.channel_rango > 20) self.player.channel_rango = 0;
@@ -2402,30 +2420,30 @@ module.exports = class Account {
       }
 
       /*case Types.CLIENT_OPCODE.channel_rooms:
-				{
-					// seguridad
-					if (!self.login_complete) {
-						console.log("login incomplete",opcode);self.connection.close();
-						return null;
-					}
-					var _strtype = message[1];
-					if (_strtype === "all" || _strtype === "waiting" || _strtype === "friends" || _strtype === "guild" ||  _strtype === "normal" || _strtype === "boss" || _strtype === "same" || _strtype === "score") {
-						self.gameserver.sendRoomsTypeJc(self, 0, _strtype);
-					} else if (_strtype === "next") {
-						self.player.channel_rango = self.player.channel_rango + 6;
-						if (self.player.channel_rango > 20)
-							self.player.channel_rango = 0;
-						//Logger.normal("Channel Rango Room #1: "+self.player.channel_rango);
-						self.gameserver.sendRoomsTypeJc(self, self.player.channel_rango, _strtype);
-					} else if (_strtype === "prev") {
-						self.player.channel_rango = self.player.channel_rango - 6;
-						if (self.player.channel_rango < 0)
-							self.player.channel_rango = 0;
-						//Logger.normal("Channel Rango Room #2: "+self.player.channel_rango);
-						self.gameserver.sendRoomsTypeJc(self, self.player.channel_rango, _strtype);
-					}
-					break;
-				}*/
+        {
+          // seguridad
+          if (!self.login_complete) {
+            console.log("login incomplete",opcode);self.connection.close();
+            return null;
+          }
+          var _strtype = message[1];
+          if (_strtype === "all" || _strtype === "waiting" || _strtype === "friends" || _strtype === "guild" ||  _strtype === "normal" || _strtype === "boss" || _strtype === "same" || _strtype === "score") {
+            self.gameserver.sendRoomsTypeJc(self, 0, _strtype);
+          } else if (_strtype === "next") {
+            self.player.channel_rango = self.player.channel_rango + 6;
+            if (self.player.channel_rango > 20)
+              self.player.channel_rango = 0;
+            //Logger.normal("Channel Rango Room #1: "+self.player.channel_rango);
+            self.gameserver.sendRoomsTypeJc(self, self.player.channel_rango, _strtype);
+          } else if (_strtype === "prev") {
+            self.player.channel_rango = self.player.channel_rango - 6;
+            if (self.player.channel_rango < 0)
+              self.player.channel_rango = 0;
+            //Logger.normal("Channel Rango Room #2: "+self.player.channel_rango);
+            self.gameserver.sendRoomsTypeJc(self, self.player.channel_rango, _strtype);
+          }
+          break;
+        }*/
 
       case Types.CLIENT_OPCODE.get_room_info: {
         // seguridad
@@ -2510,12 +2528,12 @@ module.exports = class Account {
             );
             //Logger.info('User: '+self.player.game_id+' has left the Room: '+self.room_number);
             /*if (self.room.game) {
-								if (self.room.player_count === 2) {
-									self.room.game.checkDead();
-								} else if (self.room.player_count > 2) {
-									self.room.game.gamePass(self);
-								}
-							}*/
+                if (self.room.player_count === 2) {
+                  self.room.game.checkDead();
+                } else if (self.room.player_count > 2) {
+                  self.room.game.gamePass(self);
+                }
+              }*/
             //self.gameserver.pushBroadcastChat(new Message.chatResponse(self, "Player "+self.player.game_id+" left the room.", Types.CHAT_TYPE.SYSTEM), self.room);
             //self.gameserver.pushBroadcastChat(new Message.chatResponse(self, "Winning Bonus: Team A = %% GP, Team B = %% GP.", Types.CHAT_TYPE.SYSTEM), self.room);
           }
@@ -2528,11 +2546,11 @@ module.exports = class Account {
         self.gameserver.sendAccountsOnline();
         if (self.gameserver.server_subtype !== 3) {
           /*self.gameserver.forEachAccount(function (account_rooms) {
-							if (account_rooms !== null) {
-								account_rooms.gameserver.sendRooms(account_rooms);
-								account_rooms.sendMessage(new Message.loginResponse(account_rooms));
-							}
-						});*/
+              if (account_rooms !== null) {
+                account_rooms.gameserver.sendRooms(account_rooms);
+                account_rooms.sendMessage(new Message.loginResponse(account_rooms));
+              }
+            });*/
           self.gameserver.sendRooms(self);
           if (self.player.random_mobil === parseInt(1)) {
             self.player.mobile = Types.MOBILE.RANDOM;
@@ -2869,9 +2887,9 @@ module.exports = class Account {
           Types.MOBILES[mobile_prix] !== null
         ) {
           /*if (mobile_prix == Types.MOBILE.DRAGON && self.player.rank !== 31 && self.player.rank !== 26) {
-							self.sendMessage(new Message.alertResponse("Non-Selectable Mobile", "You can not select this mobile."));
-							return null;
-						}*/
+              self.sendMessage(new Message.alertResponse("Non-Selectable Mobile", "You can not select this mobile."));
+              return null;
+            }*/
           if (mobile_prix == Types.MOBILE.RANDOM) {
             var random_number = parseInt(getRndInteger(0, 6));
             if (random_number === 7) random_number = 26;
@@ -2921,11 +2939,11 @@ module.exports = class Account {
         }
 
         /*if (self.gameserver.id === 3) {
-						if (self.player.cash <= 1499) {
-							self.sendMessage(new Message.alertResponse("I am sorry", "You do not have enough cash to start this game. <img class='emo' src='/static/images/emo/sad.png'>"));
-							return null;
-						}
-					}*/
+            if (self.player.cash <= 1499) {
+              self.sendMessage(new Message.alertResponse("I am sorry", "You do not have enough cash to start this game. <img class='emo' src='/static/images/emo/sad.png'>"));
+              return null;
+            }
+          }*/
 
         self.player.tournament_wait_game = 1;
         self.send([
@@ -3839,8 +3857,8 @@ module.exports = class Account {
           return null;
         }
         /*if ((self.player.rank >= 27) === false) {
-						return null;
-					}*/
+            return null;
+          }*/
 
         if (self.room) {
           if (self.room.game_mode === Types.GAME_MODE.BOSS) {
@@ -4493,8 +4511,8 @@ module.exports = class Account {
           ])
         );
         /*} else {
-						self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.ADD_FRIEND_OFFLINE, []));
-					}*/
+            self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.ADD_FRIEND_OFFLINE, []));
+          }*/
 
         break;
       }
@@ -4709,13 +4727,13 @@ module.exports = class Account {
             var valido = false;
             for (var xm in avatar_user) {
               /*if (avatar_user[xm].aId != 1060) {
-									self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1060, 1, 0, 'Rose (get relationship)']));
-									return null;
-								}
-								if (avatar_user[xm].aId != 1063) {
-									self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1063, 1, 0, 'Tissue (break friendship)']));
-									return null;
-								}*/
+                  self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1060, 1, 0, 'Rose (get relationship)']));
+                  return null;
+                }
+                if (avatar_user[xm].aId != 1063) {
+                  self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1063, 1, 0, 'Tissue (break friendship)']));
+                  return null;
+                }*/
               if (rel_tip === "f") {
                 if (avatar_user[xm].aId === 1060) {
                   self.send([40, 76, player2.player.game_id]);
@@ -4730,9 +4748,9 @@ module.exports = class Account {
                     ],
                   ]);
                 } /* else {
-										self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1060, 1, 0, 'Rose (get relationship)']));
-										return null;
-									}*/
+                    self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1060, 1, 0, 'Rose (get relationship)']));
+                    return null;
+                  }*/
               }
               if (rel_tip === "e") {
                 if (avatar_user[xm].aId === 1061) {
@@ -4748,9 +4766,9 @@ module.exports = class Account {
                     ],
                   ]);
                 } /* else {
-										self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1061, 1, 0, 'Engagement Ring']));
-										return null;
-									}*/
+                    self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1061, 1, 0, 'Engagement Ring']));
+                    return null;
+                  }*/
               }
               if (rel_tip === "m") {
                 if (avatar_user[xm].aId === 1062) {
@@ -4767,9 +4785,9 @@ module.exports = class Account {
                   ]);
                 }
                 /*if (avatar_user[xm].aId !== 1062) {
-										self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1062, 1, 0, 'Marriage Ring']));
-										return null;
-									}*/
+                    self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1062, 1, 0, 'Marriage Ring']));
+                    return null;
+                  }*/
               }
               if (rel_tip === "s") {
                 if (self.player.relationship_status === "f") {
@@ -4777,27 +4795,27 @@ module.exports = class Account {
                     valido = true;
                     Ava_break = 1063;
                   } /* else {
-											self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1063, 1, 0, 'Tissue (break friendship)']));
-											return null;
-										}*/
+                      self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1063, 1, 0, 'Tissue (break friendship)']));
+                      return null;
+                    }*/
                 }
                 if (self.player.relationship_status === "e") {
                   if (avatar_user[xm].aId === 1064) {
                     valido = true;
                     Ava_break = 1064;
                   } /* else {
-											self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1064, 1, 0, 'Hammer (break engagement)']));
-											return null;
-										}*/
+                      self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1064, 1, 0, 'Hammer (break engagement)']));
+                      return null;
+                    }*/
                 }
                 if (self.player.relationship_status === "m") {
                   if (avatar_user[xm].aId === 1065) {
                     valido = true;
                     Ava_break = 1065;
                   } /* else {
-											self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1065, 1, 0, 'Lawyer (break marriage)']));
-											return null;
-										}*/
+                      self.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.NEED_ITEM, [1065, 1, 0, 'Lawyer (break marriage)']));
+                      return null;
+                    }*/
                 }
                 if (valido) {
                   var name_ava_gift =
@@ -4946,13 +4964,13 @@ module.exports = class Account {
                   account.player.gameserverevent = Time_Event;
                   account.gameserver.evento200 = true;
                   /*var data_game_server = self.gameserver.chathistory.slice(0);
-										
-										data_game_server.push(['', '', 9]);
-										if (self.gameserver.evento200 === true) {
-											var w = self.gameserver.SecondsToString(parseInt(self.player.gameserverevent));
-											data_game_server.push(['¡EVENTO! GP & Gold: 200% - '+w+' para finalizar.', '', 17]);
-										}
-										account.send([Types.SERVER_OPCODE.room_state, [0, data_game_server], 1]);*/
+                    
+                    data_game_server.push(['', '', 9]);
+                    if (self.gameserver.evento200 === true) {
+                      var w = self.gameserver.SecondsToString(parseInt(self.player.gameserverevent));
+                      data_game_server.push(['¡EVENTO! GP & Gold: 200% - '+w+' para finalizar.', '', 17]);
+                    }
+                    account.send([Types.SERVER_OPCODE.room_state, [0, data_game_server], 1]);*/
                 }
               });
             }, 4000);
@@ -4993,13 +5011,13 @@ module.exports = class Account {
                   account.player.gameserverevent = Time_Event;
                   account.gameserver.evento200 = true;
                   /*var data_game_server = self.gameserver.chathistory.slice(0);
-										
-										data_game_server.push(['', '', 9]);
-										if (self.gameserver.evento200 === true) {
-											var w = self.gameserver.SecondsToString(parseInt(self.player.gameserverevent));
-											data_game_server.push(['¡EVENTO! GP & Gold: 200% - '+w+' para finalizar.', '', 17]);
-										}
-										account.send([Types.SERVER_OPCODE.room_state, [0, data_game_server], 1]);*/
+                    
+                    data_game_server.push(['', '', 9]);
+                    if (self.gameserver.evento200 === true) {
+                      var w = self.gameserver.SecondsToString(parseInt(self.player.gameserverevent));
+                      data_game_server.push(['¡EVENTO! GP & Gold: 200% - '+w+' para finalizar.', '', 17]);
+                    }
+                    account.send([Types.SERVER_OPCODE.room_state, [0, data_game_server], 1]);*/
                 }
               });
             }, 4000);
