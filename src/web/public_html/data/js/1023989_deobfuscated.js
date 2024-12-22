@@ -22690,7 +22690,7 @@
     function IsEmojiSupported() {
       var a = document.createElement("canvas");
       a.width = a.height = 64;
-      var b = a.getContext("2d");
+      var b = a.getContext("2d", { willReadFrequently: true });
       b.fillStyle = "#000";
       b.font = "64px Emoji, Arial, sans-serif";
       b.fillText("🤔", -12, 54.4);
@@ -30311,6 +30311,7 @@
     var DISCONNECT_REASON_CHANGED_CHANNEL = 3;
     var DISCONNECT_REASON_BAD_CLIENT = 4;
     var g_is_showing_login_avatars;
+
     function DragonNetwork() {
       this.location = GUI_LOCATION_CHANNEL;
       this.pms_on_hold = [];
@@ -30326,6 +30327,7 @@
       };
       this.Init();
     }
+
     DragonNetwork.prototype.Init = function () {
       var a = this;
       try {
@@ -30375,13 +30377,16 @@
         error(d, d.message);
       }
     };
+
     DragonNetwork.prototype.SendChat = function (a, b, c) {
       this.ds.Send(CLIENT_OPCODE.chat, a, b ? 1 : 0, c);
       this.last_chat = a;
     };
+
     DragonNetwork.prototype.SendRoomCreate = function (a, b, c, d) {
       this.ds.Send(CLIENT_OPCODE.room_create, a, b, c, d);
     };
+
     DragonNetwork.prototype.SendRoomJoin = function (a, b) {
       if (b) {
         this.ds.Send(CLIENT_OPCODE.room_join, a, b);
@@ -30389,6 +30394,7 @@
         this.ds.Send(CLIENT_OPCODE.room_join, a);
       }
     };
+
     DragonNetwork.prototype.SendWatchRoom = function (a, b) {
       if (b) {
         this.ds.Send(CLIENT_OPCODE.room_watch, a, b);
@@ -30396,6 +30402,7 @@
         this.ds.Send(CLIENT_OPCODE.room_watch, a);
       }
     };
+
     DragonNetwork.prototype.SendRoomLeave = function () {
       this.ds.Send(CLIENT_OPCODE.channel_join);
       if (this.game) {
@@ -30403,93 +30410,122 @@
         this.game = undefined;
       }
     };
+
     DragonNetwork.prototype.SendRoomChangeReady = function (a) {
       this.ds.Send(CLIENT_OPCODE.room_change_ready, a);
     };
+
     DragonNetwork.prototype.SendRoomChangeTeam = function (a) {
       this.ds.Send(CLIENT_OPCODE.room_change_team, a);
     };
+
     DragonNetwork.prototype.SendRoomGameStart = function () {
       this.ds.Send(CLIENT_OPCODE.game_start);
     };
+
     DragonNetwork.prototype.SendPlayerShoot = function (a, b, c, d, e, f, h, k, m) {
       this.ds.Send(CLIENT_OPCODE.game_shoot, a, b, c, d, e, f, h, k, m);
     };
+
     DragonNetwork.prototype.SendPlayerPassTurn = function (a, b, c, d, e, f) {
       this.ds.Send(CLIENT_OPCODE.game_pass_turn, a, b, c, d, e, f);
     };
+
     DragonNetwork.prototype.SendPlayerMove = function (a, b, c, d, e) {
       this.ds.Send(CLIENT_OPCODE.game_move, a, b, c, d, e);
     };
+
     DragonNetwork.prototype.SendChangeInfo = function (a) {
       this.ds.Send(CLIENT_OPCODE.change_info, a ? 1 : 0);
     };
+
     DragonNetwork.prototype.SendChangeName = function (a) {
       this.ds.Send(CLIENT_OPCODE.change_name, a);
     };
+
     DragonNetwork.prototype.SendPlayerUseItem = function (a) {
       this.ds.Send(CLIENT_OPCODE.game_use_item, a);
     };
+
     DragonNetwork.prototype.SendRoomChangeMobile = function (a) {
       this.ds.Send(CLIENT_OPCODE.mobile, a);
     };
+
     DragonNetwork.prototype.SendGetMyAvatars = function () {
       this.ds.Send(CLIENT_OPCODE.get_my_avatars);
     };
+
     DragonNetwork.prototype.SendEquip = function (a) {
       this.ds.Send(CLIENT_OPCODE.equip, a);
     };
+
     DragonNetwork.prototype.SendPurchase = function (a, b, c, d, e, f, h) {
       this.ds.Send(CLIENT_OPCODE.buy, a, b, c, d, e, f, h);
     };
+
     DragonNetwork.prototype.SendQuickJoin = function () {
       this.ds.Send(CLIENT_OPCODE.quick_join);
     };
+
     DragonNetwork.prototype.SendRoomChangeTitle = function (a) {
       this.ds.Send(CLIENT_OPCODE.room_title, a);
     };
+
     DragonNetwork.prototype.SendSelectBot = function (a, b) {
       this.ds.Send(CLIENT_OPCODE.select_bot, a, b);
     };
+
     DragonNetwork.prototype.SendEvent = function (a, b) {
       this.ds.Send(CLIENT_OPCODE.event, a, b);
     };
+
     DragonNetwork.prototype.SendGetPlayerInfo = function (a) {
       this.ds.Send(CLIENT_OPCODE.getinfo, a);
     };
+
     DragonNetwork.prototype.SendAddFriendRequest = function (a) {
       this.ds.Send(CLIENT_OPCODE.addfriend, a);
     };
+
     DragonNetwork.prototype.SendGuildInviteRequest = function (a) {
       if (DEBUG) {
         console.log("Send: guildinvite", a);
       }
       this.ds.Send(CLIENT_OPCODE.guildinvite, a);
     };
+
     DragonNetwork.prototype.SendFriendApproved = function (a, b) {
       this.ds.Send(CLIENT_OPCODE.friend_approved, a, b);
     };
+
     DragonNetwork.prototype.SendPrivateChat = function (a, b) {
       this.ds.Send(CLIENT_OPCODE.pchat, a, b);
     };
+
     DragonNetwork.prototype.SendDeleteFriend = function (a) {
       this.ds.Send(CLIENT_OPCODE.friend_delete, a);
     };
+
     DragonNetwork.prototype.SendGuildKick = function (a) {
       this.ds.Send(CLIENT_OPCODE.guild_kick, a);
     };
+
     DragonNetwork.prototype.SendRoomOptions = function (a, b, c, d, e, f, h, k, m, n, p) {
       this.ds.Send(CLIENT_OPCODE.room_options, a, b, c, d, e, c == MAP.CUSTOM ? f : 0, Number(!!h), Number(!!k), Number(!!m), Number(!!n), p);
     };
+
     DragonNetwork.prototype.SendGuildCreate = function (a) {
       this.ds.Send(CLIENT_OPCODE.guild_create, a);
     };
+
     DragonNetwork.prototype.SendGuildLeave = function () {
       this.ds.Send(CLIENT_OPCODE.guild_leave);
     };
+
     DragonNetwork.prototype.SendChannelRooms = function (a) {
       this.ds.Send(CLIENT_OPCODE.channel_rooms, a);
     };
+
     DragonNetwork.prototype.SendTabWatch = function (a) {
       if (this.ds) {
         this.ds.Send(CLIENT_OPCODE.tab, a);
@@ -30593,7 +30629,9 @@
     DragonNetwork.prototype.ConnectToGameServer = function (a, b, c) {
       var d;
       var e = this;
+
       $("#BrokerScreen").hide();
+
       if (a) {
         d = new DragonSocket();
         if (!d.IsSupported()) {
@@ -32061,7 +32099,7 @@
       }
 
       var c = 0; // count valid broker server config
-      // var d = 0;
+      var d = 0;
       var e = 0; // count server full
       var b = this.user_rank;
 
@@ -37326,6 +37364,7 @@
     var ROOM_NAMES = "Hello;My Room;ThorBound;Welcome;Let's Rock!;Come to play;A Game!;More gold;And if we play?;Join the room".split(";");
     var ROOM_NAMES_ES = "Hola;Mi Sala;ThorBound;Bienvenido;Ven a jugar;A Jugar!;Más oro;Y si jugamos?;Únete a la sala!".split(";");
     var g_privateChat;
+
     function ChannelGUI(a) {
       DragonScroll("#channel");
       DragonScroll("#playersList");
