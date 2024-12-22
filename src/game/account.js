@@ -190,8 +190,8 @@ class Account {
     if (handler) {
       handler.call(this, message);
     } else {
-      Logger.info("Opcode: " + Types.getMessageTypeAsString(opcode) + " data: " + message);
     }
+    Logger.info("Opcode: " + Types.getMessageTypeAsString(opcode) + " data: " + message);
 
     this.throttleAction();
   }

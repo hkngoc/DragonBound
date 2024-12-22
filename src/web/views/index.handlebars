@@ -65,6 +65,7 @@
           };
           return true
         }
+
         _0x539ex6[_0x539exf] = function() {
           if (_0x539ex6.readyState == 2) {
             _0x539ex17(_0x539ex6)
@@ -80,10 +81,12 @@
             }
           }
         };
+
         _0x539ex6.onprogress = function(a) {
           var b = document.getElementById('meterDN1'),
             _0x539ex1c = document.getElementById('meterDN2'),
             _0x539ex1d = 0;
+
           if (a.lengthComputable) {
             _0x539ex1d = a.loaded / a.total * 100
           } else {
@@ -91,6 +94,7 @@
               _0x539ex1d = a.loaded / _0x539ex8 * 100
             }
           };
+
           _0x539ex1d = Math.round(_0x539ex1d > 4 ? (_0x539ex1d < 100 ? _0x539ex1d : 100) : 0);
           if (_0x539ex1d > _0x539ex16) {
             if (_0x539ex1c) {
@@ -101,6 +105,7 @@
             }
           }
         };
+
         _0x539ex6[_0x539ex11](_0x539ex12, _0x539exc, true);
         _0x539ex6[_0x539ex13]();
         if (d && d.parentNode) {

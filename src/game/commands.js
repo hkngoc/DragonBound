@@ -38,7 +38,9 @@ function junteall(str) {
   str = str[1];
   str = str.split(" ");
   var complete = [];
-  for (var i = 1; i < str.length; i++) complete.push(str[i]);
+  for (var i = 1; i < str.length; i++) {
+    complete.push(str[i]);
+  }
   /*console.log(complete.join(" "));*/
   return complete.join(" ");
 }
@@ -81,8 +83,12 @@ module.exports = class Commands {
     var self = this;
     var data;
     var data2;
+
     try {
       data = this.cmdargs(msj[1]);
+
+      console.log("parse command", msj);
+
       switch (data[0]) {
         case "/delete_avatars": {
           if (

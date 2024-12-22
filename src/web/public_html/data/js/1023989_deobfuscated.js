@@ -39697,8 +39697,10 @@
         this.ws.close();
       }
     };
+
     DragonFreeze(DragonSocket);
     DragonFreeze(WebSocket);
+
     function SpamFlyingGroundParts(a, b, c, d) {
       for (var e = 0; e < c; e++) {
         var f = GetRandomElementFromArray(PARTICLES1.graphics2).css;
