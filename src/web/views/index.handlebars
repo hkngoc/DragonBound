@@ -16,46 +16,55 @@
     <meta name="theme-color" content="#000000" />
     {{!-- <meta name="referrer" content="same-origin"> --}}
     <link rel="manifest" href="/static/app.json?3">
+    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.11/alertify.min.js" integrity="sha512-2R8JJ9GapQ1VCvcazWIP4F7rOrMs6mzorqtZlXpvakAU0O/iw4n90CFrmG9+BwI//xxtnHxb5rbpkIF2s6z39w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/1.6.1/pixi.js" integrity="sha512-awHJvvQdIZNHwzUqlZ7GtvIzwV1IgZtjggyggzkcANFzodLjIuHEdLezpLaL52+b+KSKj3Y4irwZDRO+j5O37w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+    {{!-- import local static for dev local without intenet  --}}
+    <script src="/static/js/jquery-3.5.0.min.js"></script>
+    <script src="/static/js/alertify-0.3.11.min.js"></script>
+    <script src="/static/js/pixi-1.6.1.js"></script>
     <script>
       (function() {
-        console.log('gaa')
-        var d = document.getElementsByTagName('script'),
-          _0x539ex2 = d[d.length - 1].getAttribute('v'),
-          _arnulfover = '10',
-          _0x539ex3 = 'onreadyst',
-          _0x539ex4 = 'fre',
-          _0x539ex5 = 'al',
-          _0x539ex6 = new XMLHttpRequest(),
-          {{!-- _0x539ex7 = "1023989", --}}
-          {{!-- _0x539ex7 = "1023989_unpack", --}}
-          _0x539ex7 = "1023989_deobfuscated",
-          _0x539ex8 = 1400000,
-          _0x539ex9 = 'eze',
-          _0x539exa = '/stat',
-          _0x539exb = 'ev',
-          _0x539exc = _0x539exa + 'ic/' + 'js/' + _0x539ex7 + '.js?' + _arnulfover,
-          _0x539exd = Object[_0x539ex4 + _0x539ex9],
-          _0x539exe = 'atechange',
-          _0x539exf = _0x539ex3 + _0x539exe,
-          _0x539ex10 = window[_0x539exb + _0x539ex5],
-          _0x539ex11 = 'open',
-          _0x539ex12 = 'GET',
-          _0x539ex13 = 'send',
-          _0x539ex14 = JSON,
-          _0x539ex15 = 'prototype',
-          _0x539ex16 = 0;
-        _0x539exd(String[_0x539ex15]);
-        _0x539exd(String);
-        _0x539exd(XMLHttpRequest[_0x539ex15]);
-        _0x539exd(XMLHttpRequest);
-        _0x539exd(Math);
-        _0x539exd(Object);
-        _0x539exd(_0x539ex14);
-        _0x539exd(WebSocket[_0x539ex15]);
-        _0x539exd(WebSocket);
-        _0x539exd(Function[_0x539ex15]);
-        _0x539exd(Function);
-        _0x539exd(_0x539ex10);
+        {{!-- console.log('gaa') --}}
+        const d = document.getElementsByTagName('script');
+        const _0x539ex2 = d[d.length - 1].getAttribute('v');
+        const _arnulfover = '10';
+        {{!-- const _0x539ex3 = 'onreadyst'; --}}
+        {{!-- const _0x539ex4 = 'fre'; --}}
+        {{!-- const _0x539ex5 = 'al'; --}}
+        {{!-- const _0x539exe = 'atechange'; --}}
+        {{!-- const _0x539ex9 = 'eze'; --}}
+        {{!-- const _0x539exb = 'ev'; --}}
+        {{!-- const _0x539exa = '/stat'; --}}
+        {{!-- const _0x539ex14 = JSON; --}}
+        {{!-- const _0x539ex15 = 'prototype'; --}}
+
+        const _0x539ex6 = new XMLHttpRequest();
+        const _0x539ex10 = window['eval'];
+
+        const _0x539ex7 = "1023989_deobfuscated";
+        const _0x539ex8 = 1400000;
+        const _0x539exc = '/static/js/' + _0x539ex7 + '.js?' + _arnulfover;
+        const _0x539exf = 'onreadystatechange';
+        const _0x539ex11 = 'open';
+        const _0x539ex12 = 'GET';
+        const _0x539ex13 = 'send';
+        const _0x539ex16 = 0;
+
+        const freeze = Object['freeze'];
+
+        freeze(String['prototype']);
+        freeze(String);
+        freeze(XMLHttpRequest['prototype']);
+        freeze(XMLHttpRequest);
+        freeze(Math);
+        freeze(Object);
+        freeze(JSON);
+        freeze(WebSocket['prototype']);
+        freeze(WebSocket);
+        freeze(Function['prototype']);
+        freeze(Function);
+        freeze(window['eval']);
 
         function _0x539ex17(a, b) {
           var c = a.getAllResponseHeaders();
@@ -106,6 +115,7 @@
           }
         };
 
+        {{!-- console.log(_0x539ex6, _0x539ex12, _0x539exc, _0x539ex13); --}}
         _0x539ex6[_0x539ex11](_0x539ex12, _0x539exc, true);
         _0x539ex6[_0x539ex13]();
         if (d && d.parentNode) {
