@@ -6,8 +6,8 @@
   "scripts": {
     "start:web": "node src/web/main/server.js",
     "start:game": "node src/game.js",
-    "dev:web": "nodemon --exitcrash src/web/main/server.js",
-    "dev:game": "nodemon --exitcrash src/game.js",
+    "dev:web": "nodemon src/web/main/server.js --watch",
+    "dev:game": "nodemon src/game.js --watch",
     "start:scheduler": "node src/ranking/scheduler.js"
   },
   "repository": {
@@ -58,6 +58,7 @@
     "pngjs": "^7.0.0",
     "promise": "^8.3.0",
     "setimmediate": "^1.0.5",
+    "socket.io": "^4.8.1",
     "underscore": "^1.13.7",
     "uninstall": "^0.0.0",
     "xmlhttprequest": "^1.8.0"

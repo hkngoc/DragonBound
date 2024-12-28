@@ -41,7 +41,8 @@ for (var i in this.multiworld) {
 server.onConnect(function (connection) {
   for (var i in self.multiworld) {
     if (server.server_qid == self.multiworld[i].id) {
-      //Logger.info("enter intro server:"+server.server_qid);}
+      Logger.info("enter intro server:"+server.server_qid);
+
       const ip = connection._connection._socket.remoteAddress;
       //console.log(ip);
       if (ip_actions[ip] == undefined) {

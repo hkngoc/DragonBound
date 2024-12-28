@@ -1,8 +1,8 @@
-var _ = require('underscore');
-var cls = require('./class');
-var Types = require('../gametypes');
-var Logger = require('./logger');
-var Map = require('./map');
+const _ = require('underscore');
+const cls = require('./class');
+const Types = require('../gametypes');
+const Logger = require('./logger');
+const Map = require('./map');
 
 module.exports = MapController = cls.Class.extend({
     init: function (load) {

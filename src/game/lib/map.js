@@ -1,11 +1,11 @@
-var _ = require("underscore");
-var cls = require("./class");
-var Types = require("../gametypes");
-var Logger = require('./logger');
-var fs = require('fs'),
-    PNG = require('pngjs').PNG;
+const _ = require("underscore");
+const cls = require("./class");
+const Types = require("../gametypes");
+const Logger = require('./logger');
+const fs = require('fs')
+const PNG = require('pngjs').PNG;
 
-module.exports = Map = cls.Class.extend({
+const Map = cls.Class.extend({
     init: function (id) {
         var self = this;
         self.id = id;
@@ -165,3 +165,5 @@ module.exports = Map = cls.Class.extend({
         return Math.floor(Math.random() * (high - low) + low);
     }
 });
+
+module.exports = Map;

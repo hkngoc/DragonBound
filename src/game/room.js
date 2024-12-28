@@ -42,7 +42,7 @@ module.exports = class Room {
         this.turn_list = [];
 
         this.win_team_gp = 0;
-		this.win_team_gpb = 0;
+        this.win_team_gpb = 0;
         //this.win__gp = 16;
 
         this.team_a = {};
@@ -77,7 +77,7 @@ module.exports = class Room {
         this.is_s1_disabled = 0;
         this.is_tele_disabled = 0;
         this.is_random_teams = 0;
-		this.is_avatars_on = 0;
+        this.is_avatars_on = 0;
         if (this.game_mode === Types.GAME_MODE.BOSS) {
             this.is_avatars_on = 1;
         } else {
@@ -86,9 +86,9 @@ module.exports = class Room {
         this.is_dual_plus_disabled = 0;
         this.player_count = 0;
         this.turn_time = 20;
-		this.room_for_sale = 0;
-		this.allow_watch = 0;
-		this.allow_talk = 0;
+        this.room_for_sale = 0;
+        this.allow_watch = 0;
+        this.allow_talk = 0;
 
         this.frist_turn = 1;
 
@@ -149,10 +149,10 @@ module.exports = class Room {
             account.sendMessage(new Message.alert2Response(Types.ALERT2_TYPES.MUTED, []));
             return null;
         }
-		/*if (account.player.rank < 5) {
-			account.send([17,"Hola "+account.player.game_id,"Tu Nivel <span class='span_rank rank rank"+account.player.rank+"'></span> Es Muy Bajo. <br>Nivel mínimo <span class='span_rank rank rank5'></span> es requerido para hablar en este chat. <br><br><a style='color:#fbf9f9;text-shadow: 0px 0px 2px #ff980099, 0px 0px 3px #ff830057, 0px 0px 7px #ff98005e, 0px 0px 5px #ff9b0066, 0px 0px 8px #ff980059, 0px 0px 8px #ff8f0070;'>Unete a nuestras redes sociales!!</a>. <br><br> <a href='https://www.facebook.com/groups/250371652898757' target='_blank'> <img width='40' height='40' target='_blank' src='/static/images/fbx.png'></a>&nbsp&nbsp<a href='https://chat.whatsapp.com/DMeNbEsnTbfDQWtwvDsq5d' target='_blank'> <img width='40' height='40' target='_blank' src='/static/images/wspp.png'></a><br>" ]);
-			return null;
-		} */
+        /*if (account.player.rank < 5) {
+            account.send([17,"Hola "+account.player.game_id,"Tu Nivel <span class='span_rank rank rank"+account.player.rank+"'></span> Es Muy Bajo. <br>Nivel mínimo <span class='span_rank rank rank5'></span> es requerido para hablar en este chat. <br><br><a style='color:#fbf9f9;text-shadow: 0px 0px 2px #ff980099, 0px 0px 3px #ff830057, 0px 0px 7px #ff98005e, 0px 0px 5px #ff9b0066, 0px 0px 8px #ff980059, 0px 0px 8px #ff8f0070;'>Unete a nuestras redes sociales!!</a>. <br><br> <a href='https://www.facebook.com/groups/250371652898757' target='_blank'> <img width='40' height='40' target='_blank' src='/static/images/fbx.png'></a>&nbsp&nbsp<a href='https://chat.whatsapp.com/DMeNbEsnTbfDQWtwvDsq5d' target='_blank'> <img width='40' height='40' target='_blank' src='/static/images/wspp.png'></a><br>" ]);
+            return null;
+        } */
         /*if (account.player.gm === 1)
             maxlng = 120;*/
         if (msj.length > maxlng)
@@ -439,32 +439,46 @@ module.exports = class Room {
                             }
                         });
                     }
-				});
-				
+                });
+                
                 self.game = new Game(self.id, self, self.gameserver);
                 if (self.game) {
                     self.RoomUpdate(self);
-					self.turn_list = [];
+                    self.turn_list = [];
                     if (self.gameserver.server_subtype !== 3)
                         self.gameserver.sendRooms();
-					self.game.start(function (fturn) {
-						var lastturn_discount = -8;
-						self.forPlayers(function (account) {
-							if (typeof (account) !== 'undefined') {
-								if (account.player.mobile === Types.MOBILE.RANDOM) {
-									account.player.mobile = Types.MOBILE_R[getRndInteger(0, Types.MOBILE_R.length-1)];
+                    self.game.start(function (fturn) {
+                        var lastturn_discount = -8;
+                        self.forPlayers(function (account) {
+                            if (typeof (account) !== 'undefined') {
+                                if (account.player.mobile === Types.MOBILE.RANDOM) {
+                                    account.player.mobile = Types.MOBILE_R[getRndInteger(0, Types.MOBILE_R.length-1)];
                                     account.player.reloadHp();
-								}
-								if (self.game_mode === Types.GAME_MODE.TAG) {
-									var random_number = parseInt(getRndInteger(0, 20));
-									if (random_number === Types.MOBILE.RANDOM || random_number === Types.MOBILE.FOX || random_number === Types.MOBILE.DRAGON || random_number === Types.MOBILE.DRAG || random_number === Types.MOBILE.KALSIDDON || random_number === Types.MOBILE.MAYA || random_number === Types.MOBILE.DRAGON2 || random_number === Types.MOBILE.EASTER || random_number === Types.MOBILE.COPYLOID || random_number === Types.MOBILE.PHOENIX || random_number === Types.MOBILE.HALLOWEEN || random_number === Types.MOBILE.BEE)
-										random_number = parseInt(getRndInteger(0, 6));
-									account.send([Types.SERVER_OPCODE.game_mode_gb_tag, random_number]);
-								}
-								account.player.check_my_ava = self.is_avatars_on;
-								if (self.is_avatars_on === 0) {
+                                }
+                                if (self.game_mode === Types.GAME_MODE.TAG) {
+                                    var random_number = parseInt(getRndInteger(0, 20));
+                                    if (
+                                        random_number === Types.MOBILE.RANDOM ||
+                                        random_number === Types.MOBILE.FOX ||
+                                        random_number === Types.MOBILE.DRAGON ||
+                                        random_number === Types.MOBILE.DRAG ||
+                                        random_number === Types.MOBILE.KALSIDDON ||
+                                        random_number === Types.MOBILE.MAYA ||
+                                        random_number === Types.MOBILE.DRAGON2 ||
+                                        random_number === Types.MOBILE.EASTER ||
+                                        random_number === Types.MOBILE.COPYLOID ||
+                                        random_number === Types.MOBILE.PHOENIX ||
+                                        random_number === Types.MOBILE.HALLOWEEN ||
+                                        random_number === Types.MOBILE.BEE
+                                    ) {
+                                        random_number = parseInt(getRndInteger(0, 6));
+                                    }
+                                    account.send([Types.SERVER_OPCODE.game_mode_gb_tag, random_number]);
+                                }
+                                account.player.check_my_ava = self.is_avatars_on;
+                                if (self.is_avatars_on === 0) {
                                     account.player.resetStatsToDefault();
-								} else {
+                                } else {
                                     {
                                         const selectedMobile = Types.MOBILES[account.player.mobile];
                                         
@@ -482,84 +496,84 @@ module.exports = class Room {
                                         } else {
                                         }
                                     }
-								}
-								self.win_team_gp = self.team_b_count==1 ? 34 :self.team_b_count==2 ? 56 : self.team_b_count==3 ? 68 : self.team_b_count==4 ? 70 : 0;
-								if (self.gameserver.evento200 === true || self.event_game_room === 1)
-									self.win_team_gp *= 2;
-								if (self.no_bonus_user)
-									self.win_team_gp = parseInt(Math.abs(self.win_team_gp / 100));
-								
-								self.win_team_gpb = self.team_bots_count==1 ? 29 :self.team_bots_count==2 ? 42 : self.team_bots_count==3 ? 52 : self.team_bots_count==4 ? 62 : 0;
-								if (self.gameserver.evento200 === true || self.event_game_room === 1)
-									self.win_team_gpb *= 2;
-								self.turn_list.push({
-									user_id: account.player.user_id,
-									team: account.player.team,
-									position: account.player.position
-								});
-								account.player.lastturn = lastturn_discount;
-								account.player.game_position = account.player.position;
-							}
-						});
-					
-						self.shuffleTurnList(self.turn_list,function (turnList){
-							self.turn_list = turnList;
-							let turnTime = (self.turn_time+3)*1000;
-							var game_start_message = new Message.gameStart(self);
-							self.gameserver.pushToRoom(self.id, game_start_message);
-							self.game.historical.push(game_start_message);
-							/*if (self.gameserver.server_subtype === 3) {
-								self.forPlayers(function (players_server_event) {
-									if (typeof (players_server_event) !== 'undefined') {
-										if (self.gameserver.name === 'Holiday') {
-											setTimeout(function() {
-												players_server_event.send([0,players_server_event.player.game_id+" ("+players_server_event.player.gm_probability+") -VS- "+account.player.game_id+" ("+account.player.gm_probability+")","",17]);
-											}, 3000);
-										}
-										if (self.gameserver.name === 'Prix') {
-											setTimeout(function() {
-												players_server_event.send([0,players_server_event.player.game_id+" ("+players_server_event.player.punts_prix_user+") -VS- "+account.player.game_id+" ("+account.player.punts_prix_user+")","",17]);
-											}, 3000)
-										}
-								//		if (self.gameserver.id === 3) {
-								//			setTimeout(function() {
-								//				players_server_event.send([0,"Betting Room Cash: "+players_server_event.player.game_id+" (1500) -VS- "+account.player.game_id+" (1500)","",17]);
-								//			}, 3000)
-								//		}
-									}
-								});
-							}*/
-							/*self.gameserver.forEachAccount(function (accountp) {
-								if (self.gameserver.name === 'Holiday') {
-									setTimeout(function() {
-										self.send([0,self.account.player.game_id+" ("+self.account.player.gm_probability+") -VS- "+accountp.player.game_id+" ("+accountp.player.gm_probability+")","",17]);
+                                }
+                                self.win_team_gp = self.team_b_count==1 ? 34 :self.team_b_count==2 ? 56 : self.team_b_count==3 ? 68 : self.team_b_count==4 ? 70 : 0;
+                                if (self.gameserver.evento200 === true || self.event_game_room === 1)
+                                    self.win_team_gp *= 2;
+                                if (self.no_bonus_user)
+                                    self.win_team_gp = parseInt(Math.abs(self.win_team_gp / 100));
+                                
+                                self.win_team_gpb = self.team_bots_count==1 ? 29 :self.team_bots_count==2 ? 42 : self.team_bots_count==3 ? 52 : self.team_bots_count==4 ? 62 : 0;
+                                if (self.gameserver.evento200 === true || self.event_game_room === 1)
+                                    self.win_team_gpb *= 2;
+                                self.turn_list.push({
+                                    user_id: account.player.user_id,
+                                    team: account.player.team,
+                                    position: account.player.position
+                                });
+                                account.player.lastturn = lastturn_discount;
+                                account.player.game_position = account.player.position;
+                            }
+                        });
+                    
+                        self.shuffleTurnList(self.turn_list,function (turnList){
+                            self.turn_list = turnList;
+                            let turnTime = (self.turn_time+3)*1000;
+                            var game_start_message = new Message.gameStart(self);
+                            self.gameserver.pushToRoom(self.id, game_start_message);
+                            self.game.historical.push(game_start_message);
+                            /*if (self.gameserver.server_subtype === 3) {
+                                self.forPlayers(function (players_server_event) {
+                                    if (typeof (players_server_event) !== 'undefined') {
+                                        if (self.gameserver.name === 'Holiday') {
+                                            setTimeout(function() {
+                                                players_server_event.send([0,players_server_event.player.game_id+" ("+players_server_event.player.gm_probability+") -VS- "+account.player.game_id+" ("+account.player.gm_probability+")","",17]);
+                                            }, 3000);
+                                        }
+                                        if (self.gameserver.name === 'Prix') {
+                                            setTimeout(function() {
+                                                players_server_event.send([0,players_server_event.player.game_id+" ("+players_server_event.player.punts_prix_user+") -VS- "+account.player.game_id+" ("+account.player.punts_prix_user+")","",17]);
+                                            }, 3000)
+                                        }
+                                //		if (self.gameserver.id === 3) {
+                                //			setTimeout(function() {
+                                //				players_server_event.send([0,"Betting Room Cash: "+players_server_event.player.game_id+" (1500) -VS- "+account.player.game_id+" (1500)","",17]);
+                                //			}, 3000)
+                                //		}
+                                    }
+                                });
+                            }*/
+                            /*self.gameserver.forEachAccount(function (accountp) {
+                                if (self.gameserver.name === 'Holiday') {
+                                    setTimeout(function() {
+                                        self.send([0,self.account.player.game_id+" ("+self.account.player.gm_probability+") -VS- "+accountp.player.game_id+" ("+accountp.player.gm_probability+")","",17]);
                                         accountp.send([0,accountp.player.game_id+" ("+accountp.player.gm_probability+") -VS- "+self.account.player.game_id+" ("+self.account.player.gm_probability+")","",17]);
                                     }, 3000);
-								}
-								if (self.gameserver.name === 'Prix') {
+                                }
+                                if (self.gameserver.name === 'Prix') {
                                     setTimeout(function() {
                                         self.send([0,self.player.game_id+" ("+self.player.punts_prix_user+") -VS- "+accountp.player.game_id+" ("+accountp.player.punts_prix_user+")","",17]);
                                         accountp.send([0,accountp.player.game_id+" ("+accountp.player.punts_prix_user+") -VS- "+self.player.game_id+" ("+self.player.punts_prix_user+")","",17]);
                                     }, 3000)
                                 }
-							});*/
-							//
-							if (self.game_mode === Types.GAME_MODE.BOSS) {
-								self.forBots(function (bot) {
-									if (bot.player.user_id == self.turn_list[0].user_id) {
-										bot.turn();
-									}
-								});
-								self.map = -1;
-								if (self.gameserver.server_subtype !== 3)
-									self.gameserver.sendRooms();
-							}
-							self.game.turnTime = turnTime>7000?turnTime:7000;
-					//		console.log({is:"final turn list",turnlist:self.turn_list});
-					//		console.log({is:"set tur time",time:self.turn_time, final:self.game.turnTime});
-							self.game.setPassTimeOut(self.turn_list[0].user_id);
-						});
-						
+                            });*/
+                            //
+                            if (self.game_mode === Types.GAME_MODE.BOSS) {
+                                self.forBots(function (bot) {
+                                    if (bot.player.user_id == self.turn_list[0].user_id) {
+                                        bot.turn();
+                                    }
+                                });
+                                self.map = -1;
+                                if (self.gameserver.server_subtype !== 3)
+                                    self.gameserver.sendRooms();
+                            }
+                            self.game.turnTime = turnTime>7000?turnTime:7000;
+                    //		console.log({is:"final turn list",turnlist:self.turn_list});
+                    //		console.log({is:"set tur time",time:self.turn_time, final:self.game.turnTime});
+                            self.game.setPassTimeOut(self.turn_list[0].user_id);
+                        });
+                        
                     });
                     self.game.onGameEnd(function (team) {
                         var date_my_info_player = [];
@@ -636,7 +650,7 @@ module.exports = class Room {
                                             player.cash += 1500;
                                             self.gameserver.db.sendCash(1500, player.user_id);
                                         }*/
-									} else {
+                                    } else {
                                         if (!player.is_bot&&self.game_mode === Types.GAME_MODE.BOSS) {
                                             var superiorDerroted = false;
                                             self.forBots(function (bots) {
@@ -709,15 +723,15 @@ module.exports = class Room {
                         self.game = null;
                         if (self.player_count < self.max_players)
                             self.status = Types.ROOM_STATUS.WAITING;
-						else if (self.player_count >= self.max_players)
+                        else if (self.player_count >= self.max_players)
                                self.status = Types.ROOM_STATUS.FULL;
-						   else 
-							   self.status = Types.ROOM_STATUS.PLAYING;
+                           else 
+                               self.status = Types.ROOM_STATUS.PLAYING;
                         if (self.game_mode === Types.GAME_MODE.BOSS)
                             self.map = -1;
-						   if (self.gameserver.server_subtype !== 3)
+                           if (self.gameserver.server_subtype !== 3)
                                self.gameserver.sendRooms();
-							   
+                               
                         self.gameserver.pushToRoom(self.id, new Message.roomPlayers(self));
                         if (self.gameserver.server_subtype === 3) {
                             self.forPlayers(function (players_server_event) {
@@ -790,55 +804,55 @@ module.exports = class Room {
                                 }
                             });
                         }
-					});
+                    });
                 }
             }
         }
-	}
-	
-	shuffleTurnList(rawList,callback){
-		let self	= this;
-		let team	= Math.round(Math.random());
-		let teamList= [[],[]];
-		for (let i = 0; i < rawList.length; i++) {
-			teamList[rawList[i].team].push(rawList[i].user_id);
-		}
-		teamList[0].shuffle();
-		teamList[1].shuffle();
-		let turnList = teamList[team].interpolate(teamList[team==0?1:0])
-		
-		self.forTurnList(turnList,function(fturnList){
-		//	console.log({is:"shuffle",data:fturnList});
-			callback(fturnList);
-		});
+    }
+    
+    shuffleTurnList(rawList,callback){
+        let self	= this;
+        let team	= Math.round(Math.random());
+        let teamList= [[],[]];
+        for (let i = 0; i < rawList.length; i++) {
+            teamList[rawList[i].team].push(rawList[i].user_id);
+        }
+        teamList[0].shuffle();
+        teamList[1].shuffle();
+        let turnList = teamList[team].interpolate(teamList[team==0?1:0])
+        
+        self.forTurnList(turnList,function(fturnList){
+        //	console.log({is:"shuffle",data:fturnList});
+            callback(fturnList);
+        });
 
-	}
+    }
 
-	forTurnList(turnList,callback){
-		let self		= this;
-		let returnList	= [];
-		let lastturn	= [-7,-6,-5,-4,-3,-2,-1,0];
+    forTurnList(turnList,callback){
+        let self		= this;
+        let returnList	= [];
+        let lastturn	= [-7,-6,-5,-4,-3,-2,-1,0];
 
-		for (let i = 0; i < turnList.length; i++) {
-			let playerId	= turnList[i];
-			let account		= self.gameserver.getAccountById(playerId)? self.gameserver.getAccountById(playerId) : self.gameserver.getBotById(playerId)
-			if (account) {
-				returnList.push(self.formatTurnList({lastturn:lastturn[i],account:account}));
-			}
-		}
-		callback(returnList)
-	}
+        for (let i = 0; i < turnList.length; i++) {
+            let playerId	= turnList[i];
+            let account		= self.gameserver.getAccountById(playerId)? self.gameserver.getAccountById(playerId) : self.gameserver.getBotById(playerId)
+            if (account) {
+                returnList.push(self.formatTurnList({lastturn:lastturn[i],account:account}));
+            }
+        }
+        callback(returnList)
+    }
 
-	formatTurnList(data){
-		data.account.player.lastturn = data.lastturn;
-		return {
-			user_id: data.account.player.user_id,
-			team: data.account.player.team,
-			delay: data.account.player.delay,
-			lastturn: data.lastturn,
-			position: data.account.player.position
-		}
-	}
+    formatTurnList(data){
+        data.account.player.lastturn = data.lastturn;
+        return {
+            user_id: data.account.player.user_id,
+            team: data.account.player.team,
+            delay: data.account.player.delay,
+            lastturn: data.lastturn,
+            position: data.account.player.position
+        }
+    }
 
     checkReady() {
         var self = this;
@@ -1048,15 +1062,15 @@ module.exports = class Room {
                     self.turn_list.splice(i,1);
             });
             if (self.game) {
-				if (self.game.turns_pass <= 6  && self.player_count == 2) {
-					self.free_kill = true;
-					self.gameserver.pushBroadcastChat(new Message.chatResponse(self, "Free Kill Detectado - No hay bonificación por victoria", Types.CHAT_TYPE.SYSTEM), self);
+                if (self.game.turns_pass <= 6  && self.player_count == 2) {
+                    self.free_kill = true;
+                    self.gameserver.pushBroadcastChat(new Message.chatResponse(self, "Free Kill Detectado - No hay bonificación por victoria", Types.CHAT_TYPE.SYSTEM), self);
                     //.send(Types.GAMEMSG.free_kill_detected)
-				}
+                }
                 self.kick_user_time[account.player.user_id] = {
                     expiry: Date.now() + (5 * 1000 * 60)
                 }
-			}
+            }
             account.player.is_alive = 0;
             if (self.status == Types.ROOM_STATUS.PLAYING) {
                 if (self.game.turn_player == account.player.position && self.player_count > 0) {
@@ -1093,7 +1107,7 @@ module.exports = class Room {
                                 self.found_master = true;
                                 self.gameserver.pushToRoom(self.id, new Message.passMaster(p));
                                 self.gameserver.pushBroadcastChat(new Message.chatResponse(self, "Master de la sala se transfirió a "+p.player.game_id, Types.CHAT_TYPE.SYSTEM), self);
-								
+                                
                             }
                         });
                 }
@@ -1104,11 +1118,11 @@ module.exports = class Room {
                 } else {
                     self.status = Types.ROOM_STATUS.FULL;
                 }
-				if (self.gameserver.server_subtype !== 3)
-					self.gameserver.sendRooms();
-			}
-			
-			if (self.gameserver.server_subtype === 3) {
+                if (self.gameserver.server_subtype !== 3)
+                    self.gameserver.sendRooms();
+            }
+            
+            if (self.gameserver.server_subtype === 3) {
                 //console.log(self.player_count);
                 if (self.player_count === 0) {
                     self.gameserver.removeRoom(self.id);
@@ -1126,13 +1140,13 @@ module.exports = class Room {
                     }
                 }
             }
-		
+        
             if (self.player_count <= 0) {
                 if (self.canremove === true) {
-					//Logger.normal("Remove Room #1: "+self.id);
+                    //Logger.normal("Remove Room #1: "+self.id);
                     self.gameserver.removeRoom(self.id);
-					if (self.gameserver.server_subtype !== 3)
-						self.gameserver.sendRooms();
+                    if (self.gameserver.server_subtype !== 3)
+                        self.gameserver.sendRooms();
                 }
             } else if (self.player_count === 1 && self.game) {
                 self.game.checkDead();
@@ -1142,10 +1156,10 @@ module.exports = class Room {
             self.player_count = self.team_a_count + self.team_b_count;
             if (self.player_count <= 0) {
                 if (self.canremove === true) {
-					//Logger.normal("Remove Room #2: "+self.id);
+                    //Logger.normal("Remove Room #2: "+self.id);
                     self.gameserver.removeRoom(self.id);
-					if (self.gameserver.server_subtype !== 3)
-						self.gameserver.sendRooms();
+                    if (self.gameserver.server_subtype !== 3)
+                        self.gameserver.sendRooms();
                 }
             }
         }
@@ -1155,20 +1169,20 @@ module.exports = class Room {
         var self = this;
         self.title = title;
         self.gameserver.pushToRoom(self.id, new Message.roomState(self));
-	}
+    }
     
     RoomUpdate(room_options=false) {
         var self = this;
         if(room_options)
         self.room_options = room_options;
         self.gameserver.pushToRoom(self.id, new Message.roomState(self));
-		
+        
         self.gameserver.pushToRoom(self.id, new Message.roomPlayers(self), null);
     }
 
     RandomInt(low, high) {
         return Math.floor(Math.random() * (high - low) + low);
-	}
+    }
   resetBot(callback) {
         var self = this;
         for (var id in this.team_bots) {
@@ -1185,36 +1199,36 @@ module.exports = class Room {
 };
 
 if(!Array.prototype.hasOwnProperty('interpolate')) {
-	Object.defineProperty(Array.prototype, "interpolate", {
-		writable: false,
-		configurable: false,
-		enumerable: false,
-		value: function(other) {
-	 		let limit = this.length < other.length ? other.length : this.length;
-	 		let out = [];
-			
-			for(let i = 0; i < limit; i++) {
-				if(this.length > 0) out.push(this.shift());
-				if(other.length > 0) out.push(other.shift());
-			}
-			return out;
-		}
-	});
+    Object.defineProperty(Array.prototype, "interpolate", {
+        writable: false,
+        configurable: false,
+        enumerable: false,
+        value: function(other) {
+             let limit = this.length < other.length ? other.length : this.length;
+             let out = [];
+            
+            for(let i = 0; i < limit; i++) {
+                if(this.length > 0) out.push(this.shift());
+                if(other.length > 0) out.push(other.shift());
+            }
+            return out;
+        }
+    });
 }
 if(!Array.prototype.hasOwnProperty('shuffle')) {
-	Object.defineProperty(Array.prototype, "shuffle", {
-		writable: false,
-		configurable: false,
-		enumerable: false,
-		value: function() {
-			let index = this.length;
-			while (0 !== index) {
-				let j = Math.floor(Math.random() * index);
-				index -= 1;
-				let i = this[index];
-				this[index] = this[j];
-				this[j] = i;
-			}
-		}
-	});
+    Object.defineProperty(Array.prototype, "shuffle", {
+        writable: false,
+        configurable: false,
+        enumerable: false,
+        value: function() {
+            let index = this.length;
+            while (0 !== index) {
+                let j = Math.floor(Math.random() * index);
+                index -= 1;
+                let i = this[index];
+                this[index] = this[j];
+                this[j] = i;
+            }
+        }
+    });
 }
