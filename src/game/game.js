@@ -648,6 +648,7 @@ module.exports = class Game {
         stime: shootConfig.addtime + stime,
         account: account,
         shootId: shootId,
+        map: self.map,
       };
 
       data = { ...data, ...shootConfig };

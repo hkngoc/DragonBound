@@ -705,16 +705,47 @@ var Types = {
     SCORE: 3,
     TAG: 4,
   },
+
   RANDOMIZER: [0, 1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14, 15],
+
   GAME_ID: ["GM", "DN"],
+
   MAPS_PLAY: [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
     42, 43, 44, 45, 46, 47, 48, 49,
   ],
+
   //    MAPS_PLAY_BOSS: [0, 1, 2, 3, 4, 5], //, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49],
+
   MAPS_PLAY_BOSS: [1, 6, 8, 9],
-  MOBILE_R: [0, 1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14, 15],
+
+  MOBILE_R: [
+     0, // ARMOR
+     1, // ICE
+     2, // ADUKA
+     3, // LIGHTNING
+     4, // BIGFOOT
+     5, // JD
+     6, // ASATE
+    //  7, // RANDOM
+     8, // KNIGHT
+    //  9, // FOX
+    // 10, // DRAGON
+    11, // NAK
+    12, // TRICO
+    13, // MAGE
+    14, // TURTLE
+    15, // BOOMER
+    // 16, // ELECTRICO
+    17, // GRUB
+    // 18, // DRAGON2
+    19, // RAON
+    // 20, // RANDOMIZER
+    21, // FROG
+    22, // KALSIDDON
+  ],
+
   COMPUTER_PLAYER: [
     {
       rank: 0,
@@ -910,6 +941,7 @@ var Types = {
     },
   ],
 };
+
 Types.WEATHERS = {
   length: 100,
   _base: {
@@ -1033,6 +1065,7 @@ Types.WEATHERS = {
     },
   },
 };
+
 Types.WEATHERS.active = [
   Types.WEATHERS.list.thor,
   //Types.WEATHERS.list.wind_change,
@@ -1050,6 +1083,7 @@ Types.WEATHERS.active = [
   Types.WEATHERS.list.mirror,
   Types.WEATHERS.list.tornado,
 ];
+
 //TODO: for testing mirror bug
 // Types.WEATHERS.active = [
 //   Types.WEATHERS.list.mirror,
@@ -1068,7 +1102,9 @@ Types.WEATHERS.active = [
 //   Types.WEATHERS.list.mirror,
 //   Types.WEATHERS.list.tornado,
 // ];
+
 Types.MOBILES = [
+  // ARMOR: 0
   {
     delay: 510,
     name: "Armor",
@@ -1144,6 +1180,7 @@ Types.MOBILES = [
     ],
     //{"a":73.5,"b":0.74,"name":"Armor","max":55,"min":10,"mobilename":"armor","aim":[[52,33],[52,33],[52,33]]}
   },
+  // ICE: 1
   {
     delay: 490,
     name: "Ice",
@@ -1204,6 +1241,7 @@ Types.MOBILES = [
     ],
     //{"a":62.5,"b":0.625,"name":"Ice","max":70,"min":20,"mobilename":"ice","aim":[[58,50],[40,40],[40,40]]}
   },
+  // ADUKA: 2
   {
     delay: 510,
     name: "Aduka",
@@ -1320,6 +1358,7 @@ Types.MOBILES = [
     //392
     //{"a":62.5,"b":0.69,"name":"Aduka","max":170,"min":110,"mobilename":"aduka","aim":[[130,40],[130,40],[130,40]]}
   },
+  // LIGHTNING: 3
   {
     delay: 500,
     name: "Lightning",
@@ -1422,6 +1461,7 @@ Types.MOBILES = [
     ],
     //{"a":65,"b":0.72,"name":"Lightning","max":40,"min":18,"mobilename":"lightning","aim":[[58,44],[58,44],[58,44]]}
   },
+  // BIGFOOT: 4
   {
     delay: 520,
     name: "Bigfoot",
@@ -1675,6 +1715,7 @@ Types.MOBILES = [
     ],
     //{"a":88,"b":0.74,"name":"BigFoot","max":45,"min":20,"mobilename":"bigfoot","aim":[[58,50],[58,50],[58,50]]}
   },
+  // JD: 5
   {
     delay: 520,
     name: "J.D",
@@ -1739,6 +1780,7 @@ Types.MOBILES = [
     ],
     //{"a":62.5,"b":0.625,"name":"J.D","max":65,"min":15,"mobilename":"jd","aim":[[68,45],[68,45],[68,45]]}
   },
+  // ASATE: 6
   {
     delay: 480,
     name: "A.Sate",
@@ -1909,6 +1951,7 @@ Types.MOBILES = [
     ],
     //{"a":76,"b":0.765,"name":"A.Sate","max":60,"min":20,"mobilename":"asate","aim":[[40,30],[40,30],[40,30]]}
   },
+  // RANDOM: 7
   {
     name: "Random",
     file: "random",
@@ -1928,6 +1971,7 @@ Types.MOBILES = [
       [51, 51],
     ],
   },
+  // KNIGHT: 8
   {
     delay: 550,
     name: "Knight",
@@ -2078,6 +2122,7 @@ Types.MOBILES = [
       [40, 30],
     ],
   },
+  // FOX: 9
   {
     delay: 615,
     name: "Fox",
@@ -2138,6 +2183,7 @@ Types.MOBILES = [
       [40, 30],
     ],
   },
+  // DRAGON: 10
   {
     delay: 550,
     name: "Barney",
@@ -2391,6 +2437,7 @@ Types.MOBILES = [
       [58, 50],
     ],
   },
+  // NAK: 11
   {
     delay: 520,
     name: "Nak",
@@ -2467,6 +2514,7 @@ Types.MOBILES = [
     ],
     //{"a":82,"b":0.867,"name":"Nak","max":170,"min":110,"mobilename":"nak","aim":[[130,40],[130,40],[130,40]]}
   },
+  // TRICO: 12
   {
     delay: 490,
     name: "Trico",
@@ -2547,6 +2595,7 @@ Types.MOBILES = [
     ],
     //{"a":83,"b":0.87,"name":"Trico","max":60,"min":10,"mobilename":"dino","aim":[[58,50],[58,50],[58,50]]}
   },
+  // MAGE: 13
   {
     delay: 500,
     name: "Mage",
@@ -2620,6 +2669,7 @@ Types.MOBILES = [
     ],
     //{"a":71.5,"b":0.78,"name":"Mage","max":50,"min":15,"mobilename":"mage","aim":[[58,50],[58,50],[58,50]]}
   },
+  // TURTLE: 14
   {
     delay: 490,
     name: "Turtle",
@@ -2752,6 +2802,7 @@ Types.MOBILES = [
     ],
     //{"a":73.5,"b":0.74,"name":"Turtle","max":50,"min":25,"mobilename":"turtle","aim":[[54,42],[54,42],[54,42]]}
   },
+  // BOOMER: 15
   {
     delay: 480,
     name: "Boomer",
@@ -2847,6 +2898,7 @@ Types.MOBILES = [
     ],
     //{"a":62.5,"b":1.395,"name":"Boomer","max":90,"min":10,"mobilename":"boomer","aim":[[70,30],[70,30],[70,30]]}
   },
+  // ELECTRICO: 16
   {
     delay: 450,
     name: "Electrico",
@@ -3012,6 +3064,7 @@ Types.MOBILES = [
       [54, 42],
     ],
   },
+  // GRUB: 17
   {
     name: "Grub",
     file: "grub",
@@ -3034,6 +3087,7 @@ Types.MOBILES = [
       [54, 33],
     ],
   },
+  // DRAGON2: 18
   {
     delay: 550,
     name: "Dragon",
@@ -3267,6 +3321,7 @@ Types.MOBILES = [
       [58, 50],
     ],
   },
+  // RAON: 19
   {
     delay: 500,
     name: "Raon Launcher",
@@ -3366,6 +3421,7 @@ Types.MOBILES = [
       [54, 33],
     ],
   },
+  // RANDOMIZER: 20
   {
     name: "Randomizer",
     file: "randomizer",
@@ -3385,6 +3441,7 @@ Types.MOBILES = [
       [58, 50],
     ],
   },
+  // FROG: 21
   {
     delay: 500,
     name: "Frog",
@@ -3405,6 +3462,7 @@ Types.MOBILES = [
           addAtEnd: ["walk"],
           walk: [
             {
+              // walk: true,
               damage: 75,
               pala_bunge: [38, 38],
               addtime: 200,
@@ -3477,6 +3535,7 @@ Types.MOBILES = [
       [54, 33],
     ],
   },
+  // KALSIDDON: 22
   {
     delay: 615,
     name: "Kalsiddon",

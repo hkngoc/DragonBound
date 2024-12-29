@@ -57,10 +57,10 @@ Messages.roomState = Message.extend({
                 this.room.is_tele_disabled,
                 this.room.is_random_teams,
                 this.room.is_dual_plus_disabled,
-				this.room.turn_time,
-				this.room.room_for_sale,
-				this.room.allow_watch,
-				this.room.allow_talk
+                this.room.turn_time,
+                this.room.room_for_sale,
+                this.room.allow_watch,
+                this.room.allow_talk
             ],
             1
         ];
@@ -217,7 +217,7 @@ Messages.watcherJoined = Message.extend({
 
 Messages.roomPlayers = Message.extend({
     init: function (room) {
-		
+        
         this.room = room;
         this.data = [];
         this.no_bonus = [];
@@ -279,8 +279,8 @@ Messages.roomPlayers = Message.extend({
               self.room.watchers[user_id].player.rank,
               self.room.watchers[user_id].player.guild
             ]);
-		}
-	//	console.log({is:"room players",data:self.data});
+        }
+    //	console.log({is:"room players",data:self.data});
         return [
             Types.SERVER_OPCODE.room_players,
             self.data,
@@ -340,8 +340,8 @@ Messages.gameStart = Message.extend({
         this.room = room;
         this.data = [];
         this.players = [];
-		this.room.turn_list.forEach(turn => {
-			let account =  this.room.gameserver.getAccountById(turn.user_id)? this.room.gameserver.getAccountById(turn.user_id) : this.room.gameserver.getBotById(turn.user_id)
+        this.room.turn_list.forEach(turn => {
+            let account =  this.room.gameserver.getAccountById(turn.user_id)? this.room.gameserver.getAccountById(turn.user_id) : this.room.gameserver.getBotById(turn.user_id)
             let player = account.player;
             let mob_data = Types.MOBILES[account.player.mobile];
             let my_shield_regen = player.shield_regen;
@@ -379,8 +379,8 @@ Messages.gameStart = Message.extend({
                 player.relationship_status,
                 player.country
             ]);
-		});
-	//	console.log({is:"mensaje turn",data:this.players});
+        });
+    //	console.log({is:"mensaje turn",data:this.players});
         //players first_turn thor_x thor_y thor_a thor_d weather wind_power wind_angle map 
         //is_s1_disabled event_game game_mode score
         this.data.push(this.players);
@@ -398,8 +398,8 @@ Messages.gameStart = Message.extend({
         this.data.push(this.room.event_game_room = this.room.event_game_room == 1 ? 1 : this.room.event_game_room == 2 ? 0 : this.room.event_game_room == 3 ? 0 : this.room.event_game_room == 4 ? 0 : this.room.event_game_room == 5 ? 0 : this.room.event_game_room == 6 ? 0 : this.room.event_game_room == 7 ? 0 : 0); //event_game
         this.data.push(this.room.game_mode); //game_mode
         this.data.push(0); //score
-		this.data.push(this.room.turn_time);
-		this.data.push(0); 
+        this.data.push(this.room.turn_time);
+        this.data.push(0); 
         this.data.push(0);
         this.data.push(this.room.game.weather.client.active);
         this.data.push(this.room.game.GetNextWeatherPos());
@@ -427,7 +427,7 @@ Messages.gamePlay = Message.extend({
         // console.log(this.account.room.game.weather.client.active)
     },
     serialize: function () {
-		var self = this;
+        var self = this;
         var game_play = [Types.SERVER_OPCODE.play, [
             self.next_turn_number,
             self.player.game_position,
@@ -446,10 +446,10 @@ Messages.gamePlay = Message.extend({
             (self.account.room.game.wind_angle + 180),/*self.account.room.game.wind_angle,*/ //wind_angle
             self.data,
             self.player.win_gold,
-			self.account.room.game.weather.client.active,
+            self.account.room.game.weather.client.active,
             self.account.room.game.GetNextWeatherPos()
         ]];
-		self.account.room.forPlayers(function (account) {
+        self.account.room.forPlayers(function (account) {
             account.player.view_replay.push(JSON.stringify(game_play));
         });
         return game_play;
@@ -492,8 +492,8 @@ Messages.gameOver = Message.extend({
                 0 //Bonus Gold
             ]);
         });
-		self.data.push(player_left_room);
-		self.room.player_left_room = [];
+        self.data.push(player_left_room);
+        self.room.player_left_room = [];
     },
     serialize: function () {
         var game_over = [Types.SERVER_OPCODE.game_over, {
@@ -503,7 +503,7 @@ Messages.gameOver = Message.extend({
             scores: this.data,
             "chat": []
         }];
-		this.room.forPlayers(function (account) {
+        this.room.forPlayers(function (account) {
             account.player.view_replay.push(JSON.stringify(game_over));
         });
         return game_over;
@@ -565,11 +565,11 @@ Messages.gamePass = Message.extend({
                 this.room.game?this.room.game.thor.y:0,
                 this.room.game?this.room.game.thor.angle:0, //thor_angle
                 this.room.game?this.room.game.thor.damage:0,
-			         	this.room.game.weather.client.list, //new_weather
-				        this.room.game.wind_power,
-			        	(this.room.game.wind_angle + 180),
-			        	this.account.room.game.weather.client.active,
-			        	this.account.room.game.GetNextWeatherPos()
+                         this.room.game.weather.client.list, //new_weather
+                        this.room.game.wind_power,
+                        (this.room.game.wind_angle + 180),
+                        this.account.room.game.weather.client.active,
+                        this.account.room.game.GetNextWeatherPos()
             ]
         ];
     }
@@ -635,8 +635,8 @@ Messages.loginResponse = Message.extend({
                 this.player.guild_score,
                 this.player.megaphones,
                 (this.account.lucky_egg_left() > 0 ? Math.floor(this.account.lucky_egg_left()/1000) : 0),
-				this.player.electrico
-				
+                this.player.electrico
+                
             ]
         ];
     }

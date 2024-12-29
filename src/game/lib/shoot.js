@@ -11,6 +11,7 @@ var Vector = require("./vect");
 module.exports = class Shoot {
   constructor(data) {
     let self = this;
+
     const def = {
       is: null, //	c
       x0: 0, //	c
@@ -76,15 +77,19 @@ module.exports = class Shoot {
         black: false,
       },
     };
+
     let con = data;
     data = Object.assign(def, data);
     for (const param in data) {
       self[param] = data[param];
     }
+
     self.current_angle = self.ang;
     con.account = "";
     //console.log(con);
-    if (this.ang == "auto") this.autoAngle();
+    if (this.ang == "auto") {
+      this.autoAngle();
+    }
 
     for (let key in this.modifiers) {
       self[key] = self[key]
@@ -99,8 +104,9 @@ module.exports = class Shoot {
     //if(Array.isArray(this.orbit[1])&&this.ang > 90 && this.ang < 270) this.orbit[1] =
 
     this.time = 0;
-    if (!this.v) this.v = new Vector2(this.ang, this.power);
-
+    if (!this.v) {
+      this.v = new Vector2(this.ang, this.power);
+    }
     this.show = true;
     this.thorTime = 0;
 
@@ -108,9 +114,15 @@ module.exports = class Shoot {
       this.killAt = Math.abs(this.stime * 2 - this.getMaxT() - 200);
       console.log({ is: "killAt", killAt: this.killAt });
     }
-    if (this.wind_power != 0) this.setWindEfect();
-    if (this.power == "auto") this.positionToForce({ x: this.x1, y: this.y1 });
-
+    if (this.wind_power != 0) {
+      this.setWindEfect();
+    }
+    if (this.power == "auto") {
+      this.positionToForce({
+        x: this.x1,
+        y: this.y1
+      });
+    }
     this.box = new Box(new Vector(this.x0, this.y0), 8, 10, 0);
     this.explodebox = new Box(new Vector(this.x0, this.y0), 6, 8, 0);
 
@@ -120,7 +132,9 @@ module.exports = class Shoot {
 
     if (this.damage !== null) {
       let attack_my_ava = this.account.player.avaAttack;
-      if (this.account.player.check_my_ava === 0) attack_my_ava = 0;
+      if (this.account.player.check_my_ava === 0) {
+        attack_my_ava = 0;
+      }
       let total_attack = parseInt(Math.round(parseInt(attack_my_ava / 2)));
       if (total_attack > 50) {
         total_attack = 50;
@@ -128,51 +142,63 @@ module.exports = class Shoot {
       this.damage += total_attack;
     }
     /*
-		console.log("====================== SET SHOOT ==========================");
-		console.log({
-			"x0"		: this.x0,
-			"y0"		: this.y0,
-			"vx"		: this.v.x,
-			vy			: this.v.y,
-			"ang"		: this.ang,
-			"power"		: this.power,
-			"type"		: this.type,
-			"ax"		: this.friccion,
-			"ay"		: this.weight,
-			"wind_ang"	: this.wind_ang,
-			"wind_power": this.wind_power,
-			"stime"		: this.stime,
-			"isIon"		: this.isIon,
-			exp			: this.explode,
-			img			: this.image,
-			ionId		: this.ionId,
-			damage		: this.damage,
-			heal		: this.heal,
-			orbit		: this.orbit
-		});
-		console.log("==========================================================");
-		*/
+    console.log("====================== SET SHOOT ==========================");
+    console.log({
+      "x0"		: this.x0,
+      "y0"		: this.y0,
+      "vx"		: this.v.x,
+      vy			: this.v.y,
+      "ang"		: this.ang,
+      "power"		: this.power,
+      "type"		: this.type,
+      "ax"		: this.friccion,
+      "ay"		: this.weight,
+      "wind_ang"	: this.wind_ang,
+      "wind_power": this.wind_power,
+      "stime"		: this.stime,
+      "isIon"		: this.isIon,
+      exp			: this.explode,
+      img			: this.image,
+      ionId		: this.ionId,
+      damage		: this.damage,
+      heal		: this.heal,
+      orbit		: this.orbit
+    });
+    console.log("==========================================================");
+    */
   }
 
   move(x, y) {
-    if (this.box === null) this.box = new Box(new Vector(x, y), 30, 25, 0);
+    if (this.box === null) {
+      this.box = new Box(new Vector(x, y), 30, 25, 0);
+    }
+
     this.box.setp(new Vector(x, y));
   }
 
   setExplodebox(x, y) {
-    if (this.explodebox === null)
+    if (this.explodebox === null) {
       this.explodebox = new Box(new Vector(x, y), 40, 40, 0);
+    }
+
     this.explodebox.setp(new Vector(x, y));
   }
 
   update() {
     this.time++;
-    if (this.walk) this.a = this.GetPosForWalking();
-    else this.a = this.getPosAtTime();
+
+    if (this.walk) {
+      this.a = this.GetPosForWalking();
+      console.log("GetPosForWalking", this.a);
+    } else {
+      this.a = this.getPosAtTime();
+      console.log("getPosAtTime", this. a);
+    }
   }
 
   getPosAtTime(time = null) {
     let a = (time ? time : this.time) / 485;
+
     return {
       x: Math.ceil(this.x0 + this.v.x * a + (this.friccion * a * a) / 2),
       y: Math.ceil(this.y0 + this.v.y * a + (this.weight * a * a) / 2),
@@ -181,6 +207,7 @@ module.exports = class Shoot {
 
   getVelocityAtTime(time = null) {
     let a = (time ? time : this.time) / 485;
+
     return {
       x: Math.ceil(this.v.x + this.friccion * a),
       y: Math.ceil(this.v.y + this.weight * a),
@@ -190,43 +217,62 @@ module.exports = class Shoot {
   getAngleAtTimeV2(time) {
     const v = this.getVelocityAtTime(time);
     const ang = RadToAngle(Math.atan2(-v.y, v.x));
+
     return ang;
   }
 
   GetPosForWalking() {
     //   a, b, c
-    if (!this.a) this.a = { x: this.x0, y: this.y0 };
-
-    let pop = this.dir == "LEFT" ? this.a.x - 1 : this.a.x + 1;
-    if (0 > pop || pop >= this.map.w)
-      return {
-        x: a,
-        y: this.ay,
-        stuck: !0,
-      };
-    if (this.map.IsPixel(pop, this.a.y)) {
-      for (c = this.a.y; c > this.a.y - 10; c--)
-        if (!this.map.IsPixel(pop, c))
-          return {
-            x: pop,
-            y: c,
-          };
-      return {
-        x: a,
-        y: this.a.y,
-        stuck: !0,
+    if (!this.a) {
+      this.a = {
+        x: this.x0,
+        y: this.y0
       };
     }
-    for (c = this.a.y + 1; c < this.map.h; c++)
-      if (this.map.IsPixel(pop, c))
+
+    let pop = this.dir == Types.DIR.LEFT
+      ? this.a.x - 1
+      : this.a.x + 1;
+
+    if (pop < 0 || pop >= this.map.w) {
+      return {
+        x: this.a.x,
+        y: this.a.y,
+        stuck: true
+      };
+    }
+
+    if (this.map.IsPixel(pop, this.a.y)) {
+      for (let c = this.a.y; c > this.a.y - 10; c--) {
+        if (!this.map.IsPixel(pop, c)) {
+          return {
+            x: pop,
+            y: c
+          };
+        }
+      }
+
+      return {
+        x: this.a.x,
+        y: this.a.y,
+        stuck: true
+      };
+    }
+
+    for (let c = this.a.y + 1; c < this.map.h; c++) {
+      if (this.map.IsPixel(pop, c)) {
         return {
           x: pop,
-          y: c - 1,
+          y: c - 1
         };
+      }
+    }
+
     return {
       x: pop,
-      y: this.map.h + 100,
-      fall_and_die: !0,
+      // y: this.map.h + 100,
+      y: this.a.y + 100,
+      fall_and_die: true
     };
   }
 
@@ -236,6 +282,7 @@ module.exports = class Shoot {
     var a = this.getPosAtTime(time + delta);
     return Math.abs(RadToAngle(Math.atan2(a.y - b.y, a.x - b.x)));
   }
+
   positionToForce(
     final,
     inicial = this.y0,
@@ -244,10 +291,10 @@ module.exports = class Shoot {
     ang = this.ang
   ) {
     /*
-		tiempo = tiempo / 485;
-		let x 	= ( final.x - inicial.x ) / tiempo;
-		let y 	= ( (2 * final.y ) - (2 * inicial.y) - (this.weight * tiempo * tiempo)) / 2 * tiempo;
-		let power	= Math.sqrt(x*x+y*y);*/
+    tiempo = tiempo / 485;
+    let x 	= ( final.x - inicial.x ) / tiempo;
+    let y 	= ( (2 * final.y ) - (2 * inicial.y) - (this.weight * tiempo * tiempo)) / 2 * tiempo;
+    let power	= Math.sqrt(x*x+y*y);*/
 
     let V0Y = Math.round(
       (final - inicial - tiempo * tiempo * weight) /
@@ -257,9 +304,11 @@ module.exports = class Shoot {
     //	console.log({is:"pocition to force",in:{Xf:final,Xi:inicial,tiempo:tiempo,peso:weight},out:{power:power,V0y:V0Y}});
     this.power = Math.abs(power);
   }
+
   getMaxT() {
     return Math.ceil(-this.v.y / this.weight) * 488;
   }
+
   setWindEfect() {
     let b0 =
       Math.round(
@@ -282,6 +331,7 @@ module.exports = class Shoot {
     this.weight = Math.round(this.weight - b1);
     //		console.log({in:{wind_ang:this.wind_ang,wind_power:this.wind_power,weight:this.weight,friccion:this.friccion},out:{b0:b0,b1:b1,fri:this.friccion,wei:this.weight}});
   }
+
   autoPower() {
     let self = this;
     let ang = this.ang;
@@ -306,8 +356,11 @@ module.exports = class Shoot {
           }
         }
       }
-      if (found) break;
+      if (found) {
+        break;
+      }
     }
+
     return found;
     /*
         if (found === false) {
@@ -316,13 +369,15 @@ module.exports = class Shoot {
             } else if (this.ang >= 60) {
                 this.ang -= 10;
             }
-		}*/
+    }*/
   }
+
   autoAngle() {
     this.ang =
       (-Math.atan2(this.y1 - this.y0, this.x1 - this.x0) * 180) / Math.PI;
     if (this.ang < 0) this.ang += 360;
   }
+
   autoAngle2() {
     let self = this;
     let power = this.power;

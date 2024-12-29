@@ -12,6 +12,7 @@ module.exports = function handleGameShoot(message) {
     self.connection.close();
     return null;
   }
+
   let x = message[1];
   let y = message[2];
   let body = message[3];
@@ -20,11 +21,13 @@ module.exports = function handleGameShoot(message) {
   let power = message[6];
   let time = Math.trunc(message[7] / 1000);
   let type = message[8];
+
   if (self.room) {
     self.player.x = x;
     self.player.y = y;
     self.player.body = body;
     self.player.look = look;
+
     if (self.room.game !== null) {
       if (self.player) {
         self.player.move();

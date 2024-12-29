@@ -235,39 +235,42 @@ module.exports = class World {
     this.work = true;
     this.run();
   }
+
   /*
-    shoot(noholea = false) {
-        this.chat_complete = false;
-        this.nohole = noholea;
-        for (var id in this.shoots) {
-            this.shoots_data.push({
-                s: [],
-                tele: [],
-                exp: null,
-                thor: null,
-                img: null,
-                time: null,
-                /*tr: null,
-                change: null,
-                hole: [],
-                damages: [],
-                wave: [],
-                orbit:[],
-jumps:[],
-                is_lightning: [],
-                no_rotate: null,
-                camera: null,
-                /*start : {
-                    t: [30],
-                    ang: [302],
-                    x: [30],
-                    y: [30]
-                },
-                ss: null
-            });
-        }
+  shoot(noholea = false) {
+    this.chat_complete = false;
+    this.nohole = noholea;
+
+    for (var id in this.shoots) {
+      this.shoots_data.push({
+        s: [],
+        tele: [],
+        exp: null,
+        thor: null,
+        img: null,
+        time: null,
+        /*tr: null,
+        change: null,
+        hole: [],
+        damages: [],
+        wave: [],
+        orbit:[],
+        jumps:[],
+        is_lightning: [],
+        no_rotate: null,
+        camera: null,
+        /*start : {
+            t: [30],
+            ang: [302],
+            x: [30],
+            y: [30]
+        },
+        ss: null
+      });
     }
+  }
 */
+
   shoot(noholea = false) {
     this.chat_complete = false;
     this.nohole = noholea;
@@ -285,10 +288,13 @@ jumps:[],
 
   update() {
     var self = this;
+
     if (this.shoots_count > 0) {
       var good_shot_message = false;
+
       for (var id in this.shoots) {
         var shoot = this.shoots[id];
+
         if (shoot && !shoot.isComplete) {
           //console.log("Shoot not complete\n");
           shoot.update();
@@ -298,7 +304,9 @@ jumps:[],
 
           /* |<-========================= [Stats Avatars] ===========================->| */
           var scratch_my_ava = shoot.account.player.avaScratch;
-          if (shoot.account.player.check_my_ava === 0) scratch_my_ava = 0;
+          if (shoot.account.player.check_my_ava === 0) {
+            scratch_my_ava = 0;
+          }
           //Logger.log('Scratch: ' + scratch_my_ava);
           /* |<-========================= [Stats Avatars] ===========================->| */
           shoot.move(shoot.a.x, shoot.a.y, 0);
@@ -317,8 +325,10 @@ jumps:[],
             self.game.room.forPlayers(function (account) {
               let player = account.player;
               // //console.log({id:player.user_id,position:player.position,alive:player.is_alive});
+
               account.update();
               // console.log(self.game.weather.client.active);
+
               if (player.is_alive === 1) {
                 if (!shoot.canCollide) {
                   /** @WTF is this */
@@ -334,6 +344,7 @@ jumps:[],
                 } else if (shoot.isComplete) {
                   shoot.canCollide = true;
                 }
+
                 var penalty = false;
 
                 let timxx = shoot.time * 2;
@@ -348,11 +359,14 @@ jumps:[],
                       Math.pow(player.y - shoot.a.y, 2)
                   ),
                 };
+
                 let dm = shoot.damage;
                 let heal = shoot.heal;
                 let shdm = 0;
 
-                if (shoot.canCollide && x11 === 0) fullcollide = true;
+                if (shoot.canCollide && x11 === 0) {
+                  fullcollide = true;
+                }
 
                 if (shoot.groundCollide || fullcollide || shoot.isComplete) {
                   if (
@@ -364,16 +378,17 @@ jumps:[],
                     shoot.cancelTele = true;
                   }
                   /*
-									console.log({
-										is:"teleport",
-										tamañoMapa		: {
-											h:self.map.h,
-											w:self.map.w,
-										},
-										pocicionDisparo	: shoot.a,
-										condicionA		: self.map.w < shoot.a.x,
-										condicionB		: self.map.h < shoot.a.y
-									});*/
+                  console.log({
+                    is:"teleport",
+                    tamañoMapa		: {
+                      h:self.map.h,
+                      w:self.map.w,
+                    },
+                    pocicionDisparo	: shoot.a,
+                    condicionA		: self.map.w < shoot.a.x,
+                    condicionB		: self.map.h < shoot.a.y
+                  });*/
+
                   if (
                     shoot.bonos &&
                     shoot.account.player.team === player.team &&
@@ -382,7 +397,10 @@ jumps:[],
                     penalty = true;
                   }
 
-                  if (self.game.room.no_bonus_user) self.gp_kill = 0;
+                  if (self.game.room.no_bonus_user) {
+                    self.gp_kill = 0;
+                  }
+
                   if (distf.t <= 60 && shoot.heal) {
                     //distancia
                     heal -= distf.t / 2;
@@ -397,6 +415,7 @@ jumps:[],
                     dm -= distf.t / 2;
                     areacollide = true;
                   }
+
                   if (fullcollide || areacollide) {
                     /** @Begin add Shoots */
                     if (!shoot.canPlayerCollide) {
@@ -413,18 +432,19 @@ jumps:[],
                       };
                       self.addShootQueue(shoot);
                     }
-                    if (
-                      !self.map.IsPixel(shoot.a.x, shoot.a.y) &&
-                      shoot.is == "digger"
-                    )
+                    if (!self.map.IsPixel(shoot.a.x, shoot.a.y) && shoot.is == "digger") {
                       shoot.canPlayerCollide = true;
+                    }
+
                     /** @End add Shoots */
                     if (shoot.canPlayerCollide) {
                       if (player.shield > 0 && !shoot.heal) {
                         //Logger.cyan("#1 Shield: "+player.shield+" - DameShot: "+dm+" - User: "+player.game_id);
                         shdm = player.shield - dm;
+
                         if (shdm === 0) {
                           player.setShield(0);
+
                           if (shoot.image === Types.BULLETS.JD2) {
                             self.shoots_data[self.shoots_complete].damages.push(
                               {
@@ -448,6 +468,7 @@ jumps:[],
                         } else if (shdm < 0) {
                           player.setShield(0);
                           player.disHpShield(Math.floor(Math.abs(shdm)), 0);
+
                           if (shoot.image === Types.BULLETS.JD2) {
                             self.shoots_data[self.shoots_complete].damages.push(
                               {
@@ -470,6 +491,7 @@ jumps:[],
                           }
                         } else {
                           player.setShield(Math.floor(Math.abs(shdm)));
+
                           if (shoot.image === Types.BULLETS.JD2) {
                             self.shoots_data[self.shoots_complete].damages.push(
                               {
@@ -672,42 +694,37 @@ jumps:[],
               }
             });
           }
+
           if (shoot.isComplete) {
             this.shoots_data[this.shoots_complete].s.push(shoot.x0);
             this.shoots_data[this.shoots_complete].s.push(shoot.y0);
             this.shoots_data[this.shoots_complete].s.push(shoot.ang);
             this.shoots_data[this.shoots_complete].s.push(shoot.power);
-            this.shoots_data[this.shoots_complete].s.push(
-              shoot.ax ? shoot.ax : shoot.friccion
-            );
-            this.shoots_data[this.shoots_complete].s.push(
-              shoot.ay ? shoot.ay : shoot.weight
-            );
+            this.shoots_data[this.shoots_complete].s.push(shoot.ax ? shoot.ax : shoot.friccion);
+            this.shoots_data[this.shoots_complete].s.push(shoot.ay ? shoot.ay : shoot.weight);
             this.shoots_data[this.shoots_complete].s.push(shoot.stime);
-            this.shoots_data[this.shoots_complete].exp =
-              shoot.account.player.TELEPORT == 1 ? 7 : shoot.explode; //EXPLODE
+            this.shoots_data[this.shoots_complete].exp = shoot.account.player.TELEPORT == 1 ? 7 : shoot.explode; //EXPLODE
             this.shoots_data[this.shoots_complete].thor = shoot.isthor;
-            this.shoots_data[this.shoots_complete].img =
-              shoot.account.player.TELEPORT == 1 ? 10 : shoot.image; //BULLETS
+            this.shoots_data[this.shoots_complete].img = shoot.account.player.TELEPORT == 1 ? 10 : shoot.image; //BULLETS
+
             if (shoot.account.player.TELEPORT == 1) {
               if (!shoot.cancelTele) {
-                this.shoots_data[this.shoots_complete].tele.push(
-                  shoot.account.player.game_position
-                );
+                this.shoots_data[this.shoots_complete].tele.push(shoot.account.player.game_position);
                 this.shoots_data[this.shoots_complete].tele.push(shoot.a.x);
                 this.shoots_data[this.shoots_complete].tele.push(shoot.a.y);
                 this.shoots_data[this.shoots_complete].tele.push(shoot.a.x);
                 this.shoots_data[this.shoots_complete].tele.push(shoot.a.y);
               }
+
               shoot.account.player.TELEPORT = 0;
             }
+
             this.shoots_data[this.shoots_complete].orbit = shoot.orbit;
             this.shoots_data[this.shoots_complete].wave = shoot.wave;
             /*this.shoots_data[ this.shoots_complete ].change.at = shoot.at;
-						this.shoots_data[ this.shoots_complete ].change.exp = shoot.explodeC;
-						this.shoots_data[ this.shoots_complete ].change.img = shoot.imageC;*/
-            this.shoots_data[this.shoots_complete].is_lightning =
-              shoot.isLightning;
+            this.shoots_data[ this.shoots_complete ].change.exp = shoot.explodeC;
+            this.shoots_data[ this.shoots_complete ].change.img = shoot.imageC;*/
+            this.shoots_data[this.shoots_complete].is_lightning = shoot.isLightning;
             this.shoots_data[this.shoots_complete].no_rotate = shoot.no_rotate;
             this.shoots_data[this.shoots_complete].camera = shoot.camera;
             this.shoots_data[this.shoots_complete].s.push(shoot.image);
@@ -728,6 +745,7 @@ jumps:[],
           }
         }
       }
+
       if (this.shoots_count <= this.shoots_complete) {
         this.shoots_count = 0;
         this.shoots_complete = 0;
@@ -745,6 +763,7 @@ jumps:[],
         });
         //.catch((error)=>console.log({is:"world shoot compleate",error:error}))
       }
+
       setImmediate(function () {
         self.update();
       });
@@ -754,6 +773,7 @@ jumps:[],
   onShootComplete(callback) {
     this.shoot_complete = callback;
   }
+
   procesBonos(data) {
     //	console.log({is:"proces bonos in ",data:data});
     return this.addKillsBonus(data)
@@ -768,15 +788,16 @@ jumps:[],
         //console.log({is:"set dead bonus",data:data});
         return this.addGeneralBonus(data);
       }) /*
-		.then((data)=>{
-			//console.log({is:"add general bonus", data:data});
-			return data
-		})*/
+    .then((data)=>{
+      //console.log({is:"add general bonus", data:data});
+      return data
+    })*/
       .catch((error) => {
         //console.log({is:"world shoot Error",error:error})
         return false;
       });
   }
+
   addKillsBonus(data) {
     let self = this;
     let kills = data.bonos.kills;
@@ -797,6 +818,7 @@ jumps:[],
       resolve(data);
     });
   }
+
   addMultiKillBonus(data) {
     if (data.bonos.ValidKills > 1) {
       let bono;
@@ -817,6 +839,7 @@ jumps:[],
     }
     return data;
   }
+
   addAngleBonus(data) {
     if (data.bonos.damage && !data.bonos.teamDamage) {
       if (
@@ -843,6 +866,7 @@ jumps:[],
     }
     return data;
   }
+
   addGeneralBonus(data) {
     return new Promise((resolve) => {
       Object.keys(data.bonos).forEach((value, index, array) => {
@@ -860,6 +884,7 @@ jumps:[],
       });
     });
   }
+
   checkCollision(shoot) {
     let self = this;
     //	console.log({isCollider:self.map.IsPixel(shoot.a.x, shoot.a.y)})
@@ -871,12 +896,12 @@ jumps:[],
       (!self.map.IsPixel(shoot.a.x, shoot.a.y) && shoot.is == "digger")
     ) {
       /*	console.log({
-				is:"check collision",
-				condicionA	: (self.map.IsPixel(shoot.a.x, shoot.a.y) && !shoot.groundCollide && shoot.canMapCollide && shoot.is != "digger"),
-				condicionB	: (!self.map.IsPixel(shoot.a.x, shoot.a.y ) && shoot.is == "digger" ) ,
-				condicionC	: (self.map.w < shoot.a.x || self.map.h < shoot.a.y),
-				condicionD	: (shoot.time>shoot.killAt),
-			})*/
+        is:"check collision",
+        condicionA	: (self.map.IsPixel(shoot.a.x, shoot.a.y) && !shoot.groundCollide && shoot.canMapCollide && shoot.is != "digger"),
+        condicionB	: (!self.map.IsPixel(shoot.a.x, shoot.a.y ) && shoot.is == "digger" ) ,
+        condicionC	: (self.map.w < shoot.a.x || self.map.h < shoot.a.y),
+        condicionD	: (shoot.time>shoot.killAt),
+      })*/
       shoot.isComplete = true;
       self.addGroundHole(shoot);
       shoot.groundCollide = true;
@@ -887,12 +912,12 @@ jumps:[],
     ) {
       shoot.isComplete = true;
       /*	console.log({
-				is:"check collision",
-				condicionA	: (self.map.IsPixel(shoot.a.x, shoot.a.y) && !shoot.groundCollide && shoot.canMapCollide && shoot.is != "digger"),
-				condicionB	: (!self.map.IsPixel(shoot.a.x, shoot.a.y ) && shoot.is == "digger" ) ,
-				condicionC	: (self.map.w < shoot.a.x || self.map.h < shoot.a.y),
-				condicionD	: (shoot.time>shoot.killAt),
-			})*/
+        is:"check collision",
+        condicionA	: (self.map.IsPixel(shoot.a.x, shoot.a.y) && !shoot.groundCollide && shoot.canMapCollide && shoot.is != "digger"),
+        condicionB	: (!self.map.IsPixel(shoot.a.x, shoot.a.y ) && shoot.is == "digger" ) ,
+        condicionC	: (self.map.w < shoot.a.x || self.map.h < shoot.a.y),
+        condicionD	: (shoot.time>shoot.killAt),
+      })*/
     }
   }
 
@@ -913,6 +938,7 @@ jumps:[],
       }
     });
   }
+
   _castWeatherTornado(shoot, force, config) {
     let side = shoot.a.x > force.px ? "R" : "L";
     shoot.lastTornado = shoot.lastTornado ? shoot.lastTornado : null;
@@ -940,6 +966,7 @@ jumps:[],
       this._castWeatherMirrorTornado(shoot, force, config);
     }
   }
+
   _castWeatherMirrorTornado(shoot, force, config) {
     shoot.lastMirror = shoot.lastMirror ? shoot.lastMirror : null;
     shoot.countMirror = shoot.countMirror ? shoot.countMirror : 0;
@@ -975,6 +1002,7 @@ jumps:[],
         }
     }
   }
+
   _castWeatherMirror(shoot, force, config) {
     shoot.lastMirror = shoot.lastMirror ? shoot.lastMirror : null;
     shoot.countMirror = shoot.countMirror ? shoot.countMirror : 0;
@@ -1011,6 +1039,7 @@ jumps:[],
       }
     }
   }
+
   _castWeatherLightning(shoot, force, config) {
     if (shoot.is !== "weatherLightning") {
       //	console.log({shoot:shoot,include:shoot.addAtEnd.includes("lightning")})
@@ -1022,6 +1051,7 @@ jumps:[],
       this.shoots_data[this.shoots_complete].tr = [50, 0, shoot.time * 2, 200];
     }
   }
+
   _castWeatherSun(shoot, force, config) {
     if (shoot.is !== "weatherSun") {
       const { time } = shoot;
@@ -1047,6 +1077,7 @@ jumps:[],
       shoot.damage = shoot.damage * 1.5;
     }
   }
+
   _castWeatherBlack(shoot, force, config) {
     if (shoot.is !== "weatherBlack") {
       const { time } = shoot;
@@ -1076,6 +1107,7 @@ jumps:[],
       shoot.bunge_jc[1]
     );
   }
+
   addAtMaxT(data) {
     let self = this;
     if (data.addAtMaxT)
@@ -1106,21 +1138,32 @@ jumps:[],
 
   addAtEnd(data) {
     let self = this;
-    if (data.addAtEnd)
+
+    if (data.addAtEnd) {
       for (const add of data.addAtEnd) {
         for (let i = 0; i < data[add].length; i++) {
           //		console.log(`add ${add} id: ${i} at End`)
+          // const c = data[add][i];
+          // const d = {
+          //   ...data,
+          //   config: {
+          //     ...c,
+          //     stime: c.addtime == "maxt"
+          //       ? data.stime + data.getMaxT()
+          //       : (c.addtime ? (i + 1) * c.addtime : 0) + data.stime + data.time * 2,
+          //     iD: i,
+          //   }
+          // }
           data.config = data[add][i];
-          data.config.stime =
-            data.config.addtime == "maxt"
+          data.config.stime = data.config.addtime == "maxt"
               ? data.stime + data.getMaxT()
-              : (data.config.addtime ? (i + 1) * data.config.addtime : 0) +
-                data.stime +
-                data.time * 2;
+              : (data.config.addtime ? (i + 1) * data.config.addtime : 0) + data.stime + data.time * 2;
           data.config.iD = i;
+
           self["add" + add](data);
         }
       }
+    }
   }
 
   addAtCollide(data) {
@@ -1140,6 +1183,7 @@ jumps:[],
       }
     }
   }
+
   addWeatherDamage(data) {
     let self = this;
     if (
@@ -1158,6 +1202,7 @@ jumps:[],
     if (self.game.weather.current == 4) self._addWeatherLightning(data);
     //console.log("[add Weather]",{current:self.game.weather.current});
   }
+
   addthor(data) {
     var self = this;
     self.game.thor.angle =
@@ -1320,8 +1365,7 @@ jumps:[],
 
     shootConfig = { ...shootConfig, ...data.config };
     if (Array.isArray(shootConfig.ang)) {
-      shootConfig.ang =
-        shootConfig.ang[data.ang > 90 && data.ang < 270 ? 0 : 1];
+      shootConfig.ang = shootConfig.ang[data.ang > 90 && data.ang < 270 ? 0 : 1];
     }
     if (
       Array.isArray(shootConfig.orbit) &&
@@ -1336,18 +1380,16 @@ jumps:[],
     }
     if (data.config.power == "parent") {
       //	shootConfig.v = {x:data.v.x,y:0};
-      shootConfig.ang -=
-        shootConfig.addAng[data.ang > 90 && data.ang < 270 ? 0 : 1];
-      shootConfig.power =
-        data.v.x / Math.cos((shootConfig.ang * Math.PI) / 180);
+      shootConfig.ang -= shootConfig.addAng[data.ang > 90 && data.ang < 270 ? 0 : 1];
+      shootConfig.power = data.v.x / Math.cos((shootConfig.ang * Math.PI) / 180);
       //	console.log({is:"shoot",ang:shootConfig.ang});
       //	shootConfig.power = Math.sqrt((data.v.x*data.v.x + 0),2)
     }
 
     self.shoots[self.shoots_count] = new Shoot(shootConfig);
     /*	console.log("===============================================================================");
-		console.log({is:"addbulets",data:shootConfig})
-		console.log("===============================================================================");*/
+    console.log({is:"addbulets",data:shootConfig})
+    console.log("===============================================================================");*/
 
     self.shoots_data[self.shoots_complete].isStage = true;
     self.shoots_count++;
@@ -1375,10 +1417,12 @@ jumps:[],
     }
   }
 
-  addwalker() {
+  addwalk() {
     let self = this;
     //	self.shoots_data[self.shoots_complete].walker = 1;
-    self.shoots_data[self.shoots_complete].path = [600, 800, 0, 1000, -1000, 0];
+    // self.shoots_data[self.shoots_complete].path = [600, 800, 0, 1000, -1000, 0];
+    // self.shoots_data[self.shoots_complete].isComplete = true;
+    // self.shoots_data[self.shoots_complete].damageComplete = true;
   }
 
   addmine() {

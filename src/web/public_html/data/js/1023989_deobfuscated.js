@@ -4586,18 +4586,18 @@
     KALSIDDONSS_MED: 76,
     KALSIDDONSS_MED_OPEN: 77,
     KALSIDDONSS_TINY: 78,
-    MAYA1: 79,
-    MAYA2: 80,
-    MAYASS: 81,
-    TIBURON1: 82,
-    TIBURON2: 83,
-    TIBURONSS: 84,
-    PHOENIX1: 85,
-    PHOENIX2: 86,
-    PHOENIXSS: 87,
-    BEE1: 88,
-    BEE2: 89,
-    BEESS: 90
+    // MAYA1: 79,
+    // MAYA2: 80,
+    // MAYASS: 81,
+    // TIBURON1: 82,
+    // TIBURON2: 83,
+    // TIBURONSS: 84,
+    // PHOENIX1: 85,
+    // PHOENIX2: 86,
+    // PHOENIXSS: 87,
+    // BEE1: 88,
+    // BEE2: 89,
+    // BEESS: 90
   };
 
   var EXPLODE = {
@@ -4655,15 +4655,15 @@
     SUN: 51,
     USEITEM: 52,
     KALSIDDON: 53,
-    MAYA1: 54,
-    MAYA2: 55,
-    MAYASS: 56,
-    PHOENIX1: 57,
-    PHOENIX2: 58,
-    PHOENIXSS: 59,
-    BEE1: 60,
-    BEE2: 61,
-    BEESS: 62,
+    // MAYA1: 54,
+    // MAYA2: 55,
+    // MAYASS: 56,
+    // PHOENIX1: 57,
+    // PHOENIX2: 58,
+    // PHOENIXSS: 59,
+    // BEE1: 60,
+    // BEE2: 61,
+    // BEESS: 62,
   };
 
   var g_is_easter = is_between(new Date(), new Date("2020-03-30"), new Date("2020-04-20"));
@@ -23099,8 +23099,10 @@
     FACEBOOK: 6,
     LEVEL: 7
   };
+
   var CHALLENGES_TEXT = "Win rate;Weekly ranking;Ranking of my guild;Active days;Avatars;Active Friends;Facebook;My level".split(";");
   var CHALLENGES_TIP = ";;;An active day is when you win at least 3 times that day. We count how many active days you had in the last 10 days.;;The number of friends who collected their 24-hour free cash at the last 3 days.".split(";");
+
   function DailyCashData(a, b, c, d, e, f, h) {
     var k = h >= 3 && e <= 0;
     $("#freecashWindow .DragonWindowTitle").text(l.t("Daily Free Cash"));
@@ -23149,6 +23151,7 @@
     });
     DragonWindowOpen($("#freecashWindow"), g_is_mobile_device);
   }
+
   function Hotkeys(a) {
     var b = false;
     D = "?".charCodeAt();
@@ -23510,6 +23513,7 @@
       }
     });
   }
+
   function FacebookShare(a, b, c, d, e, f) {
     FB.ui({
       app_id: FB_APP_ID,
@@ -23520,6 +23524,7 @@
       mobile_iframe: g_is_mobile_device
     }, f);
   }
+
   function CenterDialog(a) {
     var b = window.innerWidth;
     var c = window.innerHeight;
@@ -23544,7 +23549,9 @@
       scale: f
     }).css("z-index", g_draggable_z_index += 1);
   }
+
   var g_isWebGLsupported;
+
   function PrepareOptionsDialog(a, b) {
     var c = $("#OptionsDialog");
     if (a) {
@@ -23597,6 +23604,7 @@
     $("#OptionAnimations").prop("checked", !!OPTIONS.anim);
     $("#OptionRenderer").val(g_renderer);
   }
+
   function OptionsDialogOnChangeBackground(a) {
     SetValue("background", OPTIONS.background = $("#OptionBackground").is(":checked") ? 1 : 0);
     if (a.game) {
@@ -23607,6 +23615,7 @@
       }
     }
   }
+
   function OptionsDialogGUI(a) {
     $("#OptionsOK").on("click touchstart", function () {
       AudioPlay(AUDIO_BUTTON_SELECT2);
@@ -23709,6 +23718,7 @@
       }
     });
   }
+
   function CreateRoomDialogPressedOK(a) {
     var b;
     var c = "";
@@ -23725,15 +23735,19 @@
     }
     a.SendRoomCreate(b, c, d, e);
   }
+
   var g_create_room_game_mode = GAME_MODE_NORMAL;
   var g_create_room_max_players = 8;
+
   function UpdateNumPlayersCreate() {
     $("#CreateRoomPlayers").text(RoomPlayersNumberToString(g_create_room_max_players, g_create_room_game_mode));
   }
+
   function RoomPlayersNumberToString(a, b) {
     var c = floor(a / 2);
     return c + (b == GAME_MODE_BOSS ? " vs BOT" : " vs " + c);
   }
+
   function CreateRoomDialogGUI(a) {
     UpdateNumPlayersCreate();
     $("#dialogCreateRoomButtonCancel").click(function () {
@@ -23776,6 +23790,7 @@
       CreateRoomChangeMode((g_create_room_game_mode + GAME_MODES - 1) % GAME_MODES, a.myPlayerInfo.unlock);
     });
   }
+
   function CreateRoomChangeMode(a, b) {
     g_create_room_game_mode = a;
     UpdateNumPlayersCreate();
@@ -23809,10 +23824,12 @@
       $("#dialogCreateMessage").html(l.t(c));
     }
   }
+
   function ChannelChatClear() {
     $("#channelTextHtml").html("");
     DragonScrollUpdate($("#channel"), "bottom");
   }
+
   function BuildPlayerNameWithGuild(a, b, c, d, e) {
     if (d) {
       b = "<a href=\"/user/" + encodeURIComponent(b) + "\" target=\"_blank\" style=\"color:" + d + "\">" + b + "</a>";
@@ -23823,6 +23840,7 @@
     }
     return b;
   }
+
   function BuildRelationRankGuildName(a, b, c, d, e) {
     var f = "";
     if (a == "f") {
@@ -23834,6 +23852,7 @@
     }
     return f += "<span class=\"span_rank2 rank rank" + b + "\"></span> " + BuildPlayerNameWithGuild(c, d, e);
   }
+
   function BuildRelationRankCountryGuildName(a, b, c, d, e, f, h) {
     var k = "";
     if (a == "f") {
@@ -23855,6 +23874,7 @@
     }
     return k;
   }
+
   var PLAYER_INDEX_USER_ID = 0;
   var PLAYER_INDEX_GAME_ID = 1;
   var PLAYER_INDEX_RANK = 2;
@@ -23866,6 +23886,7 @@
   var PLAYER_INDEX_MOBILE = 8;
   var PLAYER_INDEX_AVATARS = 9;
   var PLAYER_INDEX_IS_BOT = 10;
+
   function ChannelUpdatePlayersList(a) {
     var b = "";
     for (var c = 0; c < a.length - 3; c += 4) {
@@ -23875,6 +23896,7 @@
     $("#channelPlayersListHtml").html(b);
     DragonScrollUpdate($("#playersList"), "top");
   }
+
   var g_my_guild_members = [];
   function GotFullGuildMembersList(a, b) {
     if (a) {
@@ -23955,6 +23977,7 @@
       SetGuildNameInput($("#create_guild_name"), b);
     }
   }
+
   var FRIEND_INDEX_ID = 0;
   var FRIEND_INDEX_NAME = 1;
   var FRIEND_INDEX_GENDER = 2;
@@ -24078,6 +24101,7 @@
     });
     a.friends = f;
   }
+
   function InitRefreshButtonFriends(a) {
     $("#refresh_friends_button").bind("click", function () {
       var b = get_time();
@@ -24087,6 +24111,7 @@
       }
     });
   }
+
   function InitRefreshButtonGuildies(a) {
     $("#refresh_button_guildies").bind("click", function () {
       var b = get_time();
@@ -24096,6 +24121,7 @@
       }
     });
   }
+
   function FriendUpdate(a, b, c, d, e) {
     var f = "Offline";
     if (d) {
@@ -24110,12 +24136,14 @@
     a.children(".friendListGP").html("GP " + c);
     a.children(".friendListLocation").html(f);
   }
+
   function pad(a, b) {
     for (var c = "" + a; c.length < b;) {
       c = "0" + c;
     }
     return c;
   }
+
   function Img2url(a, b) {
     if (a == "m") {
       return STATIC_DIR + "images/fbboy.png";
@@ -24133,6 +24161,7 @@
       return FixHTTPS(a);
     }
   }
+
   function Img2div(a, b, c, d, e, f) {
     a = Img2url(a, b);
     if (a.indexOf("//graph.facebook.com/") == 0) {
@@ -24181,6 +24210,7 @@
       return c;
     }
   }
+
   function Img2Div2(a, b, c, d) {
     a.html("");
     var e = a.width();
@@ -24245,8 +24275,10 @@
     }
     return a;
   }
+
   var g_reward1_timer;
   var g_reward2_timer;
+
   function ChannelPlayerInfoUpdate(a, b) {
     $("#myName2").html("").append(createName(0, "", a.rank, a.guild, a.game_id, "", 2));
     $("#myGP2").html(Commatize(a.gp) + " GP");
@@ -24308,6 +24340,7 @@
       g_channel_player.change_mobile(g_server_force_mobile);
     }
   }
+
   function RoomChangeDetails(a, b, c) {
     b = $("#room" + b);
     if (!a) {
@@ -24346,6 +24379,7 @@
     b.children(".roomGuildMember").toggle(!!(c & 2));
     b.show();
   }
+
   function GenerateMinimapCanvas(a, b) {
     var c = DragonDecompress(a);
     var d = document.createElement("canvas");
@@ -24362,6 +24396,7 @@
     f.src = b;
     return d;
   }
+
   function GetRoomDivFromRoomNumber(a) {
     for (var b = 0; b < 9; b++) {
       if ($("#room" + b + " .roomNumber").html() == a) {
@@ -24369,14 +24404,17 @@
       }
     }
   }
+
   var g_extra_info_timeout;
   var g_extra_info_room;
+
   function CloseRoomExtraInfo() {
     g_extra_info_room = undefined;
     g_extra_info_timeout = clearTimeout(g_extra_info_timeout);
     $(".roomExtraInfo").removeClass("roomExtraInfo");
     $(".roomExtraInfoSlot").remove();
   }
+
   function ShowExtraRoomInfo(a) {
     var b = a[0];
     var c = GetRoomDivFromRoomNumber(b);
@@ -24392,7 +24430,9 @@
       }, 3000);
     }
   }
+
   var SERVER_SUB_TYPE_COUPLES = 4;
+
   function SetLobby(a, b, c) {
     $("#tournament_timer,#tournament_timer_header").hide();
     if (b == 1) {
@@ -24450,7 +24490,9 @@
   function LobbyChangeMobile(a) {
     g_channel_player.change_mobile(a);
   }
+
   var g_is_showing_tournament_waiting_msg;
+
   function TournamentWaitingMsgShow(a, b) {
     if (g_is_showing_tournament_waiting_msg) {
       if (b) {
@@ -24475,6 +24517,7 @@
       });
     }
   }
+
   function TournamentWaitingMsgHide() {
     g_is_showing_tournament_waiting_msg = false;
     $("#tournament_waiting").html("").hide().css({
@@ -24484,6 +24527,7 @@
       $("#lobbyButtonMobile").show();
     }
   }
+
   function SecondsToString(a) {
     var b = "";
     if (a < 0) {
@@ -24506,6 +24550,7 @@
       return l.t("Now");
     }
   }
+
   var g_tournament_timer;
   var g_tournament_timer_start;
   var g_t0;

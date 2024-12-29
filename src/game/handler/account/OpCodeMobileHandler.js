@@ -12,19 +12,21 @@ module.exports = function handleMobile(message) {
     self.connection.close();
     return null;
   }
+
   var _mob = message[1];
+
   if (self.room) {
     if (typeof Types.MOBILES[_mob] != "undefined" && Types.MOBILES[_mob] !== null) {
       if (self.player.is_master === 1 && self.room.game_mode === Types.GAME_MODE.SAME) {
         self.room.forPlayers(function (accountdbp) {
           if (accountdbp !== null) {
-            var prohivido = true;
+            var prevent = true;
             if (self.player.rank < 26 || self.player.rank === 27 || self.player.rank === 28 || self.player.rank === 29 || self.player.rank === 30) {
               if (_mob == Types.MOBILE.COPYLOID || _mob == Types.MOBILE.BEE) {
-                prohivido = false;
+                prevent = false;
               }
             }
-            if (prohivido) {
+            if (prevent) {
               if (_mob == Types.MOBILE.RANDOM) {
                 self.player.random_mobil = 1;
                 accountdbp.player.random_mobil = 1;
