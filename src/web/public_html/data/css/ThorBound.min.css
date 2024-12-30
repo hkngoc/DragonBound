@@ -10699,9 +10699,19 @@ table.MobileTable th, table.MobileTable td {
     zoom: 0.65;
 }
 
-.mobileSelectBtn.glow_button:hover {
-    background: rgba(70,70,0,0.75);
-    box-shadow: 0 0 8px 8px #ff0;
+.mobileSelectBtn {
+    cursor: pointer;
+}
+.mobileSelectBtn[mobile-disabled] {
+    cursor: not-allowed;
+}
+
+.mobileSelectBtn[mobile-disabled].glow_button:hover {
+    /* background: rgba(70,70,0,0.75);
+    box-shadow: 0 0 8px 8px #ff0; */
+
+    background: unset;
+    box-shadow: none !important;
 }
 
 .mobileSelectBtn:active {

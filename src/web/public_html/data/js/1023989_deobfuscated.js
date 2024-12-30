@@ -4478,20 +4478,20 @@
   MOBILE.TRICO,
   MOBILE.BIGFOOT,
   MOBILE.BOOMER,
-  MOBILE.RAON,
+  // MOBILE.RAON,
   MOBILE.LIGHTNING,
   MOBILE.JD,
   MOBILE.ASATE,
   MOBILE.ICE,
   MOBILE.TURTLE,
-  MOBILE.GRUB,
+  // MOBILE.GRUB,
   MOBILE.ADUKA,
   MOBILE.KALSIDDON,
-  MOBILE.FROG,
+  // MOBILE.FROG,
   MOBILE.KNIGHT,
   // MOBILE.DRAGON,
   MOBILE.DRAGON2,
-  MOBILE.RANDOM
+  // MOBILE.RANDOM
 
   // MOBILE.FOX,
   // MOBILE.ELECTRICO,
@@ -19223,28 +19223,47 @@
       `).appendTo(d);
       mobileSelectNodes.push(table);
 
-      function addMobile(m, h, parent) {
+      function addMobile(m, h, parent, enable) {
         var f = {
           j: m,
           m: MOBILES[m]
         };
         f.nameDiv = undefined;
-        var k = $("<div class=\"mobileSelectBtn glow_button\" style=\"cursor: pointer;\"><div class=\"mobileName blackShadow\">" + f.m.name + "</div><div class=\"Alt\">" + h.toString(16).toUpperCase() + "</div>").click(function (c) {
-          return function () {
-            if (c.nameDiv.text() == c.m.name) {
-              dragonNetwork.SendRoomChangeMobile(c.j);
-              b();
-              AudioPlay(AUDIO_BUTTON_SELECT2);
-            }
-          };
-        }(f)).appendTo(parent);
+
+        var k = $(`
+            <div
+              class="mobileSelectBtn glow_button"
+              ${enable ? "" : "mobile-disabled"}
+            >
+              <div class="mobileName blackShadow">${f.m.name}</div>
+              <div class="Alt">${h.toString(16).toUpperCase()}</div>
+            </div>
+          `);
+        
+        if (enable) {
+          k.click(function (c) {
+            return function () {
+              if (c.nameDiv.text() == c.m.name) {
+                dragonNetwork.SendRoomChangeMobile(c.j);
+                b();
+                AudioPlay(AUDIO_BUTTON_SELECT2);
+              }
+            };
+          }(f))
+        }
+
+        k.appendTo(parent);
+
         f.nameDiv = k.children().eq(0);
         var m = f.m.epa && f.m.epa.file ? f.m.epa.file : f.m.file;
+
         if (!m.includes("/")) {
           m = "mobiles/" + m + ".png";
         }
+
         f.anim = new CAnimatedObject2(m, f.m.epa || f.m.graphics, f.j == MOBILE.RANDOM ? 29 : 35, f.j == MOBILE.RANDOM ? 63 : 55, k, 1, MOBILE_FPS, true, LOOP_NORMAL, 0, 1, true);
         mobileSelectNodes.push(f.anim);
+
         k.hover(function (a) {
           return function () {
             return a.anim.ChangeEpaAnim("emotion1", "normal");
@@ -19253,7 +19272,7 @@
       }
 
       for (const mobile of Object.keys(MOBILES)) {
-        addMobile(mobile, mobile, $(`#mobile_${mobile}`));
+        addMobile(mobile, mobile, $(`#mobile_${mobile}`), SELECTABLE_MOBILES.includes(Number(mobile)));
       }
 
       // for (
