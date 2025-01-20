@@ -218,16 +218,20 @@ module.exports = class Room {
     if (!this.allow_watch && account.player.gm !== 1) {
       return null;
     }
+
     this.watchers[account.user_id] = account;
     account.room = this;
+
     account.send([Types.SERVER_OPCODE.enter_room]);
     account.sendMessage(new Message.roomState(this));
     account.sendMessage(new Message.roomPlayers(this));
+
     if (this.status == Types.ROOM_STATUS.PLAYING) {
       this.game.historical.forEach(function (message) {
         account.sendMessage(message);
       });
     }
+
     if (account.player.gm !== 1) {
       this.gameserver.pushToRoom(this.id, new Message.watcherJoined(account), account.user_id);
     }
@@ -300,13 +304,18 @@ module.exports = class Room {
 
   changeTeam(account) {
     var self = this;
+
     if (this.game_mode === Types.GAME_MODE.BOSS || this.status == Types.ROOM_STATUS.PLAYING) {
       return null;
     }
+
     let player = account.player;
     var change = false;
+
+    // 0: Team A, 1: Team B
     if (player.team === 0) {
-      if (self.team_b_count >= 4) {} else {
+      if (self.team_b_count >= 4) {
+      } else {
         self.team_a_count--;
         delete self.team_a[player.user_id];
         self.team_b[player.user_id] = player.user_id;
@@ -314,18 +323,38 @@ module.exports = class Room {
         self.team_b_count++;
         change = true;
       }
-    } else if (self.team_a_count >= 4) {} else {
-      self.team_b_count--;
-      delete self.team_b[player.user_id];
-      self.team_a[player.user_id] = player.user_id;
-      player.team = 0;
-      self.team_a_count++;
-      change = true;
+    } else if (player.team === 1) {
+      if (self.team_a_count >= 4) {
+      } else {
+        self.team_b_count--;
+        delete self.team_b[player.user_id];
+        self.team_a[player.user_id] = player.user_id;
+        player.team = 0;
+        self.team_a_count++;
+        change = true;
+      }
     }
+
     if (change === true) {
       this.updatePosition().then(function () {
         self.gameserver.pushToRoom(self.id, new Message.changedTeam(account, self));
       });
+    }
+  }
+
+  changeHost(account) {
+    const player = account.player;
+
+    if (player.team === -1) {
+
+    } else {
+      if (player.team == 0) {
+        self.team_a_count--;
+        delete self.team_a[player.user_id];
+      } else {
+        self.team_a_count--;
+        delete self.team_a[player.user_id];
+      }
     }
   }
 

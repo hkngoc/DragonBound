@@ -34,6 +34,7 @@ module.exports = {
   handleRoomTitle: require("./OpCodeRoomTitleHandler"),
   handleRoomChangeReady: require("./OpCodeRoomChangeReadyHandler"),
   handleRoomChangeTeam: require("./OpCodeRoomChangeTeamHandler"),
+  handleRoomChangeHost: require("./OpCodeRoomChangeHostHandler"),
   handleSelectBot: require("./OpCodeSelectBotHandler"),
   handleMobile: require("./OpCodeMobileHandler"),
   handleGameStart: require("./OpCodeGameStartHandler"),

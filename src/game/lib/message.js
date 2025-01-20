@@ -143,6 +143,35 @@ Messages.changedTeam = Message.extend({
     }
 });
 
+Messages.changedHost = Message.extend({
+    init: function (account, room) {
+        this.player = account.player;
+        this.room = room;
+        this.no_bonus = [];
+    },
+
+    serialize: function () {
+        var self = this;
+
+        self.room.forPlayers(function (account) {
+            // if (typeof (self.player.no_win_bonus_accounts[parseInt(account.player.user_id)]) !== 'undefined') {
+            //     if (account.player.user_id === self.player.no_win_bonus_accounts[parseInt(account.player.user_id)].user_id) {
+            //         self.no_bonus = [self.player.position, account.player.position];
+            //     }
+            // }
+        });
+
+        return [
+            Types.SERVER_OPCODE.changed_host,
+            3,
+            5,
+            self.player.user_id,
+            self.player.team ? 'B' : 'A',
+            self.no_bonus
+        ];
+    }
+});
+
 Messages.playerLeft = Message.extend({
     init: function (account, room) {
         this.player = account.player;

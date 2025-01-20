@@ -67,7 +67,10 @@ var Types = {
     replay: 62,
     filter: 63,
     check_guild_name: 64,
+
+    changed_host: 65,
   },
+
   CLIENT_OPCODE: {
     login: 0,
     game_shoot: 1,
@@ -132,7 +135,10 @@ var Types = {
     started_to_shoot: 60,
     look: 61,
     check_guild_name: 62,
+
+    room_change_host: 63,
   },
+
   THOR_LEVEL: [0, 300, 900, 1800, 3200, 6e3],
   DISCONNECT_REASON_INACTIVE: 1,
   DISCONNECT_REASON_FULL: 2,
@@ -3352,15 +3358,15 @@ Types.MOBILES = [
           explode: null,
           weight: 398,
           friccion: 0,
-          addAtEnd: ["walk"],
-          walk: {
-            damage: 240,
-            walk: true,
-            walk_max: 30,
-            is_alive: true,
-            image: Types.BULLETS.RAONMINE,
-            explode: Types.EXPLODE.RAONMINE,
-          },
+          // addAtEnd: ["walk"],
+          // walk: {
+          //   damage: 240,
+          //   walk: true,
+          //   walk_max: 30,
+          //   is_alive: true,
+          //   image: Types.BULLETS.RAONMINE,
+          //   explode: Types.EXPLODE.RAONMINE,
+          // },
         },
         {
           delay: 0,
@@ -3371,15 +3377,15 @@ Types.MOBILES = [
           explode: null,
           weight: 398,
           friccion: 0,
-          addAtEnd: ["walk"],
-          walk: {
-            damage: 240,
-            walk: true,
-            walk_max: 30,
-            is_alive: true,
-            image: Types.BULLETS.RAONMINE,
-            explode: Types.EXPLODE.RAONMINE,
-          },
+          // addAtEnd: ["walk"],
+          // walk: {
+          //   damage: 240,
+          //   walk: true,
+          //   walk_max: 30,
+          //   is_alive: true,
+          //   image: Types.BULLETS.RAONMINE,
+          //   explode: Types.EXPLODE.RAONMINE,
+          // },
         },
       ],
       [
@@ -3393,17 +3399,17 @@ Types.MOBILES = [
           weight: 398,
           friccion: 0,
           ss: true,
-          addAtEnd: ["walk"],
-          walk: [
-            {
-              damage: 75,
-              pala_bunge: [38, 38],
-              addtime: 200,
-              dir: "auto",
-              image: Types.BULLETS.RAONSS_WALKER,
-              explode: Types.EXPLODE.RAONSS_WALKER,
-            },
-          ],
+          // addAtEnd: ["walk"],
+          // walk: [
+          //   {
+          //     damage: 75,
+          //     pala_bunge: [38, 38],
+          //     addtime: 200,
+          //     dir: "auto",
+          //     image: Types.BULLETS.RAONSS_WALKER,
+          //     explode: Types.EXPLODE.RAONSS_WALKER,
+          //   },
+          // ],
         },
       ],
     ],

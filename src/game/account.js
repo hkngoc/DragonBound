@@ -161,6 +161,7 @@ class Account {
     [Types.CLIENT_OPCODE.room_title]: this.handleRoomTitle,
     [Types.CLIENT_OPCODE.room_change_ready]: this.handleRoomChangeReady,
     [Types.CLIENT_OPCODE.room_change_team]: this.handleRoomChangeTeam,
+    [Types.CLIENT_OPCODE.room_change_host]: this.handleRoomChangeHost,
     [Types.CLIENT_OPCODE.select_bot]: this.handleSelectBot,
     [Types.CLIENT_OPCODE.mobile]: this.handleMobile,
     [Types.CLIENT_OPCODE.game_start]: this.handleGameStart,

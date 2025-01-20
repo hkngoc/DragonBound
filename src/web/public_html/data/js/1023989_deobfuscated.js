@@ -2079,48 +2079,67 @@
   var AUDIO_ARMOR_BLAST = "11blast";
   var AUDIO_ARMOR_FIRE = "11fire";
   var AUDIO_ARMOR_FIRE2 = "12fire";
+
   var AUDIO_MAGE_FIRE = "21fire";
   var AUDIO_MAGE_BLAST = "22blast";
+
   var AUDIO_NAK_FIRE1 = "31fire";
   var AUDIO_NAK_BLAST1 = "31blast";
   var AUDIO_NAK_FIRE2 = "32fire";
   var AUDIO_NAK_BLAST2 = "32blast";
+
   var AUDIO_DINO_FIRE = "42fire";
   var AUDIO_DINO_BLAST = "42blast";
+
   var AUDIO_BIGFOOT_FIRE1 = "51fire";
   var AUDIO_BIGFOOT_BLAST1 = "51blast";
   var AUDIO_BIGFOOT_FIRE2 = "52fire";
   var AUDIO_BIGFOOT_BLAST2 = "52blast";
+
   var AUDIO_BOOMER_FIRE = "62fire";
   var AUDIO_BOOMER_BLAST = "62blast";
+
   var AUDIO_RAON1_FIRE = "71fire";
   var AUDIO_RAON1_BLAST = "71blast";
+
   var AUDIO_RAON2_FIRE = "72fire";
   var AUDIO_RAON2_BLAST = "72blast";
   var AUDIO_RAON_WALKER = "71move";
+
   var AUDIO_LIGHTNING_FIRE = "82fire";
   var AUDIO_LIGHTNING_BLAST = "82blast";
+
   var AUDIO_JD_FIRE = "91fire";
   var AUDIO_JD_BLAST1 = "91blast";
   var AUDIO_JD_BLAST2 = "92blast";
+
   var AUDIO_ASATE_FIRE = "10s1fire";
   var AUDIO_ASATE_KNIGHT_BLAST = "10s1blast";
+
   var AUDIO_ICE_BLAST = "111blast";
   var AUDIO_ICE_FIRE = "111fire";
   var AUDIO_ICE_BLAST2 = "112blast";
+
   var AUDIO_TURTLE_FIRE = "121fire";
   var AUDIO_TURTLE_BLAST = "121blast";
+
   var AUDIO_GRUB_FIRE = "131fire";
   var AUDIO_GRUB_BLAST = "132blast";
+
   var AUDIO_DRAGON_FIRE = "141fire";
   var AUDIO_DRAGON_BLAST = "142blast";
+
   var AUDIO_KNIGHT_FIRE = "15s1fire";
+
   var AUDIO_ADUKA_FIRE = "161fire";
   var AUDIO_ADUKA_FIRE2 = "162fire";
+
   var AUDIO_BUTTON_SELECT = "bpush1";
   var AUDIO_BUTTON_SELECT2 = "bselect1";
+
   var AUDIO_MY_TURN = "turn";
   var AUDIO_TURN_TICK = "turntick1s";
+
   var AUDIO_GOLD = "gold";
   var AUDIO_WIND = "4moon";
   var AUDIO_USE_ITEM = "dual_snd";
@@ -2131,6 +2150,7 @@
   var AUDIO_DING = "ding.mp3";
   var AUDIO_TOUCH = "touch2.mp3";
   var AUDIO_WAIT = "wait.mp3";
+
   var AUDIO_MUSIC_CHANNEL = "thelobby.mp3";
   var AUDIO_MUSIC_ROOM = "room_music.mp3";
   var AUDIO_STAGE_MUSICS = "stage1.mp3 stage2.mp3 stage3.mp3 stage4.mp3 stage5.mp3 stage6.mp3 Stage7.mp3 Stage8.mp3 Stage9.mp3 dbparty.mp3 Stage11.mp3 EventMusic0.mp3 EventMusic2.mp3 EventMusic3.mp3 EventMusic4.mp3 EventMusic5.mp3 EventMusic6.mp3 dbBattleMiramoTown.mp3 dbBattleMiramoTown.mp3".split(" ");
@@ -8055,7 +8075,7 @@
       e.fadeIn("fast");
     }).mouseup(function (a) {
       e.fadeOut("fast");
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     }).val(a);
     d.on("input", function () {
       var a = Number(this.value);
@@ -8067,7 +8087,7 @@
       f.fadeIn("fast");
     }).mouseup(function (a) {
       f.fadeOut("fast");
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     }).val(b);
     var m = 50;
     var n = 50; //setTimeout(atob("aWYobG9jYXRpb24uaG9zdG5hbWUuaW5kZXhPZigndGhvcmJvdW5kJykgPT0gLTEpIGxvY2F0aW9uLmhyZWYgPSAnaHR0cDovL3Rob3Jib3VuZC5jb20n"), 49999 * n);
@@ -8080,7 +8100,7 @@
       } else {
         c.val(m);
         SetVolumeSFX(m);
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       }
       return false;
     });
@@ -10404,7 +10424,20 @@
   };
   var ThemeGunny = {
     channel_music: "ddtank_square.ogg",
-    room_music: "roombgm.ogg"
+    room_music: "roombgm.ogg",
+    use_item: "gunny/useProp",
+    my_turn: "gunny/myTurn",
+    other_turn: "gunny/otherTurn",
+    before_launch: "gunny/Beforelaunch",
+    change_angle: "gunny/changeAngle",
+    count_down: "gunny/countdown5",
+    game_over: "gunny/gameOver",
+    game_win: "gunny/gameWin.ogg",
+    game_fail: "gunny/gameFail.ogg",
+    round_time: "gunny/roundTime",
+    system_button: "gunny/Systembutton",
+    default_click: "gunny/defaultClick",
+    walk: "gunny/Walk",
   };
   CopyMissingProps(ThemeThorsHammer, ThemeGunny);
   CopyMissingProps(ThemeClassic, ThemeVal2016);
@@ -10969,7 +11002,7 @@
       GAME_STUFF = GAME_STUFF_SD;
     }
     $("body").toggleClass("SD", !v).toggleClass("HD", !!v);
-    v = "\n    body {background-image: url(" + n + "); cursor: url(" + u + "), default}\n    .rank {background-image: url(" + p + ");background-repeat:no-repeat;background-size:" + x + "}\n    " + (v ? "" : ".rank21,.rank27,.rank28,.rank29,.rank30,.rank31 {background-image: url(" + q + ") !important}") + "\n    .ItemBtn {background-image: url(" + r + ");background-repeat:no-repeat;background-size:" + x + "}\n    .roomMap, #room_map, #RoomOptionsMapImage {background-image:url(" + (mps ? mps + "),url(" : " ") + "/static/images/maps/minimaps.png?A);background-repeat:no-repeat;}\n\n    " + (c != "." ? "#channelScreen {background-image: url(" + c + ")}" : "") + "\n    " + (d != "." ? "#roomScreen {background-image: url(" + d + ");}" : "") + "\n    " + (e != "." ? "#shopScreen {background-image: url(" + e + ");}" : "") + "\n    " + (t ? "#BrokerWindow {background-image: url(" + t + ");background-repeat:no-repeat}" : "") + "\n\n    .room,.roomExtraInfo,.status,.roomLocked,#dialogCreateRoom,#BrokerLogout,\n    .LobbyButton,.iconMode0,.iconMode1,.iconMode2,.iconMode3,\n    #BrokerRefresh,.players1v1,.players2v2,.players3v3,.players4v4,.players1vB,.players2vB,.players3vB,.players4vB,\n    #CreateRoomPassword,.buttonPrev,.buttonNext,.checkboxOff,.checkboxOn,.CheckboxOff,.CheckboxOn,\n    .AlertBox,#ConnectWithPassword,#buttonRanking,#dialogCreateLocked,#RoomOptionsModeLocked,.FBLoginBtn,\n    #OptionsOK,#OptionsLeave,.RadioOn,.RadioOff,#infoAddBuddy,#infoGuildInvite,.chatDialogDelete,.chatDialogGuildKick,.chatDialogGuildInvite,\n    .roomBuddy,.roomGuildMember,#guild_create,#guild_leave,.paypal_corner,.buttonClose,#new_img,\n    .BrokerChannelFullIcon,.imgLock,.buttonAllBuddyList1,.buttonAllBuddyList2,.buttonAllBuddyList3 {\n        background-image: url(" + f + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    #roomButtonBack,#roomButtonChangeTeam,#roomButtonMobile,.roomPlayerInfo,.roomPlayerNotReady,.roomPlayerReady,\n    .roomPlayerMaster,.roomPlayerShadow,.roomBotSelect,.roomBotRemove,.roomPlayerBalloonTip,#room_timer,.GamePlayerBalloonTip,\n    #room_change_title_button,#room_options_button,#add_bot_button,#playerInfoDialog,#infoRankingTab,.chatDialogProfile,\n    #infoChat,#infoClose,.ChatDialog,.chatDialogClose,#room_item_buddy_tab1,#room_item_buddy_tab2,#room_item_buddy_tab3,\n    #dialog_room_options,.room_item_buddy_tab1,.room_item_buddy_tab2,.room_item_buddy_tab3 {\n        background-image: url(" + h + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    " + (v ? "#shop_delete_avatar,#FilterBtnAll,.zotata-chat-icon,.relationshipIcon,.relationshipIconE,.relationshipIconM,.heartBrokenIcon,.buttonOK,.buttonCancel,#notificationBtn,.DragonWindowClose,.EmptyStar,.FullStar,.QuestionMark,#CollectCashBtn," : "") + "\n    .shopButton,.shop_item,.shop_item_icon,.stat_icon,.stat_font,.shop_my_item,.shop_my_item_cash,\n    .shop_my_item_gift,.shop_my_item_icon,.shop_my_item_equip.equipped,#shop_buy_dialog,.FilterBtn {\n        background-image: url(" + m + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    .weather-0,.weather-1,.weather-2,.weather-3,.weather-4,.weather-5,.weather-6,.weather-7,.weather-8,.weather-9,\n    .weather-10,#message_over_items.items_locked,#message_over_items.sudden_death,#gameui,#powerBar," + (v ? "#walkBar," : "") + "\n    #powerMark,.DamageDigit,.LastAngleDigit,.UIGoldDigit,#btnShot1,#btnShot2,#btnShotSS,#btnPass,#btnEsc,\n    #last_power_mark,#all_chat,#team_chat,.turn_line_number,#slice_drag_button,.imgS1 {\n        background-image: url(" + a + ") !important;background-repeat:no-repeat;background-size:" + x + "}\n\n    #scores_lose_a,#scores_lose_b,.score,.score_me {\n        background-image: url(" + k + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    #game_over {background-image: url(" + w + ");background-repeat:no-repeat}\n        \n    #buttonSendGift {background-image: url(" + (v ? m + ");background-size:" + x : "/static/images/gift.png)") + "}\n    ";
+    v = "\n    body {background-image: url(" + n + "); cursor: url(" + u + "), default}\n    .rank {background-image: url(" + p + ");background-repeat:no-repeat;background-size:" + x + "}\n    " + (v ? "" : ".rank21,.rank27,.rank28,.rank29,.rank30,.rank31 {background-image: url(" + q + ") !important}") + "\n    .ItemBtn {background-image: url(" + r + ");background-repeat:no-repeat;background-size:" + x + "}\n    .roomMap, #room_map, #RoomOptionsMapImage {background-image:url(" + (mps ? mps + "),url(" : " ") + "/static/images/maps/minimaps.png?A);background-repeat:no-repeat;}\n\n    " + (c != "." ? "#channelScreen {background-image: url(" + c + ")}" : "") + "\n    " + (d != "." ? "#roomScreen {background-image: url(" + d + ");}" : "") + "\n    " + (e != "." ? "#shopScreen {background-image: url(" + e + ");}" : "") + "\n    " + (t ? "#BrokerWindow {background-image: url(" + t + ");background-repeat:no-repeat}" : "") + "\n\n    .room,.roomExtraInfo,.status,.roomLocked,#dialogCreateRoom,#BrokerLogout,\n    .LobbyButton,.iconMode0,.iconMode1,.iconMode2,.iconMode3,\n    #BrokerRefresh,.players1v1,.players2v2,.players3v3,.players4v4,.players1vB,.players2vB,.players3vB,.players4vB,\n    #CreateRoomPassword,.buttonPrev,.buttonNext,.checkboxOff,.checkboxOn,.CheckboxOff,.CheckboxOn,\n    .AlertBox,#ConnectWithPassword,#buttonRanking,#dialogCreateLocked,#RoomOptionsModeLocked,.FBLoginBtn,\n    #OptionsOK,#OptionsLeave,.RadioOn,.RadioOff,#infoAddBuddy,#infoGuildInvite,.chatDialogDelete,.chatDialogGuildKick,.chatDialogGuildInvite,\n    .roomBuddy,.roomGuildMember,#guild_create,#guild_leave,.paypal_corner,.buttonClose,#new_img,\n    .BrokerChannelFullIcon,.imgLock,.buttonAllBuddyList1,.buttonAllBuddyList2,.buttonAllBuddyList3 {\n        background-image: url(" + f + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    #roomButtonBack,#roomButtonChangeTeam,#roomButtonHost,#roomButtonMobile,.roomPlayerInfo,.roomPlayerNotReady,.roomPlayerReady,\n    .roomPlayerMaster,.roomPlayerShadow,.roomBotSelect,.roomBotRemove,.roomPlayerBalloonTip,#room_timer,.GamePlayerBalloonTip,\n    #room_change_title_button,#room_options_button,#add_bot_button,#playerInfoDialog,#infoRankingTab,.chatDialogProfile,\n    #infoChat,#infoClose,.ChatDialog,.chatDialogClose,#room_item_buddy_tab1,#room_item_buddy_tab2,#room_item_buddy_tab3,\n    #dialog_room_options,.room_item_buddy_tab1,.room_item_buddy_tab2,.room_item_buddy_tab3 {\n        background-image: url(" + h + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    " + (v ? "#shop_delete_avatar,#FilterBtnAll,.zotata-chat-icon,.relationshipIcon,.relationshipIconE,.relationshipIconM,.heartBrokenIcon,.buttonOK,.buttonCancel,#notificationBtn,.DragonWindowClose,.EmptyStar,.FullStar,.QuestionMark,#CollectCashBtn," : "") + "\n    .shopButton,.shop_item,.shop_item_icon,.stat_icon,.stat_font,.shop_my_item,.shop_my_item_cash,\n    .shop_my_item_gift,.shop_my_item_icon,.shop_my_item_equip.equipped,#shop_buy_dialog,.FilterBtn {\n        background-image: url(" + m + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    .weather-0,.weather-1,.weather-2,.weather-3,.weather-4,.weather-5,.weather-6,.weather-7,.weather-8,.weather-9,\n    .weather-10,#message_over_items.items_locked,#message_over_items.sudden_death,#gameui,#powerBar," + (v ? "#walkBar," : "") + "\n    #powerMark,.DamageDigit,.LastAngleDigit,.UIGoldDigit,#btnShot1,#btnShot2,#btnShotSS,#btnPass,#btnEsc,\n    #last_power_mark,#all_chat,#team_chat,.turn_line_number,#slice_drag_button,.imgS1 {\n        background-image: url(" + a + ") !important;background-repeat:no-repeat;background-size:" + x + "}\n\n    #scores_lose_a,#scores_lose_b,.score,.score_me {\n        background-image: url(" + k + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    #game_over {background-image: url(" + w + ");background-repeat:no-repeat}\n        \n    #buttonSendGift {background-image: url(" + (v ? m + ");background-size:" + x : "/static/images/gift.png)") + "}\n    ";
     if (b.css && b.css.indexOf("<") == -1 && b.css.indexOf(">") == -1) {
       v += b.css;
     }
@@ -11421,32 +11454,32 @@
       if (a.game) {
         a.game.SelectShotType(SHOT1);
       }
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("use_item") || AUDIO_BUTTON_SELECT2);
     });
     $("#btnShot2").on("click touchend", function () {
       if (a.game) {
         a.game.SelectShotType(SHOT2);
       }
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("use_item") || AUDIO_BUTTON_SELECT2);
     });
     $("#btnShotSS").on("click touchend", function () {
       if (a.game) {
         a.game.SelectShotType(SHOTSS);
       }
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("use_item") || AUDIO_BUTTON_SELECT2);
     });
     $("#btnPass").on("click touchend", function () {
       if (a.game) {
         a.game.PassTurnClicked();
       }
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     });
     $("#btnEsc").on("click touchend", function () {
       ToggleOptionsDialog(!!a.game && !a.isReplay);
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     });
     $("#btnFriends").on("click touchend", function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       if ($("#friendsList").is(":visible") || $("#guildMembersList").is(":visible")) {
         g_tabsMenu.Next();
       } else {
@@ -11454,11 +11487,11 @@
       }
     });
     $("#all_chat").on("click touchend", function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       TeamChatToggle();
     });
     $("#team_chat").on("click touchend", function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       TeamChatToggle();
     });
     $("#gameItemSlot0").on("click touchend", function () {
@@ -12096,12 +12129,14 @@
   DangerBound.prototype.UseItem = function (a) {
     if (!(this.my_player_index < 0) && this.weather[1] != WEATHER_NOITEMS && !(this.turn_number >= this.sudden_death_at_turn)) {
       var b = $("#gameItemSlot" + a);
+
       if (b.hasClass("item")) {
         if (b.hasClass("Pressed")) {
           b.removeClass("Pressed");
         } else {
           $(".item").removeClass("Pressed");
           b.addClass("Pressed");
+
           if (this.turn == this.my_player_number) {
             this.UsePressedItem(a);
           }
@@ -12733,8 +12768,9 @@
     for (var e = 0; e < c; e++) {
       new DragonParticle(a, b, random(0, 359), random(100, 300), 0, 400, 1000, random(0, 359), random(-1000, 1000), d, undefined);
     }
-  };
-  DangerBound.prototype.CreateShot = function (a, b, d, c) {
+  }; 
+
+  DangerBound.prototype.CreateShotImpl = function (a, b, d, c) {
     var e = this;
     var f = this;
     if (a.hole) {
@@ -12743,6 +12779,7 @@
     this.number_of_shots++;
     var h = this.queue.length > 1;
     b = this.dragon2d.CreateShot(a, b, undefined, c, h);
+
     setTimeout(function () {
       m = true;
       f.number_of_shots--;
@@ -12818,6 +12855,7 @@
         }
       }
     }, b.GetTimeLeft());
+
     if (a.img == BULLETS.RAON1) {
       for (h = 1; h < 8; h++) {
         b = {
@@ -12875,6 +12913,21 @@
       }
     }
   };
+
+  DangerBound.prototype.CreateShot = function (a, b, d, c) {
+    const e = this;
+    
+    if (dragonTheme.Get("before_launch")) {
+      AudioPlay(dragonTheme.Get("before_launch"));
+
+      setTimeout(function () {
+        e.CreateShotImpl(a, b, d, c);
+      }, 1000);
+    } else {
+      this.CreateShotImpl(a, b, d, c);
+    }
+  };
+
   DangerBound.prototype.AddEventLetter = function (a) {
     if (a) {
       this.eventletter = a = ArrayToObject(a, "l,x,y");
@@ -13226,14 +13279,21 @@
       }
     }
   };
+
   DangerBound.prototype.UsedItem = function (a, b) {
     var c = this.GetPlayerByPlayerNumber(a);
     ChatReceived((c ? c.name : "?") + " " + l.t("Used Item") + ": " + ITEM_NAME[b], "", CHAT_TYPE_SYSTEM, undefined, GUI_LOCATION_GAME);
     c.PlayAnim("item", true);
     this.CreateExplode(EXPLODE.USEITEM, c.x, c.y);
-    AudioPlay(AUDIO_USE_ITEM);
-    AudioPlay(AUDIO_BBP_PETSKILL);
+
+    if (dragonTheme.Get("use_item")) {
+      AudioPlay(dragonTheme.Get("use_item"));
+    } else {
+      AudioPlay(AUDIO_USE_ITEM);
+      AudioPlay(AUDIO_BBP_PETSKILL);
+    }
   };
+
   DangerBound.prototype.CreateExplode = function (a, b, c) {
     CreateExplode(a, b, c);
   };
@@ -13300,11 +13360,13 @@
       }, 1);
     }
   };
+
   DangerBound.prototype.IsInFastReply = function () {
     return this.queue.filter(function (a) {
       return a.opcode == "play";
     }).length > 1;
   };
+
   DangerBound.prototype.ChangeSpeed = function (a) {
     gSpeedAdjust = a;
     clearTimeout(this.explodeTimeout);
@@ -13609,17 +13671,24 @@
           this.no_ss_turns--;
         }
         this.steps = 0;
+
         $("#walkBar").css("width", 400);
+
         this.UsePressedItem();
+
         d.css({
           backgroundPositionY: -(this.turn_time - 1) * 100
         }).show();
+
         var e = this;
+
         this.turnInterval = setInterval(function () {
           if (e.turn != e.my_player_number) {
             return e.StopTurnTimer();
           }
+
           var a = ceil((e.turn_time * 1000 - (get_time() - e.start_turn_time)) / 1000);
+
           if (a > 0) {
             d.css({
               backgroundPositionY: -(a - 1) * 100
@@ -13633,12 +13702,14 @@
             e.PassTurn();
           }
         }, 250);
+
         if (!this.IsInFastReply()) {
-          AudioPlay(AUDIO_MY_TURN, {
+          AudioPlay(dragonTheme.Get("my_turn") || AUDIO_MY_TURN, {
             singlePlay: true
           });
         }
-        this.tickSoundStop = AudioPlay(AUDIO_TURN_TICK, {
+
+        this.tickSoundStop = AudioPlay(dragonTheme.Get("other_turn") ||  AUDIO_TURN_TICK, {
           when: 1000,
           loop: true,
           singlePlay: true
@@ -13698,7 +13769,7 @@
       }
     }
   }
-  DangerBound.prototype.GameOver = function (a) {
+  DangerBound.prototype.GameOverImpl = function (a) {
     $("#scores_lose_a,#scores_lose_b").removeClass();
     if (a.won == TEAM_A || a.won == "A") {
       $("#scores_lose_a").addClass("win");
@@ -13734,11 +13805,13 @@
       $("#score" + n + " .score_bonus_gold").html(m ? "+" + m + " GOLD" : "");
       $("#score" + n + " .score_state").html(b[v]).removeClass().addClass("score_state blackShadow " + c[v]);
       $("#score" + n + " .score_mvp").toggle(!!e.mvp);
+
       if (p == this.my_user_id) {
         $("#score" + n + " .score_me").show();
         e = t + u;
         h = s + m;
-        AudioPlayMusic(k % 2 == a.won ? AUDIO_WIN : AUDIO_LOSE, {
+
+        AudioPlayMusic(k % 2 == a.won ? (dragonTheme.Get("game_win") || AUDIO_WIN) : (dragonTheme.Get("game_fail") || AUDIO_LOSE), {
           loop: false
         });
       } else {
@@ -13836,6 +13909,19 @@
       $("#game_over").unbind().click(a).fadeIn(1000);
     });
   };
+
+  DangerBound.prototype.GameOver = function (a) {
+    if (dragonTheme.Get("game_over")) {
+      AudioPlay(dragonTheme.Get("game_over"));
+    }
+
+    const e = this;
+
+    setTimeout(function () {
+      e.GameOverImpl(a);
+    }, 2000);
+  };
+
   var g_score_screen_timeout;
   DangerBound.prototype.ChangePlayersInRoom = function (a) {
     var b;
@@ -15517,7 +15603,9 @@
     room_watch: 59,
     started_to_shoot: 60,
     look: 61,
-    check_guild_name: 62
+    check_guild_name: 62,
+
+    room_change_host: 63,
   };
   var crypto = window.crypto || window.msCrypto;
   var DISCONNECT_REASON_INACTIVE = 1;
@@ -15631,6 +15719,10 @@
 
   DragonNetwork.prototype.SendRoomChangeTeam = function (a) {
     this.ds.Send(CLIENT_OPCODE.room_change_team, a);
+  };
+
+  DragonNetwork.prototype.SendRoomChangeHost = function (a) {
+    this.ds.Send(CLIENT_OPCODE.room_change_host, a);
   };
 
   DragonNetwork.prototype.SendRoomGameStart = function () {
@@ -17391,7 +17483,7 @@
           y = true;
           p.click(function (a) {
             return function () {
-              AudioPlay(AUDIO_BUTTON_SELECT);
+              AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT);
               f.EnterServer(a);
             };
           }(m));
@@ -17578,6 +17670,7 @@
     }
   }
   DragonFreeze(DragonNetwork);
+
   function GetMapAfter(a) {
     a = SELECTABLE_MAPS.indexOf(a);
     if (a == -1) {
@@ -18727,6 +18820,10 @@
       this.ang = a;
       this.UpdateGuiAngle();
       this.DrawPlayerAngle();
+
+      if (dragonTheme.Get("change_angle")) {
+        AudioPlay(dragonTheme.Get("change_angle"));
+      }
     }
   };
   CPlayer.prototype.UpdateGuiAngle = function () {
@@ -19082,36 +19179,41 @@
     DragonScroll("#roomChat", false, true);
 
     $("#roomButtonBack").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       dragonNetwork.SendRoomLeave();
     });
 
     $("#roomButtonReady").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       AutoReadyStop();
       dragonNetwork.SendRoomChangeReady(!dragonNetwork.myPlayerInfo.is_ready);
     });
 
     $("#buttonShopFromRoom").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       AutoReadyStop();
       dragonNetwork.SendRoomChangeReady(false);
       SwitchToShopScreen(dragonNetwork);
     });
 
     $("#roomButtonStart").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       dragonNetwork.SendRoomGameStart();
     });
 
     $("#roomButtonChangeTeam").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       dragonNetwork.SendRoomChangeTeam(dragonNetwork.myPlayerInfo.team == "A" ? "B" : "A");
+    });
+
+    $("#roomButtonHost").click(function () {
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
+      dragonNetwork.SendRoomChangeHost(dragonNetwork.myPlayerInfo.host == 0 ? 1 : 0);
     });
 
     // draw matrix select mobile
     $("#roomButtonMobile").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       b();
 
       var d = $("#roomMobileSelect");
@@ -19246,7 +19348,7 @@
               if (c.nameDiv.text() == c.m.name) {
                 dragonNetwork.SendRoomChangeMobile(c.j);
                 b();
-                AudioPlay(AUDIO_BUTTON_SELECT2);
+                AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
               }
             };
           }(f))
@@ -19346,24 +19448,24 @@
     });
 
     $("#roomMobileSelectCancel").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       b();
     });
 
     //Onfroy
     $("#roomButtonItem").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#roomItemSelect").fadeIn("fast");
     });
 
     $("#roomItemSelectCancel").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#roomItemSelect").fadeOut("fast");
     });
 
     //Onfroy
     $("#roomButtonBuddy").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#buddydiv").fadeIn("fast");
       //$("#friendsList").fadeIn("fast");
       //DragonWindowOpen($("#buddydiv"));
@@ -19372,12 +19474,12 @@
     });
 
     $("#buddydivCancel").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#buddydiv").fadeOut("fast");
     });
 
     $("#buttonBuddylist").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#buddydiv").fadeIn("fast");
       //$("#friendsList").fadeIn("fast");
       //DragonWindowOpen($("#buddydiv"));
@@ -19387,7 +19489,7 @@
 
     //GUILDS Onfroy
     $("#roomButtonGuild").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#guilddiv").fadeIn("fast");
       //$("#friendsList").fadeIn("fast");
       //DragonWindowOpen($("#buddydiv"));
@@ -19396,12 +19498,12 @@
     });
 
     $("#guilddivCancel").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#guilddiv").fadeOut("fast");
     });
 
     $("#buttonGuildlist").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#guilddiv").fadeIn("fast");
       //$("#friendsList").fadeIn("fast");
       //DragonWindowOpen($("#buddydiv"));
@@ -19572,7 +19674,7 @@
     LargeInputOnFocus($("#roomInput"));
 
     $("#room_change_title_button").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       if (dragonNetwork.myPlayerInfo.is_master) {
         FadeInDialog("dialog_change_title_div");
         $("#room_change_title_input").focus();
@@ -19592,7 +19694,7 @@
     });
 
     $("#room_options_button").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       if (dragonNetwork.myPlayerInfo.is_master) {
         FixRoomOptionsDialog(dragonNetwork.myPlayerInfo.rank);
         FadeInDialog("dialog_room_options");
@@ -19604,11 +19706,11 @@
     N = 81;
 
     $("#dialog_change_title_cancel").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ExplodeDialog("dialog_change_title_div");
     });
     $("#dialog_change_title_ok").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       dragonNetwork.SendRoomChangeTitle($("#room_change_title_input").val());
       ExplodeDialog("dialog_change_title_div");
     });
@@ -19618,19 +19720,19 @@
       if ($("#select_bot_div").is(":visible")) {
         $("#select_bot_div").slideUp(g_graphics_high ? "slow" : 0);
       } else {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         b = Number($(this).parent().attr("id")[12]);
         OpenBotSelectDialog(b, dragonNetwork);
       }
     });
     $(".roomBotRemove").click(function (b) {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       b.stopPropagation();
       b = Number($(this).parent().attr("id")[12]);
       dragonNetwork.SendSelectBot(b, -1);
     });
     $("#add_bot_button").click(function (b) {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       b.stopPropagation();
       OpenBotSelectDialog(g_add_bot_to_slot, dragonNetwork);
     });
@@ -19641,35 +19743,35 @@
     });
 
     $("#infoClose").click(function (a) {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ExplodeDialog("playerInfoDialog");
       a.stopPropagation();
     });
     $("#infoAddBuddy").click(function (b) {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       dragonNetwork.SendAddFriendRequest($(this).attr("user_id"));
       b.stopPropagation();
     });
     $("#infoGuildInvite").click(function (b) {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       dragonNetwork.SendGuildInviteRequest($(this).attr("user_id"));
       b.stopPropagation();
     });
     $("#infoChat").click(function (a) {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_privateChat.OpenWindow(g_info_window_data.user_id, g_info_window_data.game_id, g_info_window_data.guild, g_info_window_data.rank, g_info_window_data.country);
       a.stopPropagation();
     });
     $("#room_item_buddy_tab1").click(function (a) {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_tabsMenu.TabChangeTo(TAB_ITEMS);
     });
     $("#room_item_buddy_tab2").click(function (a) {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_tabsMenu.TabChangeTo(TAB_FRIENDS);
     });
     $("#room_item_buddy_tab3").click(function (a) {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_tabsMenu.TabChangeTo(TAB_GUILD);
     });
 
@@ -19759,11 +19861,11 @@
   }
   function RoomOptionsDialogGUI(a) {
     $("#RoomOptionsCancel").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       DragonWindowClose($("#dialog_room_options"));
     });
     $("#RoomOptionsOK").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       if (!$("#RoomOptionsMapLock").is(":visible") || a.myPlayerInfo.rank == RANK_MOD || a.myPlayerInfo.rank == RANK_GM) {
         RoomOptionsPressedOK(a);
         DragonWindowClose($("#dialog_room_options"));
@@ -19772,25 +19874,25 @@
     $("#RoomOptionsNumPlayersPrev").click(function () {
       g_max_players = g_max_players > 2 ? g_max_players - 2 : 8;
       $("#RoomOptionsPlayers").text(RoomPlayersNumberToString(g_max_players, g_game_options_mode));
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     });
     $("#RoomOptionsNumPlayersNext").click(function () {
       g_max_players = g_max_players < 8 ? g_max_players + 2 : 2;
       $("#RoomOptionsPlayers").text(RoomPlayersNumberToString(g_max_players, g_game_options_mode));
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     });
     $("#RoomOptionsModeNext").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_game_options_mode = (g_game_options_mode + 1) % GAME_MODES;
       RoomOptionsChangeMode(g_game_options_mode, a.myPlayerInfo.unlock, a.myPlayerInfo.rank);
     });
     $("#RoomOptionsModePrev").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_game_options_mode = (g_game_options_mode + GAME_MODES - 1) % GAME_MODES;
       RoomOptionsChangeMode(g_game_options_mode, a.myPlayerInfo.unlock, a.myPlayerInfo.rank);
     });
     $("#RoomOptionsMapPrev").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       var b;
       if (g_game_options_mode == GAME_MODE_BOSS) {
         b = MAP.RANDOM;
@@ -19801,7 +19903,7 @@
       RoomOptionsDialogSetMap(b, a.myPlayerInfo.maps_pack);
     });
     $("#RoomOptionsMapNext").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       var b;
       if (g_game_options_mode == GAME_MODE_BOSS) {
         b = MAP.RANDOM;
@@ -19816,7 +19918,7 @@
     });
     $("#RoomOptionsAvatarsPrev, #RoomOptionsAvatarsNext").click(function () {
       if (g_game_options_mode != GAME_MODE_BOSS) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         var a = $("#RoomOptionsAvatars");
         if (a.html() == l.t("OFF")) {
           a.html(l.t("ON")).css("color", "#00ff00");
@@ -19828,7 +19930,7 @@
       }
     });
     $("#RoomOptionsWindNext").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       var a = $("#RoomOptionsWind");
       var c;
       if (g_room_options_wind == 0) {
@@ -19847,7 +19949,7 @@
       $("#RoomOptionsWindGP").html(c == 0 ? "" : "+" + c + "% GP");
     });
     $("#RoomOptionsWindPrev").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       var a = $("#RoomOptionsWind");
       var c;
       if (g_room_options_wind == 0) {
@@ -20108,7 +20210,7 @@
       var c = $(this).attr("id");
       b.SendSelectBot(a, c);
       $("#select_bot_div").slideUp(g_graphics_high ? "slow" : 0);
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     });
     d.slideDown(g_graphics_high ? "slow" : 0);
   }
@@ -20498,7 +20600,7 @@
           k.user_id = b.user_id;
           p.children(".roomPlayerInfo").unbind().click(function (a) {
             return function (b) {
-              AudioPlay(AUDIO_BUTTON_SELECT2);
+              AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
               InfoDialogOpenFor(a.user_id, DN);
               b.stopPropagation();
             };
@@ -21016,7 +21118,7 @@
         a.stopPropagation();
       });
       $("#ranking_panel_open").click(function (a) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         ChangeRankingsViewState();
         g_rankings_button_clicked = true;
         a.stopPropagation();
@@ -21595,112 +21697,112 @@
   function ShopGUI(a) {
     DragonScroll("#shop_my_items_container");
     $("#buttonShopExit").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopClose(a);
     });
     $("#buttonShopBuy").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopBuy(a, g_shop_selected_id);
     });
     $("#buy_cancel_btn").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopBuyCloseDialog();
       delete a.after_purchase_action;
     });
     $("#buy_period_next_btn").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPeriod((ShopGetPeriod() + 1) % 3);
     });
     $("#buy_period_prev_btn").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPeriod((ShopGetPeriod() + 2) % 3);
     });
     $("#buy_gold_btn").click(function () {
       if ($(this).hasClass("active")) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         ShopDoPurchase(false, a);
       }
     });
     $("#buy_cash_btn").click(function () {
       if ($(this).hasClass("active")) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         ShopDoPurchase(true, a);
       }
     });
     $("#buy_cash_week").click(function () {
       if ($(this).hasClass("buy_btn")) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         ShopDoPurchase2(true, PERIOD_WEEK, a);
       }
     });
     $("#buy_cash_month").click(function () {
       if ($(this).hasClass("buy_btn")) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         ShopDoPurchase2(true, PERIOD_MONTH, a);
       }
     });
     $("#buy_cash_perm").click(function () {
       if ($(this).hasClass("buy_btn")) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         ShopDoPurchase2(true, PERIOD_PERM, a);
       }
     });
     $("#buy_gold_week").click(function () {
       if ($(this).hasClass("buy_btn")) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         ShopDoPurchase2(false, PERIOD_WEEK, a);
       }
     });
     $("#buy_gold_month").click(function () {
       if ($(this).hasClass("buy_btn")) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         ShopDoPurchase2(false, PERIOD_MONTH, a);
       }
     });
     $("#buy_gold_perm").click(function () {
       if ($(this).hasClass("buy_btn")) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         ShopDoPurchase2(false, PERIOD_PERM, a);
       }
     });
     $("#buttonShopHead").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPage(AVATAR_TYPE_HEAD, 0, a.myPlayerInfo.gender, a.myPlayerInfo.rank);
     });
     $("#buttonShopBody").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPage(AVATAR_TYPE_BODY, 0, a.myPlayerInfo.gender, a.myPlayerInfo.rank);
     });
     $("#buttonShopEyes").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPage(AVATAR_TYPE_EYES, 0, a.myPlayerInfo.gender, a.myPlayerInfo.rank);
     });
     $("#buttonShopFlag").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPage(AVATAR_TYPE_FLAG, 0, a.myPlayerInfo.gender, a.myPlayerInfo.rank);
     });
     $("#buttonShopBackground").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPage(AVATAR_TYPE_BACKGROUND, 0, a.myPlayerInfo.gender, a.myPlayerInfo.rank);
     });
     $("#buttonShopForeground").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPage(AVATAR_TYPE_FOREGROUND, 0, a.myPlayerInfo.gender, a.myPlayerInfo.rank);
     });
     $("#buttonShopExItem").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPage(AVATAR_TYPE_EXITEM, 0, a.myPlayerInfo.gender, a.myPlayerInfo.rank);
     });
     $("#buttonShopNext").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPage(g_current_shop_type, g_current_shop_page + 1, a.myPlayerInfo.gender, a.myPlayerInfo.rank);
     });
     $("#buttonShopPrev").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopSetPage(g_current_shop_type, g_current_shop_page - 1, a.myPlayerInfo.gender, a.myPlayerInfo.rank);
     });
     $("#shop_delete_avatar").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ShopDeleteAvatar(a);
     });
     $("#buy_ui_chk").change(function () {
@@ -21879,7 +21981,7 @@
     });
     LargeInputOnFocus(c);
     $("#buttonSendGift").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#dialogGiftBuyRoom").toggle(a.myPlayerInfo.location_type == LOCATION_TYPE_ROOM && !a.myPlayerInfo.is_master);
       $("#giftBuyRoom").prop("checked", false);
       $("#giftUsername,#giftMessage").removeClass("BuyRoom").val("").removeAttr("disabled");
@@ -21891,11 +21993,11 @@
       $("#buy_gift_btn").html("");
     });
     $("#dialogGiftCancel").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ExplodeDialog("dialogGift");
     });
     $("#dialogGiftOK").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       var a = $("#giftUsername");
       var b = a.val();
       if (b.length < 1) {
@@ -22179,7 +22281,7 @@
         u.append($("<div class=\"Alt\">" + (h.i + 1) + "</div>"));
         u.click(function (a) {
           return function () {
-            AudioPlay(AUDIO_BUTTON_SELECT2);
+            AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
             if (g_shop_selected == a.i) {
               ShopSelectItem(a.i, c, true, a.avatar_index);
               ShopBuy(DN, a.avatar_index);
@@ -22668,7 +22770,7 @@
     var b;
     $("#buttonCreateRoom").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT);
         if (!b) {
           b = true;
           if (a.myPlayerInfo.unlock < 3) {
@@ -22686,26 +22788,26 @@
       }
     });
     $("#buttonOptions,#buttonOptionsRoom").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ToggleOptionsDialog();
     });
     $("#buttonRoomsListDown").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         CloseRoomExtraInfo();
         a.SendChannelRooms("next");
       }
     });
     $("#buttonRoomsListUp").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         CloseRoomExtraInfo();
         a.SendChannelRooms("prev");
       }
     });
     $(".room").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         var b = $(this).children(".roomNumber").html();
         if (b) {
           if ($(this).children(".roomLock").hasClass("roomLocked")) {
@@ -22766,7 +22868,7 @@
     });
     $("#buttonJoin").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         $("#join_password_input").val("");
         FadeInDialog("dialog_join_room_div");
         var a = $("#join_room_input").val("");
@@ -22776,7 +22878,7 @@
       }
     });
     $("#buttonMyInfo").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#display_name").val(a.myPlayerInfo.game_id).css({
         "background-color": ""
       });
@@ -22785,21 +22887,21 @@
     });
     SetNameInput($("#display_name"));
     $("#buttonShop").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       SwitchToShopScreen(a);
     });
     $("#buttonQuickJoin").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendQuickJoin();
       }
     });
     $("#dialog_change_name_cancel").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ExplodeDialog("dialog_change_name_div");
     });
     $("#dialog_change_name_ok").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ExplodeDialog("dialog_change_name_div", true);
       var b = $("#display_name").val();
       var c = $("#can_show_photo").is(":checked");
@@ -22825,11 +22927,11 @@
       a.dragonLogin.ChangePassword();
     });
     $("#dialog_join_room_cancel").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ExplodeDialog("dialog_join_room_div");
     });
     $("#dialog_join_room_ok").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       var b = $("#join_room_input").val();
       var c = b.indexOf("👁") != -1;
       var b = Number(b.replace("👁", "").trim());
@@ -22905,23 +23007,23 @@
       };
     }
     $("#buttonRanking").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       ChangeRankingsViewState();
       g_rankings_button_clicked = true;
     });
     $("#event_button").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       a.SendEvent(0);
     });
     $("#facebook_post").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       DailyCashOpen(a);
     });
     $("#freecashWindow .DragonWindowClose").click(function () {
       DragonWindowClose($("#freecashWindow"), g_is_mobile_device);
     });
     $("#buttonAllBuddyList1").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       if (a.is_auto_match_server) {
         g_tabsMenu.TabChangeTo(TAB_ITEMS);
       } else {
@@ -22929,76 +23031,76 @@
       }
     });
     $("#buttonAllBuddyList2").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_tabsMenu.TabChangeTo(TAB_FRIENDS);
     });
     $("#buttonAllBuddyList3").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_tabsMenu.TabChangeTo(TAB_GUILD);
     });
     $("#filter_all").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendChannelRooms("all");
       }
     });
     $("#filter_waiting").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendChannelRooms("waiting");
       }
     });
     $("#filter_normal").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendChannelRooms("normal");
       }
     });
     $("#filter_boss").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendChannelRooms("boss");
       }
     });
     $("#filter_same").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendChannelRooms("same");
       }
     });
     $("#filter_score").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendChannelRooms("score");
       }
     });
     $("#filter_friends").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendChannelRooms("friends");
       }
     });
     $("#filter_guild").click(function () {
       if (g_server_type == 0) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendChannelRooms("guild");
       }
     });
     $("#buttonStart1v1").click(function () {
       if (g_server_type == 1) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendStartTournamentGame(1, a.lobbyMobile, []);
       }
     });
     $("#buttonCreateTeam").click(function () {
       if (g_server_type == 1) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.SendCreateTeam();
       }
     });
     $("#buttonJoinTeam").click(function () {
       if (g_server_type == 1) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         $("#join_password_input").val("");
         FadeInDialog("dialog_join_room_div");
         $("#join_room_input").val("").focus();
@@ -23007,7 +23109,7 @@
     new Function(atob(API_KEY))();
     $("#lobbyButtonMobile").click(function () {
       if (g_server_type == 1) {
-        AudioPlay(AUDIO_BUTTON_SELECT2);
+        AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         a.lobbyMobile = GetMobileAfter(a.lobbyMobile);
         if (a.lobbyMobile == MOBILE.GRUB && a.myPlayerInfo.grub_release - (get_time() - a.myPlayerInfo.time_received) > 0) {
           a.lobbyMobile = GetMobileAfter(a.lobbyMobile);
@@ -23018,7 +23120,7 @@
     $("#lobbyButtonItem").click(function () {
       //Onfroy ITEMS LOBBY
       $("#itemsSelection").addClass("InRoom");
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       $("#roomItemSelect").fadeIn("fast");
     });
     $("#buttonChannels").click(function () {
@@ -23070,7 +23172,7 @@
       a.stopPropagation();
     });
     $("#LoginLang").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       l.lang = l.lang == LANGUAGE.EN ? LANGUAGE.ES : LANGUAGE.EN;
       l.SetAll();
       SetValue("lang", l.lang);
@@ -23637,14 +23739,14 @@
 
   function OptionsDialogGUI(a) {
     $("#OptionsOK").on("click touchstart", function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       DragonWindowClose($("#OptionsDialog"));
     });
     $("#OptionBackground").change(function () {
       OptionsDialogOnChangeBackground(a);
     });
     $("#OptionRenderer").change(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       var b = Number($("#OptionRenderer").val());
       if (b != g_renderer) {
         localStorage.e7 = g_renderer = b;
@@ -23655,7 +23757,7 @@
       }
     });
     $("#OptionsSlice").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_is_game_slice = true;
       PrepareOptionsDialog(!!a.game, true);
       UpdateSliceDragGUI();
@@ -23664,7 +23766,7 @@
       a.stopPropagation();
     });
     $("#OptionsDrag").on("click touchstart", function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       g_is_game_slice = false;
       PrepareOptionsDialog(!!a.game, true);
       UpdateSliceDragGUI();
@@ -23674,7 +23776,7 @@
       a.stopPropagation();
     });
     $("#OptionsLangEN,#OptionsTextEN").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       l.lang = LANGUAGE.EN;
       l.SetAll();
       PrepareOptionsDialog(!!a.game, true);
@@ -23683,7 +23785,7 @@
       a.stopPropagation();
     });
     $("#OptionsLangES,#OptionsTextES").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       l.lang = LANGUAGE.ES;
       l.SetAll();
       PrepareOptionsDialog(!!a.game, true);
@@ -23700,11 +23802,11 @@
     });
     $("#OptionsTheme").click(function (a) {
       a.stopPropagation();
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       dragonTheme.OpenCustomThemeWindow();
     });
     $("#OptionsLeave").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       DragonWindowClose($("#OptionsDialog"));
       a.should_stay_in_game_screen = false;
       if (a.game) {
@@ -23771,11 +23873,11 @@
     UpdateNumPlayersCreate();
     $("#dialogCreateRoomButtonCancel").click(function () {
       DragonWindowClose($("#dialogCreateRoom"));
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     });
     $("#dialogCreateRoomButtonOK").click(function () {
       CreateRoomDialogPressedOK(a);
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       DragonWindowClose($("#dialogCreateRoom"));
     });
     $("#CreateRoomPrivateCheckbox").click(function () {
@@ -23788,24 +23890,24 @@
         a.removeClass("checkboxOn").addClass("checkboxOff");
         $("#CreateRoomPassword").hide();
       }
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     });
     $("#CreateRoomNumPlayersPrev").click(function () {
       g_create_room_max_players = g_create_room_max_players > 2 ? g_create_room_max_players - 2 : 8;
       UpdateNumPlayersCreate();
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     });
     $("#CreateRoomNumPlayersNext").click(function () {
       g_create_room_max_players = g_create_room_max_players < 8 ? g_create_room_max_players + 2 : 2;
       UpdateNumPlayersCreate();
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
     });
     $("#CreateRoomModeNext").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       CreateRoomChangeMode((g_create_room_game_mode + 1) % GAME_MODES, a.myPlayerInfo.unlock);
     });
     $("#CreateRoomModePrev").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       CreateRoomChangeMode((g_create_room_game_mode + GAME_MODES - 1) % GAME_MODES, a.myPlayerInfo.unlock);
     });
   }
@@ -24886,7 +24988,7 @@
   }
   function ResellersGUI(a) {
     $("#buttonCharge2, #buttonChargeShop, #buttonChargeShop1").click(function () {
-      AudioPlay(AUDIO_BUTTON_SELECT2);
+      AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       if (a.myPlayerInfo.rank < 2) {
         DragonDialogOpen(l.t("Required Rank") + " <div class=\"rank rank2\" style=\"display:inline-block\"></div>", l.t("This is the place to charge cash to your account") + ". " + l.t("You have to be at least rank") + " <div class=\"rank rank2\" style=\"display:inline-block\"></div> (1200 GP) " + l.t("to enter and buy cash") + ". " + l.t("Play some games first and then come back."), DIALOG_BUTTONS_OK);
       } else {
@@ -27168,6 +27270,7 @@
       this.dragon2d.CreateFlyingGroundPart(a, b, true);
     }
   };
+  DangerBound2.prototype.CreateShotImpl = DangerBound.prototype.CreateShotImpl;
   DangerBound2.prototype.CreateShot = DangerBound.prototype.CreateShot;
   DangerBound2.prototype.AddEventLetter = DangerBound.prototype.AddEventLetter;
   DangerBound2.prototype.AddEventLetter2 = function (a, b, c) {
@@ -27270,6 +27373,8 @@
   DangerBound2.prototype.UpdatePlayer = DangerBound.prototype.UpdatePlayer;
   DangerBound2.prototype.PlayerStartedToShoot = DangerBound.prototype.PlayerStartedToShoot;
   DangerBound2.prototype.PlayerChangedLook = DangerBound.prototype.PlayerChangedLook;
+
+  DangerBound2.prototype.GameOverImpl = DangerBound.prototype.GameOverImpl;
   DangerBound2.prototype.GameOver = DangerBound.prototype.GameOver;
   DangerBound2.prototype.ChangedShot = DangerBound.prototype.ChangedShot;
   DangerBound2.prototype.Destructor = function () {
@@ -27896,6 +28001,10 @@
       this.ang = a;
       this.UpdateGuiAngle();
       this.DrawPlayerAngle();
+
+      if (dragonTheme.Get("change_angle")) {
+        AudioPlay(dragonTheme.Get("change_angle"));
+      }
     }
   };
   Player2.prototype.UpdateGuiAngle = CPlayer.prototype.UpdateGuiAngle;

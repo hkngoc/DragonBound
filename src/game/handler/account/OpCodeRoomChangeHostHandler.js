@@ -14,8 +14,6 @@ module.exports = function handleRoomChangeTeam(message) {
   }
 
   if (self.room) {
-    if (self.room.search_team_room === 0) {
-      self.room.changeTeam(self);
-    }
+    self.room.changeHost(self);
   }
 }

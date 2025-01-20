@@ -2233,6 +2233,37 @@ a:active {
     background-position: -809px -495.5px
 }
 
+#roomButtonHost {
+    position: absolute;
+    left: 297px;
+    top: 310px;
+    width: 28px;
+    height: 27px;
+    background-position: 0 0
+}
+
+.HD #roomButtonHost {
+    background-position: -752px -495.5px;
+    width: 27px;
+    height: 27px
+}
+
+#roomButtonHost:hover {
+    background-position: -28px 0
+}
+
+#roomButtonHost:active {
+    background-position: -57px 0
+}
+
+.HD #roomButtonHost:hover {
+    background-position: -780.5px -495.5px
+}
+
+.HD #roomButtonHost:active {
+    background-position: -809px -495.5px
+}
+
 #lobbyButtonMobile {
     position: absolute;
     left: 530px;
