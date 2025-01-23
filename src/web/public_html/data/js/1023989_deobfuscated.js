@@ -11002,7 +11002,7 @@
       GAME_STUFF = GAME_STUFF_SD;
     }
     $("body").toggleClass("SD", !v).toggleClass("HD", !!v);
-    v = "\n    body {background-image: url(" + n + "); cursor: url(" + u + "), default}\n    .rank {background-image: url(" + p + ");background-repeat:no-repeat;background-size:" + x + "}\n    " + (v ? "" : ".rank21,.rank27,.rank28,.rank29,.rank30,.rank31 {background-image: url(" + q + ") !important}") + "\n    .ItemBtn {background-image: url(" + r + ");background-repeat:no-repeat;background-size:" + x + "}\n    .roomMap, #room_map, #RoomOptionsMapImage {background-image:url(" + (mps ? mps + "),url(" : " ") + "/static/images/maps/minimaps.png?A);background-repeat:no-repeat;}\n\n    " + (c != "." ? "#channelScreen {background-image: url(" + c + ")}" : "") + "\n    " + (d != "." ? "#roomScreen {background-image: url(" + d + ");}" : "") + "\n    " + (e != "." ? "#shopScreen {background-image: url(" + e + ");}" : "") + "\n    " + (t ? "#BrokerWindow {background-image: url(" + t + ");background-repeat:no-repeat}" : "") + "\n\n    .room,.roomExtraInfo,.status,.roomLocked,#dialogCreateRoom,#BrokerLogout,\n    .LobbyButton,.iconMode0,.iconMode1,.iconMode2,.iconMode3,\n    #BrokerRefresh,.players1v1,.players2v2,.players3v3,.players4v4,.players1vB,.players2vB,.players3vB,.players4vB,\n    #CreateRoomPassword,.buttonPrev,.buttonNext,.checkboxOff,.checkboxOn,.CheckboxOff,.CheckboxOn,\n    .AlertBox,#ConnectWithPassword,#buttonRanking,#dialogCreateLocked,#RoomOptionsModeLocked,.FBLoginBtn,\n    #OptionsOK,#OptionsLeave,.RadioOn,.RadioOff,#infoAddBuddy,#infoGuildInvite,.chatDialogDelete,.chatDialogGuildKick,.chatDialogGuildInvite,\n    .roomBuddy,.roomGuildMember,#guild_create,#guild_leave,.paypal_corner,.buttonClose,#new_img,\n    .BrokerChannelFullIcon,.imgLock,.buttonAllBuddyList1,.buttonAllBuddyList2,.buttonAllBuddyList3 {\n        background-image: url(" + f + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    #roomButtonBack,#roomButtonChangeTeam,#roomButtonHost,#roomButtonMobile,.roomPlayerInfo,.roomPlayerNotReady,.roomPlayerReady,\n    .roomPlayerMaster,.roomPlayerShadow,.roomBotSelect,.roomBotRemove,.roomPlayerBalloonTip,#room_timer,.GamePlayerBalloonTip,\n    #room_change_title_button,#room_options_button,#add_bot_button,#playerInfoDialog,#infoRankingTab,.chatDialogProfile,\n    #infoChat,#infoClose,.ChatDialog,.chatDialogClose,#room_item_buddy_tab1,#room_item_buddy_tab2,#room_item_buddy_tab3,\n    #dialog_room_options,.room_item_buddy_tab1,.room_item_buddy_tab2,.room_item_buddy_tab3 {\n        background-image: url(" + h + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    " + (v ? "#shop_delete_avatar,#FilterBtnAll,.zotata-chat-icon,.relationshipIcon,.relationshipIconE,.relationshipIconM,.heartBrokenIcon,.buttonOK,.buttonCancel,#notificationBtn,.DragonWindowClose,.EmptyStar,.FullStar,.QuestionMark,#CollectCashBtn," : "") + "\n    .shopButton,.shop_item,.shop_item_icon,.stat_icon,.stat_font,.shop_my_item,.shop_my_item_cash,\n    .shop_my_item_gift,.shop_my_item_icon,.shop_my_item_equip.equipped,#shop_buy_dialog,.FilterBtn {\n        background-image: url(" + m + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    .weather-0,.weather-1,.weather-2,.weather-3,.weather-4,.weather-5,.weather-6,.weather-7,.weather-8,.weather-9,\n    .weather-10,#message_over_items.items_locked,#message_over_items.sudden_death,#gameui,#powerBar," + (v ? "#walkBar," : "") + "\n    #powerMark,.DamageDigit,.LastAngleDigit,.UIGoldDigit,#btnShot1,#btnShot2,#btnShotSS,#btnPass,#btnEsc,\n    #last_power_mark,#all_chat,#team_chat,.turn_line_number,#slice_drag_button,.imgS1 {\n        background-image: url(" + a + ") !important;background-repeat:no-repeat;background-size:" + x + "}\n\n    #scores_lose_a,#scores_lose_b,.score,.score_me {\n        background-image: url(" + k + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    #game_over {background-image: url(" + w + ");background-repeat:no-repeat}\n        \n    #buttonSendGift {background-image: url(" + (v ? m + ");background-size:" + x : "/static/images/gift.png)") + "}\n    ";
+    v = "\n    body {background-image: url(" + n + "); cursor: url(" + u + "), default}\n    .rank {background-image: url(" + p + ");background-repeat:no-repeat;background-size:" + x + "}\n    " + (v ? "" : ".rank21,.rank27,.rank28,.rank29,.rank30,.rank31 {background-image: url(" + q + ") !important}") + "\n    .ItemBtn {background-image: url(" + r + ");background-repeat:no-repeat;background-size:" + x + "}\n    .roomMap, #room_map, #RoomOptionsMapImage {background-image:url(" + (mps ? mps + "),url(" : " ") + "/static/images/maps/minimaps.png?A);background-repeat:no-repeat;}\n\n    " + (c != "." ? "#channelScreen {background-image: url(" + c + ")}" : "") + "\n    " + (d != "." ? "#roomScreen {background-image: url(" + d + ");}" : "") + "\n    " + (e != "." ? "#shopScreen {background-image: url(" + e + ");}" : "") + "\n    " + (t ? "#BrokerWindow {background-image: url(" + t + ");background-repeat:no-repeat}" : "") + "\n\n    .room,.roomExtraInfo,.status,.roomLocked,#dialogCreateRoom,#BrokerLogout,\n    .LobbyButton,.iconMode0,.iconMode1,.iconMode2,.iconMode3,\n    #BrokerRefresh,.players1v1,.players2v2,.players3v3,.players4v4,.players1vB,.players2vB,.players3vB,.players4vB,\n    #CreateRoomPassword,.buttonPrev,.buttonNext,.checkboxOff,.checkboxOn,.CheckboxOff,.CheckboxOn,\n    .AlertBox,#ConnectWithPassword,#buttonRanking,#dialogCreateLocked,#RoomOptionsModeLocked,.FBLoginBtn,\n    #OptionsOK,#OptionsLeave,.RadioOn,.RadioOff,#infoAddBuddy,#infoGuildInvite,.chatDialogDelete,.chatDialogGuildKick,.chatDialogGuildInvite,\n    .roomBuddy,.roomGuildMember,#guild_create,#guild_leave,.paypal_corner,.buttonClose,#new_img,\n    .BrokerChannelFullIcon,.imgLock,.buttonAllBuddyList1,.buttonAllBuddyList2,.buttonAllBuddyList3 {\n        background-image: url(" + f + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    #roomButtonBack,#roomButtonChangeTeam,#roomButtonHost,#roomButtonMobile,.roomPlayerInfo,.roomPlayerNotReady,.roomPlayerReady,\n    .roomPlayerMaster,.roomPlayerShadow,.roomBotSelect,.roomBotRemove,.roomPlayerBalloonTip,#room_timer,.GamePlayerBalloonTip,\n    #room_change_title_button,#room_options_button,#add_bot_button_A,#add_bot_button,#playerInfoDialog,#infoRankingTab,.chatDialogProfile,\n    #infoChat,#infoClose,.ChatDialog,.chatDialogClose,#room_item_buddy_tab1,#room_item_buddy_tab2,#room_item_buddy_tab3,\n    #dialog_room_options,.room_item_buddy_tab1,.room_item_buddy_tab2,.room_item_buddy_tab3 {\n        background-image: url(" + h + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    " + (v ? "#shop_delete_avatar,#FilterBtnAll,.zotata-chat-icon,.relationshipIcon,.relationshipIconE,.relationshipIconM,.heartBrokenIcon,.buttonOK,.buttonCancel,#notificationBtn,.DragonWindowClose,.EmptyStar,.FullStar,.QuestionMark,#CollectCashBtn," : "") + "\n    .shopButton,.shop_item,.shop_item_icon,.stat_icon,.stat_font,.shop_my_item,.shop_my_item_cash,\n    .shop_my_item_gift,.shop_my_item_icon,.shop_my_item_equip.equipped,#shop_buy_dialog,.FilterBtn {\n        background-image: url(" + m + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    .weather-0,.weather-1,.weather-2,.weather-3,.weather-4,.weather-5,.weather-6,.weather-7,.weather-8,.weather-9,\n    .weather-10,#message_over_items.items_locked,#message_over_items.sudden_death,#gameui,#powerBar," + (v ? "#walkBar," : "") + "\n    #powerMark,.DamageDigit,.LastAngleDigit,.UIGoldDigit,#btnShot1,#btnShot2,#btnShotSS,#btnPass,#btnEsc,\n    #last_power_mark,#all_chat,#team_chat,.turn_line_number,#slice_drag_button,.imgS1 {\n        background-image: url(" + a + ") !important;background-repeat:no-repeat;background-size:" + x + "}\n\n    #scores_lose_a,#scores_lose_b,.score,.score_me {\n        background-image: url(" + k + ");background-repeat:no-repeat;background-size:" + x + "}\n\n    #game_over {background-image: url(" + w + ");background-repeat:no-repeat}\n        \n    #buttonSendGift {background-image: url(" + (v ? m + ");background-size:" + x : "/static/images/gift.png)") + "}\n    ";
     if (b.css && b.css.indexOf("<") == -1 && b.css.indexOf(">") == -1) {
       v += b.css;
     }
@@ -15538,7 +15538,9 @@
     look: 61,
     replay: 62,
     filter: 63,
-    check_guild_name: 64
+    check_guild_name: 64,
+
+    changed_host: 65,
   };
   var CLIENT_OPCODE = {
     login: 0,
@@ -16573,6 +16575,13 @@
         });
       }
     };
+
+    k[SERVER_OPCODE.changed_host] = function (a, b, c, d, f) {
+      // RoomUpdateWorthGP(a, b, a * GP_TO_GOLD_RATE, b * GP_TO_GOLD_RATE);
+
+      ChangedHost(c, d, e.myPlayerInfo, f);
+    };
+
     R = k;
 
     if (a) {
@@ -19377,65 +19386,6 @@
         addMobile(mobile, mobile, $(`#mobile_${mobile}`), SELECTABLE_MOBILES.includes(Number(mobile)));
       }
 
-      // for (
-      //   var f = {}, h = 0;
-      //   h < e.length;
-      //   f = {
-      //     nameDiv: f.nameDiv,
-      //     m: f.m,
-      //     j: f.j,
-      //     anim: f.anim,
-      //   },
-      //     h++
-      // ) {
-      //   f.j = e[h];
-      //   f.m = MOBILES[f.j];
-      //   f.nameDiv = void 0;
-      //   var k = $(
-      //     '<div class="mobileSelectBtn glow_button" style="cursor: pointer;"><div class="mobileName blackShadow">' +
-      //       f.m.name +
-      //       '</div><div class="Alt">' +
-      //       h.toString(16).toUpperCase() +
-      //       "</div>"
-      //   )
-      //     .click(
-      //       (function (c) {
-      //         return function () {
-      //           c.nameDiv.text() == c.m.name &&
-      //             (a.SendRoomChangeMobile(c.j),
-      //             b(),
-      //             AudioPlay(AUDIO_BUTTON_SELECT2));
-      //         };
-      //       })(f)
-      //     )
-      //     .appendTo(d);
-      //   f.nameDiv = k.children().eq(0);
-      //   var m = f.m.epa && f.m.epa.file ? f.m.epa.file : f.m.file;
-      //   m.includes("/") || (m = "mobiles/" + m + ".png");
-      //   f.anim = new CAnimatedObject2(
-      //     m,
-      //     f.m.epa || f.m.graphics,
-      //     f.j == MOBILE.RANDOM ? 29 : 35,
-      //     f.j == MOBILE.RANDOM ? 63 : 55,
-      //     k,
-      //     1,
-      //     MOBILE_FPS,
-      //     !0,
-      //     LOOP_NORMAL,
-      //     0,
-      //     1,
-      //     !0
-      //   );
-      //   c.push(f.anim);
-      //   k.hover(
-      //     (function (a) {
-      //       return function () {
-      //         return a.anim.ChangeEpaAnim("emotion1", "normal");
-      //       };
-      //     })(f),
-      //     function () {}
-      //   );
-      // }
       if ($(".Alt").is(":visible")) {
         $(".Alt").show();
       }
@@ -19834,14 +19784,15 @@
     $("#RoomOptionsTurnTimeLock, #RoomOptionsTurnTimeRank").toggle(a < RANK_FOR_TURN_TIME);
     $("#RoomOptionsTurnTime").toggleClass("grayscale", a < RANK_FOR_TURN_TIME);
     if (g_game_options_mode == GAME_MODE_BOSS) {
-      $("#RoomOptionsAvatarsPrev, #RoomOptionsAvatarsNext").hide();
-      $("#RoomOptionsAvatars").html(l.t("ON")).css("color", "#00ff00");
+      // $("#RoomOptionsAvatarsPrev, #RoomOptionsAvatarsNext").hide();
+
+      // $("#RoomOptionsAvatars").html(l.t("ON")).css("color", "#00ff00");
       $("#RoomOptionsAvatarsGP").html("");
-      if (g_options_map == MAP.CUSTOM) {
-        $("#RoomOptionsMapPrev, #RoomOptionsMapNext").show();
-      } else {
-        $("#RoomOptionsMapPrev, #RoomOptionsMapNext").hide();
-      }
+      // if (g_options_map == MAP.CUSTOM) {
+      //   $("#RoomOptionsMapPrev, #RoomOptionsMapNext").show();
+      // } else {
+      //   $("#RoomOptionsMapPrev, #RoomOptionsMapNext").hide();
+      // }
       if (g_options_map != MAP.RANDOM && g_options_map != MAP.CUSTOM) {
         RoomOptionsDialogSetMap(MAP.RANDOM);
       }
@@ -19849,8 +19800,8 @@
       $("#RoomOptionsRandomTeams").addClass("grayscale").html("[ ] Random Teams");
       $("#RoomOptionsS1Lock, #RoomOptionsTeleLock, #RoomOptionsRandomTeamsLock, #RoomOptionsDualPLock").show();
     } else {
-      $("#RoomOptionsAvatarsPrev, #RoomOptionsAvatarsNext").show();
-      $("#RoomOptionsMapPrev, #RoomOptionsMapNext").show();
+      // $("#RoomOptionsAvatarsPrev, #RoomOptionsAvatarsNext").show();
+      // $("#RoomOptionsMapPrev, #RoomOptionsMapNext").show();
     }
   }
   function RoomOptionsDialogSetMap(a, b) {
@@ -19894,30 +19845,34 @@
     $("#RoomOptionsMapPrev").click(function () {
       AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       var b;
-      if (g_game_options_mode == GAME_MODE_BOSS) {
-        b = MAP.RANDOM;
-        $("#RoomOptionsMapPrev, #RoomOptionsMapNext").hide();
-      } else {
-        b = GetMapBefore(g_options_map);
-      }
+      // if (g_game_options_mode == GAME_MODE_BOSS) {
+      //   b = MAP.RANDOM;
+      //   $("#RoomOptionsMapPrev, #RoomOptionsMapNext").hide();
+      // } else {
+      //   b = GetMapBefore(g_options_map);
+      // }
+      b = GetMapBefore(g_options_map);
       RoomOptionsDialogSetMap(b, a.myPlayerInfo.maps_pack);
     });
     $("#RoomOptionsMapNext").click(function () {
       AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
       var b;
-      if (g_game_options_mode == GAME_MODE_BOSS) {
-        b = MAP.RANDOM;
-        $("#RoomOptionsMapPrev, #RoomOptionsMapNext").hide();
-      } else {
-        b = GetMapAfter(g_options_map);
-      }
+      // if (g_game_options_mode == GAME_MODE_BOSS) {
+      //   b = MAP.RANDOM;
+      //   $("#RoomOptionsMapPrev, #RoomOptionsMapNext").hide();
+      // } else {
+      //   b = GetMapAfter(g_options_map);
+      // }
+      b = GetMapAfter(g_options_map);
       RoomOptionsDialogSetMap(b, a.myPlayerInfo.maps_pack);
     });
     $("#RoomOptionsMapLockBtn").click(function () {
       GoToBuyShopItem(a, 1223, 2);
     });
+
     $("#RoomOptionsAvatarsPrev, #RoomOptionsAvatarsNext").click(function () {
-      if (g_game_options_mode != GAME_MODE_BOSS) {
+      // if (g_game_options_mode != GAME_MODE_BOSS) {
+      if (true) {
         AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
         var a = $("#RoomOptionsAvatars");
         if (a.html() == l.t("OFF")) {
@@ -20246,6 +20201,7 @@
       }, 1000);
     }
   }
+
   var g_is_room_for_sale;
   function RoomUpdate(a, b) {
     $("#roomNumber").html(b.number);
@@ -20267,12 +20223,14 @@
     g_game_mode = g_game_options_mode = d;
     RoomOptionsChangeMode(d, a.myPlayerInfo.unlock, a.myPlayerInfo.rank);
     c = b.max_players;
+
     if (d == GAME_MODE_BOSS) {
       c *= 2;
-      $("#roomButtonChangeTeam").hide();
+      // $("#roomButtonChangeTeam").hide();
     } else if (g_can_change_team) {
-      $("#roomButtonChangeTeam").show();
+      // $("#roomButtonChangeTeam").show();
     }
+
     g_max_players = c;
     $("#RoomOptionsPlayers,#room_players").text(RoomPlayersNumberToString(g_max_players, d));
     if (d != GAME_MODE_SAME && g_can_change_mobile) {
@@ -20378,10 +20336,12 @@
     }
     g_room_slot_graphic2 = [];
   }
+
   function RoomUpdateWorthGP(a, b, c, d) {
     $("#gp_team_a").html("<u>" + l.t("Team") + " A</u><br>" + a + " GP<br>" + c + "G");
     $("#gp_team_b").html("<u>" + l.t("Team") + " B</u><br>" + b + " GP<br>" + d + "G");
   }
+
   var MY_AVATARS_HEAD = 0;
   var MY_AVATARS_BODY = 1;
   var MY_AVATARS_EYES = 2;
@@ -20480,48 +20440,56 @@
   var g_can_change_team = true;
   var g_can_change_mobile = true;
   var g_master_username = "";
-  function RoomPlayerUpdateGUI(a) {
+
+  function RoomPlayerUpdateGUI(currentPlayer) {
     $("#roomButtonReady").hide();
     $("#roomButtonStart").hide();
-    var b;
-    var c = 0;
-    var d = 0;
-    var e = 0;
-    var f = g_room_players_slots.length;
-    var h = true;
+
+    // var player;
+    var botCount = 0;
+    var sideACount = 0;
+    var sideBCount = 0;
+    // var slots = g_room_players_slots.length;
+    var ready = true;
+
     g_can_change_team = g_can_change_mobile = false;
-    if (f < 8) {
-      f = 8;
-    }
-    for (var k = {}, m = 0; m < f; k = {
-      user_id: k.user_id
-    }, m++) {
-      b = g_room_players_slots[m];
-      var n = "#playerInRoom" + m;
+
+    // if (slots < 8) {
+    //   slots = 8;
+    // }
+    const slots = 8;
+
+    for (var k = {}, i = 0; i < slots; k = { user_id: k.user_id }, i++) {
+      const player = g_room_players_slots[i];
+
+      var n = "#playerInRoom" + i;
       var p = $(n);
-      var q = g_room_slot_graphic2[m];
-      if (b) {
-        if (m % 2 == 0) {
-          d++;
+      var q = g_room_slot_graphic2[i];
+
+      if (player) {
+        if (i % 2 == 0) {
+          sideACount++;
         } else {
-          e++;
+          sideBCount++;
         }
-        var r = !b.avatars[MY_AVATARS_BACKGROUND] && b.power_user ? AVATAR_ID_POWER_USER_BG : b.avatars[MY_AVATARS_BACKGROUND];
+
+        var r = !player.avatars[MY_AVATARS_BACKGROUND] && player.power_user ? AVATAR_ID_POWER_USER_BG : player.avatars[MY_AVATARS_BACKGROUND];
+
         if (q) {
-          q.change_mobile(b.mobile);
-          q.change(b.avatars[MY_AVATARS_HEAD], AVATAR_TYPE_HEAD);
-          q.change(b.avatars[MY_AVATARS_BODY], AVATAR_TYPE_BODY);
-          q.change(b.avatars[MY_AVATARS_EYES], AVATAR_TYPE_EYES);
-          q.change(b.avatars[MY_AVATARS_FLAG], AVATAR_TYPE_FLAG);
+          q.change_mobile(player.mobile);
+          q.change(player.avatars[MY_AVATARS_HEAD], AVATAR_TYPE_HEAD);
+          q.change(player.avatars[MY_AVATARS_BODY], AVATAR_TYPE_BODY);
+          q.change(player.avatars[MY_AVATARS_EYES], AVATAR_TYPE_EYES);
+          q.change(player.avatars[MY_AVATARS_FLAG], AVATAR_TYPE_FLAG);
           q.change(r, AVATAR_TYPE_BACKGROUND);
-          q.change(b.avatars[MY_AVATARS_FOREGROUND], AVATAR_TYPE_FOREGROUND);
+          q.change(player.avatars[MY_AVATARS_FOREGROUND], AVATAR_TYPE_FOREGROUND);
         } else {
-          g_room_slot_graphic2[m] = new CPlayerGraphic(n + " .roomPlayerMobile", b.mobile, b.avatars[MY_AVATARS_HEAD], b.avatars[MY_AVATARS_BODY], b.avatars[MY_AVATARS_EYES], b.avatars[MY_AVATARS_FLAG], b.team == "A", r, b.avatars[MY_AVATARS_FOREGROUND]);
+          g_room_slot_graphic2[i] = new CPlayerGraphic(n + " .roomPlayerMobile", player.mobile, player.avatars[MY_AVATARS_HEAD], player.avatars[MY_AVATARS_BODY], player.avatars[MY_AVATARS_EYES], player.avatars[MY_AVATARS_FLAG], player.team == "A", r, player.avatars[MY_AVATARS_FOREGROUND]);
         }
-        p.children(".roomPlayerName").html(BuildRelationRankCountryGuildName(b.relationship_status, b.rank, b.country, b.guild, b.game_id));
-        if (b.user_id == a.user_id) {
+        p.children(".roomPlayerName").html(BuildRelationRankCountryGuildName(player.relationship_status, player.rank, player.country, player.guild, player.game_id));
+        if (player.user_id == currentPlayer.user_id) {
           //TEST STATS Mobile
-          var idmobileagd = b.mobile == -1 ? 0 : b.mobile;
+          var idmobileagd = player.mobile == -1 ? 0 : player.mobile;
           var infomobileagd = MOBILES[idmobileagd];
           //Modificamos las imagenes de stats
           if (idmobileagd >= 0) {
@@ -20532,13 +20500,13 @@
           }
           //FIN STATS
           p.children(".roomPlayerMyself").show();
-          a.is_ready = b.is_ready;
-          a.team = b.team;
-          a.mobile = b.mobile;
-          a.is_master = b.is_master;
+          currentPlayer.is_ready = player.is_ready;
+          currentPlayer.team = player.team;
+          currentPlayer.mobile = player.mobile;
+          currentPlayer.is_master = player.is_master;
           g_can_change_team = g_can_change_mobile = true;
           if (!$("#team_search").is(":visible")) {
-            if (b.is_master) {
+            if (player.is_master) {
               $("#roomButtonStart").show();
               $("#roomButtonReady").hide();
             } else {
@@ -20546,21 +20514,21 @@
               $("#roomButtonStart").hide();
             }
           }
-          $("#mobile_info").removeClass().addClass("mobile_info" + b.mobile);
+          $("#mobile_info").removeClass().addClass("mobile_info" + player.mobile);
           n = g_no_winning_bonus_for;
           q = true;
           if (n && n.length) {
             for (r = 0; r < n.length; r += 2) {
-              if (m == n[r]) {
-                if (m % 2) {
+              if (i == n[r]) {
+                if (i % 2) {
                   $("#gp_team_a").html("<u>" + l.t("Team") + " A</u><br>XXX");
                 } else {
                   $("#gp_team_b").html("<u>" + l.t("Team") + " B</u><br>XXX");
                 }
                 if (n[r + 1] == -1) {
-                  $("#no_win_bonus").html(b.game_id + " -> Computer Players<br><br>" + l.t("If you win you will not get winning bonus because you already won this player many times today.<br>Play for fun, play with others, or continue tomorrow.")).show();
+                  $("#no_win_bonus").html(player.game_id + " -> Computer Players<br><br>" + l.t("If you win you will not get winning bonus because you already won this player many times today.<br>Play for fun, play with others, or continue tomorrow.")).show();
                 } else if (g_room_players_slots[n[r + 1]]) {
-                  $("#no_win_bonus").html(b.game_id + " -> " + g_room_players_slots[n[r + 1]].game_id + "<br><br>" + l.t("If you win you will not get winning bonus because you already won this player many times today.<br>Play for fun, play with others, or continue tomorrow.")).show();
+                  $("#no_win_bonus").html(player.game_id + " -> " + g_room_players_slots[n[r + 1]].game_id + "<br><br>" + l.t("If you win you will not get winning bonus because you already won this player many times today.<br>Play for fun, play with others, or continue tomorrow.")).show();
                 }
                 q = false;
                 break;
@@ -20573,31 +20541,33 @@
         } else {
           p.children(".roomPlayerMyself").hide();
         }
-        if (b.is_master) {
+
+        if (player.is_master) {
           p.children(".roomPlayerNotReady").hide();
           p.children(".roomPlayerReady").hide();
           p.children(".roomPlayerMaster").show();
-          g_master_username = b.game_id;
+          g_master_username = player.game_id;
         } else {
           p.children(".roomPlayerMaster").hide();
-          if (b.is_ready) {
+          if (player.is_ready) {
             p.children(".roomPlayerNotReady").hide();
             p.children(".roomPlayerReady").show();
           } else {
             p.children(".roomPlayerNotReady").show();
             p.children(".roomPlayerReady").hide();
-            h = false;
+            ready = false;
           }
         }
-        if (b.is_bot) {
-          if (a.is_master) {
+
+        if (player.is_bot) {
+          if (currentPlayer.is_master) {
             p.children(".roomBotSelect").show();
           }
           p.children(".roomPlayerInfo").unbind().hide();
-          c++;
+          botCount++;
         } else {
           p.children(".roomBotSelect").hide();
-          k.user_id = b.user_id;
+          k.user_id = player.user_id;
           p.children(".roomPlayerInfo").unbind().click(function (a) {
             return function (b) {
               AudioPlay(dragonTheme.Get("default_click") || AUDIO_BUTTON_SELECT2);
@@ -20613,84 +20583,102 @@
         p.hide();
         if (q) {
           q.remove();
-          g_room_slot_graphic2[m] = undefined;
+          g_room_slot_graphic2[i] = undefined;
         }
       }
     }
+
     $("#add_bot_button").hide();
-    if (g_game_mode == GAME_MODE_BOSS && a.is_master) {
-      if (c >= 2) {
-        $(".roomBotRemove").show();
-        $(".roomBotSelect").hide();
-      } else {
-        $(".roomBotRemove").hide();
-        $(".roomBotSelect").show();
-      }
+
+    // if (currentPlayer.is_master && g_game_mode == GAME_MODE_BOSS) {
+    //   if (botCount >= 2) {
+    //     $(".roomBotRemove").show();
+    //     $(".roomBotSelect").hide();
+    //   } else {
+    //     $(".roomBotRemove").hide();
+    //     $(".roomBotSelect").show();
+    //   }
+    if (currentPlayer.is_master && (g_game_mode == GAME_MODE_BOSS || g_game_mode == GAME_MODE_NORMAL)) {
+      $(".roomBotRemove").show();
+      $(".roomBotSelect").show();
     } else {
       $(".roomBotSelect").hide();
       $(".roomBotRemove").hide();
-    }
-    if (g_game_mode == GAME_MODE_SAME && !a.is_master) {
+    } 
+
+    if (g_game_mode == GAME_MODE_SAME && !currentPlayer.is_master) {
       g_can_change_mobile = false;
     }
-    if (g_game_mode == GAME_MODE_BOSS) {
-      g_can_change_team = false;
-    }
+
+    // if (g_game_mode == GAME_MODE_BOSS) {
+    //   g_can_change_team = false;
+    // }
+
     if (g_server_force_mobile != -1 && g_server_force_mobile != -2) {
       g_can_change_mobile = false;
     }
-    if (g_server_type == 1) {
-      g_can_change_team = false;
-      $("#room_options_button").hide();
-    } else {
-      $("#room_options_button").show();
-    }
+
+    // if (g_server_type == 1) {
+    //   g_can_change_team = false;
+    //   $("#room_options_button").hide();
+    // } else {
+    //   $("#room_options_button").show();
+    // }
+
     if (g_can_change_mobile) {
       $("#roomButtonMobile").show();
     } else {
       $("#roomButtonMobile").hide();
     }
-    if (g_can_change_team) {
-      $("#roomButtonChangeTeam").show();
-    } else {
-      $("#roomButtonChangeTeam").hide();
-    }
-    c = Math.max(d, Math.floor(g_max_players / 2));
+
+    // if (g_can_change_team) {
+    //   $("#roomButtonChangeTeam").show();
+    // } else {
+    //   $("#roomButtonChangeTeam").hide();
+    // }
+
+    botCount = Math.max(sideACount, Math.floor(g_max_players / 2));
     if (g_game_mode == GAME_MODE_BOSS) {
-      k = e;
+      k = sideBCount;
       if (k < 4) {
         k++;
       }
     } else {
-      k = Math.max(e, Math.floor(g_max_players / 2));
+      k = Math.max(sideBCount, Math.floor(g_max_players / 2));
     }
     q = !!dragonTheme.Get("vortex") && g_server_subtype != SERVER_SUB_TYPE_COUPLES;
-    for (m = 0; m < f; m++) {
-      b = g_room_players_slots[m];
-      n = "#playerInRoom" + m;
+
+    for (i = 0; i < slots; i++) {
+      const player = g_room_players_slots[i];
+
+      n = "#playerInRoom" + i;
       p = $(n);
-      n = m % 2 == 0 ? c : k;
-      r = (q ? 257 - (Math.floor(n) - 1) * 48 : 113) + Math.floor(m / 2) * 97;
+      n = i % 2 == 0 ? botCount : k;
+      r = (q ? 257 - (Math.floor(n) - 1) * 48 : 113) + Math.floor(i / 2) * 97;
       p.css("top", r);
-      p = $("#vortex" + m);
+      p = $("#vortex" + i);
       p.css("top", r - 50);
-      if (b) {
+      if (player) {
         p.hide();
       } else {
-        if (Math.floor(m / 2) < n && (m % 2 == 0 || g_server_type != 1) && q) {
+        if (Math.floor(i / 2) < n && (i % 2 == 0 || g_server_type != 1) && q) {
           p.show();
         } else {
           p.hide();
         }
-        if (g_game_mode == GAME_MODE_BOSS && m == k * 2 - 1 && a.unlock > 0 && a.is_master) {
+        if (g_game_mode == GAME_MODE_BOSS && i == k * 2 - 1 && currentPlayer.unlock > 0 && currentPlayer.is_master) {
           $("#add_bot_button").css("top", r + 40).show();
-          g_add_bot_to_slot = m;
+          g_add_bot_to_slot = i;
         }
       }
     }
-    a = a.is_master && h && (g_game_mode == GAME_MODE_BOSS || d == e || g_server_type == 1);
-    $("#roomButtonStart").toggleClass("grayscale", !a);
-    $("#room_auto_match_btn").toggle(g_server_subtype == SERVER_SUB_TYPE_COUPLES && d == 1 && e == 0);
+
+    const canStart = currentPlayer.is_master && ready && (g_game_mode == GAME_MODE_BOSS || sideACount == sideBCount || g_server_type == 1);
+
+    $("#roomButtonStart").toggleClass("grayscale", !canStart);
+
+    $("#room_auto_match_btn").toggle(g_server_subtype == SERVER_SUB_TYPE_COUPLES && sideACount == 1 && sideBCount == 0);
+
     $(".roomPlayerPhoto").html("");
     if (g_server_subtype == SERVER_SUB_TYPE_COUPLES) {
       if (g_room_players_slots[0]) {
@@ -20701,6 +20689,7 @@
       }
     }
   }
+
   var g_vortex_start;
   var g_vortex_interval;
   function VortexStart() {
@@ -20805,6 +20794,7 @@
     g_room_allow_talk = b;
     RoomUpdateWatchers();
   }
+
   function ChangedMobile(a, b, c) {
     var idmobileagd = 0;
     var infomobileagd = 0;
@@ -20828,24 +20818,76 @@
       }
     }
   }
+
   function ChangedTeam(a, b, c, d) {
     g_no_winning_bonus_for = d;
     var e;
     var f = g_room_players_slots.length;
+
     for (d = 0; d < f && (!(e = g_room_players_slots[d]) || e.user_id != a); d++);
+
     if (!(d >= f) && d % 2 == (b == "A")) {
       for (a = g_room_players_slots[d]; g_room_players_slots[d];) {
         g_room_players_slots[d] = g_room_players_slots[d + 2];
         d += 2;
       }
+
       for (d = b == "A" ? 0 : 1; g_room_players_slots[d];) {
         d += 2;
       }
-      g_room_players_slots[d] = a;
+
+      console.log({ d, a, b, c });
+
+      g_room_players_slots [d] = a;
       a.team = b;
+
       RoomPlayerUpdateGUI(c);
     }
   }
+
+  function ChangedHost(a, b, c, d) {
+    // g_no_winning_bonus_for = d;
+
+    // B: team O A B
+    // C: player object
+
+    console.log({ a, b, c, d, g_room_players_slots });
+    // var e;
+    // var f = g_room_players_slots.length;
+
+    const index = g_room_players_slots.findIndex((o) => o.user_id == a);
+
+    if (b === "O") {
+      if (index >= 0) {
+        a = g_room_players_slots[index];
+        g_room_players_slots[index] = undefined;
+
+        a.team = b;
+      }
+    } else {
+
+    }
+
+    RoomPlayerUpdateGUI(c);
+    // for (d = 0; d < f && (!(e = g_room_players_slots[d]) || e.user_id != a); d++);
+
+    // if (!(d >= f) && d % 2 == (b == "A")) {
+    //   for (a = g_room_players_slots[d]; g_room_players_slots[d];) {
+    //     g_room_players_slots[d] = g_room_players_slots[d + 2];
+    //     d += 2;
+    //   }
+
+    //   for (d = b == "A" ? 0 : 1; g_room_players_slots[d];) {
+    //     d += 2;
+    //   }
+
+    //   g_room_players_slots[d] = a;
+    //   a.team = b;
+
+    //   RoomPlayerUpdateGUI(c);
+    // }
+  }
+
   function ChangedReady(a, b, c) {
     var d;
     var e;

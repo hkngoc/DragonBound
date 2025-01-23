@@ -1793,7 +1793,7 @@ a:active {
 }
 .roomBotSelect {
     position: absolute;
-    left: 136px;
+    left: 100px;
     top: 0;
     width: 82px;
     height: 19px;
@@ -1803,7 +1803,7 @@ a:active {
 }
 .roomBotRemove {
     position: absolute;
-    left: 136px;
+    left: 153px;
     top: 0;
     width: 82px;
     height: 19px;
@@ -4826,6 +4826,14 @@ a:active {
     position: absolute;
     left: 200px
 }
+
+#add_bot_button_A {
+    position: absolute;
+    left: 86px;
+    width: 82px;
+    height: 19px;
+    background-position: -83px -279px
+}
 #add_bot_button {
     position: absolute;
     left: 417px;
@@ -4833,6 +4841,7 @@ a:active {
     height: 19px;
     background-position: -83px -279px
 }
+
 .vortex {
     position: absolute;
     background: url(/static/images/vortex.png) no-repeat;

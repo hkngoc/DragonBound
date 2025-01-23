@@ -305,7 +305,7 @@ module.exports = class Room {
   changeTeam(account) {
     var self = this;
 
-    if (this.game_mode === Types.GAME_MODE.BOSS || this.status == Types.ROOM_STATUS.PLAYING) {
+    if (this.status == Types.ROOM_STATUS.PLAYING) {
       return null;
     }
 
@@ -343,19 +343,38 @@ module.exports = class Room {
   }
 
   changeHost(account) {
+    const self = this;
+
     const player = account.player;
+    let change = false;
 
     if (player.team === -1) {
-
-    } else {
-      if (player.team == 0) {
-        self.team_a_count--;
-        delete self.team_a[player.user_id];
-      } else {
-        self.team_a_count--;
-        delete self.team_a[player.user_id];
+      if (self.team_a_count < 4) {
+        self.team_a[player.user_id] = player.user_id;
+        player.team = 0;
+        self.team_a_count++;
+        change = true;
+      } else if (self.team_b_count < 4) {
+        self.team_b[player.user_id] = player.user_id;
+        player.team = 1;
+        self.team_b_count++;
+        change = true;
       }
+    } else if (player.team === 0) {
+      self.team_a_count--;
+      delete self.team_a[player.user_id];
+
+      player.team = -1;
+    } else if (player.team === 1) {
+      self.team_b_count--;
+      delete self.team_b[player.user_id];
+
+      player.team = -1;
     }
+
+    this.updatePosition().then(function () {
+      self.gameserver.pushToRoom(self.id, new Message.changedHost(account, self));
+    });
   }
 
   gameStart(account) {

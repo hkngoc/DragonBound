@@ -166,7 +166,11 @@ Messages.changedHost = Message.extend({
             3,
             5,
             self.player.user_id,
-            self.player.team ? 'B' : 'A',
+            self.player.team === -1
+                ? "O"
+                : self.player.team === 0
+                    ? "A"
+                    : "B",
             self.no_bonus
         ];
     }
